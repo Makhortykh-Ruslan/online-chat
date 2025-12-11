@@ -38,6 +38,24 @@ export default defineConfig([
 
       // --- TS ---
       '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ClassDeclaration',
+          message:
+            'Classes are discouraged in functional programming. Use functions instead.',
+        },
+      ],
+      '@typescript-eslint/no-require-imports': 'error',
+      'prefer-const': 'error',
+      '@next/next/no-async-client-component': 'error',
+      'react-hooks/rules-of-hooks': 'error',
+      'max-params': ['error', 3],
+      'no-unused-vars': 'error',
+      '@next/next/no-html-link-for-pages': 'error',
+      '@next/next/no-img-element': 'error',
+      '@next/next/no-head-element': 'error',
 
       // --- JS ---
       'no-console': ['warn', { allow: ['warn', 'error'] }],
