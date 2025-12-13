@@ -33,6 +33,14 @@ export default defineConfig([
       'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
       'react/no-unescaped-entities': 'off',
 
+      'lines-around-directive': [
+        'error',
+        {
+          before: 'never',
+          after: 'always',
+        },
+      ],
+
       // --- Next ---
       '@next/next/no-page-custom-font': 'off',
 
