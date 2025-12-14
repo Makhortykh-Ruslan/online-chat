@@ -3,13 +3,19 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { appRoutes } from '@/src/core/enums/router-paths';
-import type { ErrorModel } from '@/src/core/models/error.model';
-import { singIn, singOut, singUp } from '@/src/infrastructure/supabase';
+import { appRoutes } from '@/src/core/constants/router-paths';
+import { EControlName } from '@/src/core/enums/e-control-name';
+import type { ErrorModel, ProfileModel } from '@/src/core/models';
+import {
+  addNewProfile,
+  singIn,
+  singOut,
+  singUp,
+} from '@/src/infrastructure/supabase';
 
-export async function loginServer(prevData: ErrorModel, formData: FormData) {
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
+export async function signInServer(prevData: ErrorModel, formData: FormData) {
+  const email = formData.get(EControlName.EMAIL) as string;
+  const password = formData.get(EControlName.PASSWORD) as string;
 
   const { error } = await singIn(email, password);
 
@@ -17,35 +23,55 @@ export async function loginServer(prevData: ErrorModel, formData: FormData) {
     return { error: error.message };
   }
 
-  const pathRedirect = `/${appRoutes.main.routerPath}/${appRoutes.chat.routerPath}`;
+  const redirectPath = appRoutes.main.chat;
 
-  revalidatePath(pathRedirect);
-  redirect(pathRedirect);
+  revalidatePath(redirectPath);
+  redirect(redirectPath);
 }
 
-export async function registrationServer(
-  prevData: ErrorModel,
-  formData: FormData,
-) {
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
+export async function singUpServer(prevData: ErrorModel, formData: FormData) {
+  const email = formData.get(EControlName.EMAIL) as string;
+  const password = formData.get(EControlName.PASSWORD) as string;
 
-  const { error } = await singUp(email, password);
+  const {
+    error: signUpError,
+    data: { user },
+  } = await singUp(email, password);
 
-  if (error) {
-    return { error: error.message };
+  if (signUpError) {
+    return { error: signUpError.message };
   }
 
-  const pathRedirect = `/${appRoutes.main.routerPath}/${appRoutes.chat.routerPath}`;
+  if (!user?.id) {
+    return { error: 'For sign up faild' };
+  }
 
-  revalidatePath(pathRedirect);
-  redirect(pathRedirect);
+  const username = formData.get(EControlName.USER_NAME) as string;
+  const display_name = formData.get(EControlName.DISPLAY_NAME) as string;
+
+  const profile: ProfileModel = {
+    avatar_url: '',
+    id: user.id,
+    username,
+    display_name,
+  };
+
+  const { error: addNewProfileError } = await addNewProfile(profile);
+
+  if (addNewProfileError) {
+    return { error: addNewProfileError.message };
+  }
+
+  const redirectPath = appRoutes.main.chat;
+
+  revalidatePath(redirectPath);
+  redirect(redirectPath);
 }
 
 export async function singOutServer() {
   await singOut();
 
-  const pathRedirect = `/${appRoutes.auth.routerPath}/${appRoutes.login.routerPath}`;
+  const pathRedirect = appRoutes.auth.signIn;
 
   revalidatePath(pathRedirect);
   redirect(pathRedirect);

@@ -3,16 +3,19 @@
 import Link from 'next/link';
 import { useActionState, useEffect } from 'react';
 
-import { appRoutes } from '@/src/core/enums/router-paths';
-import type { ErrorModel } from '@/src/core/models/error.model';
-import { loginServer } from '@/src/core/server';
+import { appRoutes } from '@/src/core/constants/router-paths';
+import type { ErrorModel } from '@/src/core/models';
+import { signInServer } from '@/src/core/server';
 
 const initialState: ErrorModel = {
   error: '',
 };
 
 export const SingInForm = () => {
-  const [state, formAction] = useActionState(loginServer, initialState);
+  const [state, formAction, isPending] = useActionState(
+    signInServer,
+    initialState,
+  );
 
   useEffect(() => {
     if (state.error) {
@@ -42,7 +45,9 @@ export const SingInForm = () => {
           />
         </div>
 
-        <button role="button">Log in</button>
+        <button disabled={isPending} role="button">
+          {isPending ? 'Pending...' : 'Log in'}
+        </button>
       </form>
       <p>
         Don’t have an account? <Link href={appRoutes.auth.signUp}>Sign up</Link>

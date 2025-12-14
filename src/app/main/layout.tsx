@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { SideBar } from '@/src/app/main/components/SideBar/SideBar';
+
 export default function MainLayout({
   children,
 }: {
@@ -7,7 +9,7 @@ export default function MainLayout({
 }) {
   return (
     <main>
-      Side Bar
+      <SideBar />
       <div>{children}</div>
     </main>
   );

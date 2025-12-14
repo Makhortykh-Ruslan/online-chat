@@ -3,16 +3,16 @@
 import Link from 'next/link';
 import { useActionState, useEffect } from 'react';
 
-import { appRoutes } from '@/src/core/enums/router-paths';
-import type { ErrorModel } from '@/src/core/models/error.model';
-import { loginServer } from '@/src/core/server';
+import { appRoutes } from '@/src/core/constants/router-paths';
+import type { ErrorModel } from '@/src/core/models';
+import { singUpServer } from '@/src/core/server';
 
 const initialState: ErrorModel = {
   error: '',
 };
 
 export const SingUpForm = () => {
-  const [state, formAction] = useActionState(loginServer, initialState);
+  const [state, formAction] = useActionState(singUpServer, initialState);
 
   useEffect(() => {
     if (state.error) {
@@ -24,12 +24,21 @@ export const SingUpForm = () => {
     <section>
       <form action={formAction}>
         <div>
-          <label htmlFor="userName">User name</label>
+          <label htmlFor="username">User name</label>
           <input
-            id="userName"
+            id="username"
             type="text"
-            name="userName"
-            placeholder="Enter your user name"
+            name="username"
+            placeholder="Enter your username"
+          />
+        </div>
+        <div>
+          <label htmlFor="display_name">Display name</label>
+          <input
+            id="display_name"
+            type="text"
+            name="display_name"
+            placeholder="Enter your display name"
           />
         </div>
         <div>
