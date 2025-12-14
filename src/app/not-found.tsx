@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation';
 
+import { appRoutes } from '@/src/core/enums/router-paths';
+
 export default function NotFound() {
-  redirect('/auth/login');
+  redirect(appRoutes.auth.signIn);
 }

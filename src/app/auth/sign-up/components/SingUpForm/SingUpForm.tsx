@@ -1,7 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { useActionState, useEffect } from 'react';
 
+import { appRoutes } from '@/src/core/enums/router-paths';
 import type { ErrorModel } from '@/src/core/models/error.model';
 import { loginServer } from '@/src/core/server';
 
@@ -9,7 +11,7 @@ const initialState: ErrorModel = {
   error: '',
 };
 
-export const LoginForm = () => {
+export const SingUpForm = () => {
   const [state, formAction] = useActionState(loginServer, initialState);
 
   useEffect(() => {
@@ -18,20 +20,25 @@ export const LoginForm = () => {
     }
   }, [state.error]);
 
-  const handleRedirectToSingUp = () => {
-    console.log('redirectToSingUp');
-  };
-
   return (
     <section>
       <form action={formAction}>
         <div>
-          <label htmlFor="login">Login</label>
+          <label htmlFor="userName">User name</label>
           <input
-            id="login"
+            id="userName"
+            type="text"
+            name="userName"
+            placeholder="Enter your user name"
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
             type="text"
             name="email"
-            placeholder="Enter your login"
+            placeholder="Enter your email"
           />
         </div>
         <div>
@@ -44,9 +51,13 @@ export const LoginForm = () => {
           />
         </div>
 
-        <button role="button">Log in</button>
+        <button role="button">Create an account</button>
       </form>
-      <p onClick={handleRedirectToSingUp}>Sing up</p>
+
+      <p>
+        Back to
+        <Link href={appRoutes.auth.signIn}>sing in</Link>
+      </p>
     </section>
   );
 };
