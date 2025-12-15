@@ -10,7 +10,7 @@ export default function MainLayout({
   return (
     <main>
       <SideBar />
-      <div>{children}</div>
+      {children}
     </main>
   );
 }

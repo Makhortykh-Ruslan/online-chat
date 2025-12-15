@@ -23,7 +23,7 @@ export async function authProxy(request: NextRequest) {
   }
 
   if (isAuthenticated && isAuthRoute) {
-    return NextResponse.redirect(new URL(appRoutes.main.chat, request.url));
+    return NextResponse.redirect(new URL(appRoutes.main.root, request.url));
   }
 
   return null;

@@ -1,3 +1,3 @@
 export default function ChatPage() {
-  return <section>Chat</section>;
+  return <section>ChatId</section>;
 }

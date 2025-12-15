@@ -10,3 +10,13 @@ export async function addNewProfile(data: ProfileModel) {
   const supabase = await createClient();
   return supabase.from(relation).insert(data);
 }
+
+export async function getProfiles() {
+  const supabase = await createClient();
+  const { data: currentAuthUser } = await supabase.auth.getUser();
+
+  return supabase
+    .from(relation)
+    .select('*')
+    .neq('id', currentAuthUser.user?.id);
+}
