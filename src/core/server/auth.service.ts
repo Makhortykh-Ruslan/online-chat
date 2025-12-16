@@ -4,10 +4,10 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { appRoutes } from '@/src/core/constants/router-paths';
-import { EControlName } from '@/src/core/enums/e-control-name';
+import { EControlName } from '@/src/core/enums';
 import type { ErrorModel, ProfileModel } from '@/src/core/models';
 import {
-  addNewProfile,
+  insertNewProfile,
   singIn,
   singOut,
   singUp,
@@ -56,7 +56,7 @@ export async function singUpServer(prevData: ErrorModel, formData: FormData) {
     display_name,
   };
 
-  const { error: addNewProfileError } = await addNewProfile(profile);
+  const { error: addNewProfileError } = await insertNewProfile(profile);
 
   if (addNewProfileError) {
     return { error: addNewProfileError.message };

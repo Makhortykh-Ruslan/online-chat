@@ -1,14 +1,13 @@
 'use server';
 
+import { EBDTableName } from '@/src/core/enums';
 import type { ProfileModel } from '@/src/core/models';
 
 import { createClient } from './server.supabase';
 
-const relation = 'profiles';
-
-export async function addNewProfile(data: ProfileModel) {
+export async function insertNewProfile(data: ProfileModel) {
   const supabase = await createClient();
-  return supabase.from(relation).insert(data);
+  return supabase.from(EBDTableName.PROFILES).insert(data);
 }
 
 export async function getProfiles() {
@@ -16,7 +15,7 @@ export async function getProfiles() {
   const { data: currentAuthUser } = await supabase.auth.getUser();
 
   return supabase
-    .from(relation)
+    .from(EBDTableName.PROFILES)
     .select('*')
     .neq('id', currentAuthUser.user?.id);
 }
