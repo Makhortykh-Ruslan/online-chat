@@ -1,5 +1,3 @@
-'use server';
-
 import { createClient } from './server.supabase';
 
 export async function singUp(email: string, password: string) {

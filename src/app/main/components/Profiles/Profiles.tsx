@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import type { ProfileModel } from '@/src/core/models';
-import { findOrCreateConversation } from '@/src/infrastructure/supabase';
+import { findOrCreateConversation } from '@/src/core/server/conversation.service';
 
 type ProfilesProps = {
   data: ProfileModel[];
@@ -13,8 +13,8 @@ export function Profiles({ data }: ProfilesProps) {
   const router = useRouter();
 
   const handleClick = async (profile: ProfileModel): Promise<void> => {
-    const conversationId = await findOrCreateConversation(profile.id);
-    router.push(`/main/chat/${conversationId}`);
+    const conversation_id = await findOrCreateConversation(profile.id);
+    router.push(`/main/chat/${conversation_id}`);
   };
 
   return (

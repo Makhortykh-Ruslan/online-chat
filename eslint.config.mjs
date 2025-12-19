@@ -26,7 +26,11 @@ export default defineConfig([
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'warn',
-        { vars: 'all', varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_',
+        },
       ],
 
       // --- React ---
