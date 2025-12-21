@@ -3,18 +3,18 @@ import { getMessages } from '@/src/infrastructure/supabase';
 
 type ChatPageProps = {
   params: Promise<{
-    conversation_id: string;
+    conversationId: string;
   }>;
 };
 
 export default async function ChatPage({ params }: ChatPageProps) {
-  const { conversation_id } = await params;
-  const messages = await getMessages(conversation_id);
+  const { conversationId } = await params;
+  const messages = await getMessages(conversationId);
 
   return (
     <section>
       {messages && messages.map((el) => <p key={el.id}>{el.content}</p>)}
-      <InputMessage conversation_id={conversation_id} />
+      <InputMessage conversationId={conversationId} />
     </section>
   );
 }

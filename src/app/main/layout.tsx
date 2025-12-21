@@ -8,7 +8,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main>
+    <main style={{ display: 'flex', gap: '20px' }}>
       <SideBar />
       {children}
     </main>

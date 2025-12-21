@@ -11,10 +11,13 @@ export async function insertMessage(data: MessageModel) {
 export async function getMessages(conversation_id: string) {
   const supabase = await createClient();
 
+  console.log('conversation_id', conversation_id);
   const { data: messages } = await supabase
     .from(EBDTableName.MESSAGES)
     .select('*')
     .eq('conversation_id', conversation_id);
+
+  console.log('messages', messages);
 
   return messages;
 }

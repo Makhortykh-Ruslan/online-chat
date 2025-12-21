@@ -26,16 +26,6 @@ export async function getProfile(): Promise<ProfileModel | null> {
   return profile;
 }
 
-export async function getProfiles() {
-  const supabase = await createClient();
-  const { data: currentAuthUser } = await supabase.auth.getUser();
-
-  return supabase
-    .from(EBDTableName.PROFILES)
-    .select('*')
-    .neq('id', currentAuthUser.user?.id);
-}
-
 export async function getProfilesByUsersId(
   userIds: string[],
 ): Promise<ProfileModel[]> {
