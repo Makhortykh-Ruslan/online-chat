@@ -1,5 +1,4 @@
-import type { NextRequest } from 'next/server';
-import { NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
 import { appRoutes } from '@/src/core/constants/router-paths';
 import { createClient } from '@/src/infrastructure/supabase';
@@ -13,18 +12,19 @@ export async function authProxy(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const isAuthRoute = pathname.startsWith(appRoutes.auth.root);
-  const isMainRoute = pathname.startsWith(appRoutes.main.root);
+  const isAuthenticated = user;
 
-  const isAuthenticated = !!user;
+  const isAuthRoute =
+    pathname === appRoutes.auth.signIn || pathname === appRoutes.auth.signUp;
+  const isChatRoute = pathname.startsWith(appRoutes.main.chat);
 
-  if (!isAuthenticated && isMainRoute) {
+  if (isAuthenticated && isAuthRoute) {
+    return NextResponse.redirect(new URL(appRoutes.main.chat, request.url));
+  }
+
+  if (!isAuthenticated && isChatRoute) {
     return NextResponse.redirect(new URL(appRoutes.auth.signIn, request.url));
   }
 
-  if (isAuthenticated && isAuthRoute) {
-    return NextResponse.redirect(new URL(appRoutes.main.root, request.url));
-  }
-
-  return null;
+  return NextResponse.next();
 }

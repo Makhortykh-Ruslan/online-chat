@@ -12,5 +12,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/auth/:path*', '/main/:path*'],
+  matcher: ['/sign-in', '/sign-up', '/chat', '/chat:path*', '/settings'],
 };

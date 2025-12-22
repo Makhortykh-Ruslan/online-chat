@@ -1,4 +1,4 @@
-import { SingInForm } from '@/src/app/auth/sign-in/components/SingInForm/SingInForm';
+import { SingInForm } from './components/SingInForm/SingInForm';
 
 export default function SignInPage() {
   return (

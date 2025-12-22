@@ -1,4 +1,4 @@
-import { InputMessage } from '@/src/app/main/chat/[conversationId]/components/InputMessage/InputMessage';
+import { InputMessage } from '@/src/app/(main)/chat/[conversationId]/components/InputMessage/InputMessage';
 import { getMessages } from '@/src/infrastructure/supabase';
 
 type ChatPageProps = {

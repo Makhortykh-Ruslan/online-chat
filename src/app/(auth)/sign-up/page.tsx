@@ -1,4 +1,4 @@
-import { SingUpForm } from '@/src/app/auth/sign-up/components/SingUpForm/SingUpForm';
+import { SingUpForm } from './components/SingUpForm/SingUpForm';
 
 export default function SignUpPage() {
   return (

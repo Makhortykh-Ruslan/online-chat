@@ -1,4 +1,4 @@
-import { singOutServer } from '@/src/core/server';
+import { Header } from '@/src/app/(main)/chat/components/SideBar/components/Header/Header';
 import { getSidebarConversations } from '@/src/core/server/conversation.service';
 import { getProfile } from '@/src/infrastructure/supabase';
 
@@ -9,14 +9,10 @@ export async function SideBar() {
   const conversations = await getSidebarConversations();
 
   return (
-    <article>
+    <aside>
       <header>{profile && <h1>{profile.username}</h1>}</header>
+      <Header />
       <Conversation data={conversations} />
-      <footer>
-        <form action={singOutServer}>
-          <button type="submit">Sign out</button>
-        </form>
-      </footer>
-    </article>
+    </aside>
   );
 }
