@@ -5,14 +5,14 @@ import { useActionState, useEffect } from 'react';
 
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ErrorModel } from '@/src/core/models';
-import { singUpServer } from '@/src/core/server';
+import { signUpServer } from '@/src/core/server';
 
 const initialState: ErrorModel = {
   error: '',
 };
 
 export const SingUpForm = () => {
-  const [state, formAction] = useActionState(singUpServer, initialState);
+  const [state, formAction] = useActionState(signUpServer, initialState);
 
   useEffect(() => {
     if (state.error) {

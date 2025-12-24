@@ -8,16 +8,16 @@ import { EControlName } from '@/src/core/enums';
 import type { ErrorModel, ProfileModel } from '@/src/core/models';
 import {
   insertProfile,
-  singIn,
-  singOut,
-  singUp,
+  signIn,
+  signOut,
+  signUp,
 } from '@/src/infrastructure/supabase';
 
 export async function signInServer(prevData: ErrorModel, formData: FormData) {
   const email = formData.get(EControlName.EMAIL) as string;
   const password = formData.get(EControlName.PASSWORD) as string;
 
-  const { error } = await singIn(email, password);
+  const { error } = await signIn(email, password);
 
   if (error) {
     return { error: error.message };
@@ -29,14 +29,14 @@ export async function signInServer(prevData: ErrorModel, formData: FormData) {
   redirect(redirectPath);
 }
 
-export async function singUpServer(prevData: ErrorModel, formData: FormData) {
+export async function signUpServer(prevData: ErrorModel, formData: FormData) {
   const email = formData.get(EControlName.EMAIL) as string;
   const password = formData.get(EControlName.PASSWORD) as string;
 
   const {
     error: signUpError,
     data: { user },
-  } = await singUp(email, password);
+  } = await signUp(email, password);
 
   if (signUpError) {
     return { error: signUpError.message };
@@ -68,8 +68,8 @@ export async function singUpServer(prevData: ErrorModel, formData: FormData) {
   redirect(redirectPath);
 }
 
-export async function singOutServer() {
-  await singOut();
+export async function signOutServer() {
+  await signOut();
 
   const pathRedirect = appRoutes.auth.signIn;
 

@@ -9,10 +9,10 @@ import type { ConversationDTO } from '@/src/core/models/conversation.dto';
 import { ConversationItem } from './components/ConversationItem/ConversationItem';
 
 type Props = {
-  data: ConversationDTO[];
+  conversations: ConversationDTO[];
 };
 
-export const Conversation = ({ data }: Props) => {
+export const Conversations = ({ conversations }: Props) => {
   const router = useRouter();
 
   const selectConversation = useCallback(
@@ -31,7 +31,7 @@ export const Conversation = ({ data }: Props) => {
       </header>
 
       <main>
-        {data.map((el) => (
+        {conversations.map((el) => (
           <ConversationItem
             key={el.conversationId}
             title={el.title}
@@ -41,7 +41,7 @@ export const Conversation = ({ data }: Props) => {
           />
         ))}
 
-        {data.length === 0 && <div>Empty Conversations</div>}
+        {conversations.length === 0 && <div>Empty Conversations</div>}
       </main>
     </div>
   );
