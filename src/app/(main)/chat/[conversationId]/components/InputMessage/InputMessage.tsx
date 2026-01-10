@@ -3,7 +3,7 @@
 import { useActionState } from 'react';
 
 import type { ErrorModel } from '@/src/core/models';
-import { sendMessageServer } from '@/src/core/server';
+import { sendMessageServer } from '@/src/core/services';
 
 type InputMessageProps = {
   conversationId: string;

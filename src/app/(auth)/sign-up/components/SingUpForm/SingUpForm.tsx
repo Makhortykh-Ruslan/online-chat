@@ -5,7 +5,7 @@ import { useActionState, useEffect } from 'react';
 
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ErrorModel } from '@/src/core/models';
-import { signUpServer } from '@/src/core/server';
+import { signUpServer } from '@/src/core/services';
 
 const initialState: ErrorModel = {
   error: '',

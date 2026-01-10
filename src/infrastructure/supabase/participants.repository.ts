@@ -64,3 +64,20 @@ export async function findExistingDirectConversationId(
     return existing.conversation_id;
   }
 }
+
+export async function getParticipantsByConversationId(
+  conversationId: string,
+): Promise<Participant[]> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from(EBDTableName.CONVERSATION_PARTICIPANTS)
+    .select('*')
+    .eq('conversation_id', conversationId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data ?? [];
+}

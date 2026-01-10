@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import type { ProfileModel } from '@/src/core/models';
-import { findOrCreateConversation } from '@/src/core/server/conversation.service';
+import { findOrCreateConversation } from '@/src/core/services/conversation.service';
 
 type ProfilesProps = {
   data: ProfileModel[];

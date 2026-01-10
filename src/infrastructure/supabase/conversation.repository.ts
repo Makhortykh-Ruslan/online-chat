@@ -38,3 +38,21 @@ export async function getConversationsByIds(
 
   return data || [];
 }
+
+export async function getConversationById(
+  conversationId: string,
+): Promise<ConversationModel | null> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from(EBDTableName.CONVERSATIONS)
+    .select('*')
+    .eq('id', conversationId)
+    .single();
+
+  if (error || !data) {
+    return null;
+  }
+
+  return data;
+}

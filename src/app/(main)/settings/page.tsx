@@ -1,4 +1,4 @@
-import { signOutServer } from '@/src/core/server';
+import { signOutServer } from '@/src/core/services';
 
 export default function SettingsPage() {
   return (
