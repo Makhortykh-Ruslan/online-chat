@@ -1,5 +1,6 @@
 type AppRoutesShape = {
   auth: {
+    root: string;
     signIn: string;
     signUp: string;
   };
@@ -11,8 +12,9 @@ type AppRoutesShape = {
 
 export const appRoutes = {
   auth: {
-    signIn: '/sign-in',
-    signUp: '/sign-up',
+    root: '/auth',
+    signIn: '/auth/sign-in',
+    signUp: '/auth/sign-up',
   },
   main: {
     chat: '/chat',
