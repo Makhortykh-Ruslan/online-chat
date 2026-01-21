@@ -1,1 +1,1 @@
-export type TIcon = 'message';
+export type TIcon = 'message' | 'secure' | 'users' | 'flesh';

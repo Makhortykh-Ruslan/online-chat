@@ -1,5 +1,7 @@
+import type { TIcon } from '@/src/core/types';
+
 type IconProps = {
-  name: string;
+  name: TIcon;
   size?: number;
   className?: string;
 };

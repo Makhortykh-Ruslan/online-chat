@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Icon } from '@/src/core/components/Icon/Icon';
+import { Introducing } from '@/src/app/auth/components/Introducing/Introducing';
 
 export default function AuthLayout({
   children,
@@ -8,11 +8,11 @@ export default function AuthLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="flex gap-2">
-      <article>
-        <Icon name="message" className="text-blue-500" size={20} />
-      </article>
-      {children}
-    </section>
+    <main className="flex min-h-screen flex-col md:flex-row">
+      <section className="flex-1 bg-logo-gradient">
+        <Introducing />
+      </section>
+      <section className="flex-1">{children}</section>
+    </main>
   );
 }
