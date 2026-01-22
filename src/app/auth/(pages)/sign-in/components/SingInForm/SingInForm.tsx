@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useActionState, useEffect } from 'react';
 
+import { Button } from '@/src/core/components/Button/Button';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ErrorModel } from '@/src/core/models';
 import { signInServer } from '@/src/core/services';
@@ -45,9 +46,11 @@ export const SingInForm = () => {
           />
         </div>
 
-        <button disabled={isPending} role="button">
-          {isPending ? 'Pending...' : 'Log in'}
-        </button>
+        <Button
+          disabled={isPending}
+          color="blue"
+          text={isPending ? 'Pending...' : 'Log in'}
+        />
       </form>
       <p>
         Don’t have an account? <Link href={appRoutes.auth.signUp}>Sign up</Link>

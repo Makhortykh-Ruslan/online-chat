@@ -24,7 +24,7 @@ export const AbilityCard = ({
         <p className="text-12 md:text-14">{title}</p>
       </div>
 
-      <p className="text-12 whitespace-nowrap">{description}</p>
+      <p className="text-12">{description}</p>
     </div>
   );
 };
