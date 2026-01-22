@@ -6,4 +6,5 @@ export default {
   experimentalUseClient: true,
   printWidth: 80,
   endOfLine: 'auto',
+  plugins: ['prettier-plugin-tailwindcss'],
 };

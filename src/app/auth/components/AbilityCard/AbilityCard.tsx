@@ -14,12 +14,17 @@ export const AbilityCard = ({
   description,
 }: AbilityCardProps) => {
   return (
-    <div className="grid gap-1 py-4 px-3">
+    <div className="grid w-full gap-1 rounded-2xl border border-white/20 bg-white/25 p-2 backdrop-blur-[30px] md:px-3 md:py-4">
       <div className="flex gap-3">
-        <Icon name={iconName} className="--color-gray-0"></Icon>
-        <p className="text-14">{title}</p>
+        <Icon
+          name={iconName}
+          className="--color-gray-0 h-[18px] w-[18px] md:h-[24px] md:w-[24px]"
+        ></Icon>
+
+        <p className="text-12 md:text-14">{title}</p>
       </div>
-      <p className="text-12">{description}</p>
+
+      <p className="text-12 whitespace-nowrap">{description}</p>
     </div>
   );
 };
