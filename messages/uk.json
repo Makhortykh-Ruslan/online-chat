@@ -1,0 +1,27 @@
+{
+  "titles": {
+    "welcomeBack": "З поверненням",
+    "createAccount": "Створити акаунт",
+    "realTimeChat": "Чат у реальному часі",
+    "groupChats": "Групові чати",
+    "secure": "Безпека",
+    "flesh": "Швидкість"
+  },
+  "descriptions": {
+    "enterCredentials": "Введіть свої дані, щоб увійти в акаунт",
+    "instantMessaging": "Миттєвий обмін повідомленнями",
+    "collaborateTogether": "Спільна робота разом",
+    "endToEndEncrypted": "Наскрізне шифрування",
+    "lightingQuick": "Блискавична швидкість"
+  },
+  "labels": {
+    "fullName": "Повне ім'я",
+    "emailAddress": "Електронна пошта",
+    "password": "Пароль",
+    "confirmPassword": "Підтвердьте пароль"
+  },
+  "placeholders": {
+    "yourName": "Ваше ім'я",
+    "yourEmail": "Ваш Email"
+  }
+}

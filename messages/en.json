@@ -1,0 +1,27 @@
+{
+  "titles": {
+    "welcomeBack": "Welcome back",
+    "createAccount": "Create an account",
+    "realTimeChat": "Real-time Chat",
+    "groupChats": "Group Chats",
+    "secure": "Secure",
+    "flesh": "flesh"
+  },
+  "descriptions": {
+    "enterCredentials": "Enter your credentials to access your account",
+    "instantMessaging": "Instant messaging",
+    "collaborateTogether": "Collaborate together",
+    "endToEndEncrypted": "End-to-end encrypted",
+    "lightingQuick": "Lightning quick"
+  },
+  "labels": {
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "placeholders": {
+    "yourName": "Your Name",
+    "yourEmail": "Your Email"
+  }
+}

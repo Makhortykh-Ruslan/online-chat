@@ -1,7 +1,7 @@
 import {
   ConversationHeader,
   InputMessage,
-} from '@/src/app/(main)/chat/[conversationId]/components';
+} from '@/src/app/[locale]/(main)/chat/[conversationId]/components';
 import { getConversationDetails } from '@/src/core/services';
 import { getMessages } from '@/src/infrastructure/supabase';
 

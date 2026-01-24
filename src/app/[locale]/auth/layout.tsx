@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { AbilityCard } from '@/src/app/auth/components/AbilityCard/AbilityCard';
-import { ABILITY_CARDS } from '@/src/app/auth/constants/ability-cards';
+import { AbilityList } from '@/src/app/[locale]/auth/components/AbilityList/AbilityList';
 import { Logo } from '@/src/core/components/Logo/Logo';
 
 export default function AuthLayout({
@@ -22,9 +21,7 @@ export default function AuthLayout({
             calls, and group collaboration.
           </p>
           <div className="grid grid-cols-2 gap-4 pt-[24px] md:w-full md:max-w-[446px]">
-            {ABILITY_CARDS.map((el) => (
-              <AbilityCard key={el.id} {...el} />
-            ))}
+            {<AbilityList />}
           </div>
         </div>
       </section>

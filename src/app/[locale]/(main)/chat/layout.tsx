@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SideBar } from '@/src/app/(main)/chat/components/SideBar/SideBar';
+import { SideBar } from '@/src/app/[locale]/(main)/chat/components/SideBar/SideBar';
 
 export default function MainLayout({
   children,
