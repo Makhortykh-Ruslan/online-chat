@@ -2,7 +2,7 @@ import { getRequestConfig } from 'next-intl/server';
 
 import { routing } from '@/src/i18n/routing';
 
-export default getRequestConfig(async ({ locale }) => {
+export default getRequestConfig(async ({ locale }: any) => {
   const activeLocale = (await locale) || routing.defaultLocale;
 
   return {

@@ -12,7 +12,5 @@ export default async function NotFound() {
     routing.locales.find((l) => acceptLang.includes(l)) ||
     routing.defaultLocale;
 
-  console.log('locale', locale);
-
   redirect(`/${locale}${appRoutes.auth.signIn}`);
 }

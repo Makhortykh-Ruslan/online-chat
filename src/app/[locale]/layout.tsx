@@ -3,7 +3,6 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
 import { ThemeProvider } from 'next-themes';
 import React from 'react';
 
@@ -27,7 +26,13 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
 
-  const messages = await getMessages();
+  let messages;
+
+  try {
+    messages = (await import(`../../../messages/${locale}.json`)).default;
+  } catch (error) {
+    messages = (await import(`../../../messages/en.json`)).default;
+  }
 
   return (
     <html lang={locale} suppressHydrationWarning>
