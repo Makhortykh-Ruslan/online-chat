@@ -18,13 +18,13 @@ export const AbilityCard = ({
       <div className="flex gap-3">
         <Icon
           name={iconName}
-          className="--color-gray-0 h-[18px] w-[18px] md:h-[24px] md:w-[24px]"
+          className="text-gray-0 h-[18px] w-[18px] md:h-[24px] md:w-[24px]"
         ></Icon>
 
-        <p className="text-12 md:text-14">{title}</p>
+        <p className="text-12 md:text-14 text-gray-0">{title}</p>
       </div>
 
-      <p className="text-12">{description}</p>
+      <p className="text-12 text-gray-0 text-start">{description}</p>
     </div>
   );
 };

@@ -17,15 +17,15 @@ export default function AuthLayout({
 }>) {
   return (
     <main className="flex min-h-screen flex-col md:flex-row">
-      <section className="bg-introducing relative flex w-full flex-col items-center justify-center bg-cover bg-center px-5 py-10 text-white md:w-1/2 lg:w-[40%]">
+      <section className="bg-introducing relative flex w-full flex-1 flex-col items-center justify-center bg-cover bg-center px-5 py-10 text-white">
         <div className="z-10 flex flex-col items-center text-center">
           <Logo />
           <h1 id="intro-title" className="text-24 md:text-36 mt-4 font-bold">
             LinkUp Chat
           </h1>
-          <p className="text-12 md:text-18 mt-2 max-w-[320px] leading-relaxed opacity-90">
-            Experience seamless messaging with real-time chat, voice calls, and
-            group collaboration.
+          <p className="text-12 md:text-18 mt-2 leading-relaxed opacity-90">
+            Experience seamless messaging with real-time chat, <br /> voice
+            calls, and group collaboration.
           </p>
 
           <div className="mt-8 grid grid-cols-2 gap-4">

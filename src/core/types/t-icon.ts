@@ -1,1 +1,8 @@
-export type TIcon = 'message' | 'secure' | 'users' | 'flesh' | 'cloud';
+export type TIcon =
+  | 'message'
+  | 'secure'
+  | 'users'
+  | 'flesh'
+  | 'cloud'
+  | 'email'
+  | 'lock';
