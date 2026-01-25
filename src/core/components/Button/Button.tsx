@@ -1,23 +1,19 @@
-import React from 'react';
+import React, { type ButtonHTMLAttributes } from 'react';
 
 import type { TBtnColor } from '@/src/core/components/Button/type/t-btn-color';
 
 type Props = {
-  disabled?: boolean;
   text: string;
   color?: TBtnColor;
-  className?: string;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  type?: 'button' | 'submit' | 'reset';
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
   disabled,
   text,
   color = 'blue',
   className = '',
-  onClick,
   type = 'button',
+  ...restProps
 }: Props) => {
   const baseClasses = `
     flex items-center justify-center
@@ -39,7 +35,7 @@ export const Button = ({
       type={type}
       className={combinedClasses}
       disabled={disabled}
-      onClick={onClick}
+      {...restProps}
     >
       {text}
     </button>

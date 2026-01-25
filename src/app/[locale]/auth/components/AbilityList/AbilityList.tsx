@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { AbilityCard } from '@/src/app/[locale]/auth/components/AbilityCard/AbilityCard'; // Саме next-intl
+import { AbilityCard } from '@/src/app/[locale]/auth/components/AbilityCard';
 import { ABILITY_CARDS } from '@/src/app/[locale]/auth/constants/ability-cards';
 
 export const AbilityList = () => {

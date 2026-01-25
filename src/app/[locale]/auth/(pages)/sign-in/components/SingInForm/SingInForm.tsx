@@ -50,6 +50,7 @@ export const SingInForm = () => {
           disabled={isPending}
           color="blue"
           text={isPending ? 'Pending...' : 'Log in'}
+          type="submit"
         />
       </form>
       <p>
