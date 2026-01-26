@@ -14,12 +14,12 @@ export function ThemeToggle() {
   }, [mounted]);
 
   if (!mounted) {
-    return <div className="w-8 h-8" aria-hidden="true" />;
+    return <div className="h-8 w-8" aria-hidden="true" />;
   }
 
   return (
     <button
-      className="p-2 rounded-md transition-colors hover:bg-gray-100 dark:hover:bg-brand-800"
+      className="dark:hover:bg-brand-800 rounded-md p-2 transition-colors hover:bg-gray-100"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}

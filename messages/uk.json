@@ -1,18 +1,23 @@
 {
+  "metadata": {
+    "authTitle": "Автентифікація | LinkUp Chat",
+    "authDescription": "Увійдіть або зареєструйтеся, щоб насолоджуватися безперебійним спілкуванням у LinkUp Chat."
+  },
   "titles": {
     "welcomeBack": "З поверненням",
-    "createAccount": "Створити акаунт",
+    "createAccount": "Створити обліковий запис",
     "realTimeChat": "Чат у реальному часі",
     "groupChats": "Групові чати",
     "secure": "Безпека",
-    "flesh": "Швидкість"
+    "flesh": "Миттєвість"
   },
   "descriptions": {
-    "enterCredentials": "Введіть свої дані, щоб увійти в акаунт",
+    "enterCredentials": "Введіть свої дані для входу в обліковий запис",
     "instantMessaging": "Миттєвий обмін повідомленнями",
-    "collaborateTogether": "Спільна робота разом",
+    "collaborateTogether": "Спільна робота",
     "endToEndEncrypted": "Наскрізне шифрування",
-    "lightingQuick": "Блискавична швидкість"
+    "lightingQuick": "Блискавична швидкість",
+    "introducing": "Насолоджуйтесь безперебійним спілкуванням за допомогою чатів \n у реальному часі, голосових дзвінків та групової співпраці."
   },
   "labels": {
     "fullName": "Повне ім'я",

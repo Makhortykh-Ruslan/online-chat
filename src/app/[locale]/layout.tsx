@@ -26,22 +26,10 @@ export default async function RootLayout({
 }>) {
   const { locale } = await params;
 
-  let messages;
-
-  try {
-    messages = (await import(`../../../messages/${locale}.json`)).default;
-  } catch (error) {
-    messages = (await import(`../../../messages/en.json`)).default;
-  }
-
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <NextIntlClientProvider
-          messages={messages}
-          locale={locale}
-          key={locale}
-        >
+        <NextIntlClientProvider locale={locale} key={locale}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
           </ThemeProvider>

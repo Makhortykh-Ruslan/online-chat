@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "authTitle": "Authentication | LinkUp Chat",
+    "authDescription":"Login or Register to experience seamless messaging with LinkUp Chat."
+  },
   "titles": {
     "welcomeBack": "Welcome back",
     "createAccount": "Create an account",
@@ -12,7 +16,8 @@
     "instantMessaging": "Instant messaging",
     "collaborateTogether": "Collaborate together",
     "endToEndEncrypted": "End-to-end encrypted",
-    "lightingQuick": "Lightning quick"
+    "lightingQuick": "Lightning quick",
+    "introducing": "Experience seamless messaging with real-time chat,\n voice calls, and group collaboration."
   },
   "labels": {
     "fullName": "Full Name",

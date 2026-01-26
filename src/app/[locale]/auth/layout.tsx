@@ -1,20 +1,38 @@
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
-import { AbilityList } from '@/src/app/[locale]/auth/components/AbilityList';
 import { Logo } from '@/src/core/components/Logo/Logo';
+import type { LayoutProps } from '@/src/core/types';
 
-export const metadata: Metadata = {
-  title: 'Authentication | LinkUp Chat',
-  description:
-    'Login or Register to experience seamless messaging with LinkUp Chat.',
-};
+import { AbilityCard } from './components/AbilityCard';
+import { ABILITY_CARDS } from './constants/ability-cards';
 
-export default function AuthLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export async function generateMetadata({
+  params,
+}: LayoutProps): Promise<Metadata> {
+  const { locale } = await params;
+  const metadata = await getTranslations({ locale, namespace: 'metadata' });
+
+  return {
+    title: metadata('authTitle'),
+    description: metadata('authDescription'),
+  };
+}
+
+export default async function AuthLayout({ children, params }: LayoutProps) {
+  const { locale } = await params;
+
+  const titles = await getTranslations({
+    locale,
+    namespace: 'titles',
+  });
+
+  const descriptions = await getTranslations({
+    locale,
+    namespace: 'descriptions',
+  });
+
   return (
     <main className="flex min-h-screen flex-col md:flex-row">
       <section className="bg-introducing relative flex w-full flex-1 flex-col items-center justify-center bg-cover bg-center px-5 py-10 text-white">
@@ -23,13 +41,19 @@ export default function AuthLayout({
           <h1 id="intro-title" className="text-24 md:text-36 mt-4 font-bold">
             LinkUp Chat
           </h1>
-          <p className="text-12 md:text-18 mt-2 leading-relaxed opacity-90">
-            Experience seamless messaging with real-time chat, <br /> voice
-            calls, and group collaboration.
+          <p className="text-12 md:text-18 mt-2 leading-relaxed whitespace-pre-line opacity-90">
+            {descriptions('introducing')}
           </p>
 
-          <div className="mt-8 grid grid-cols-2 gap-4">
-            <AbilityList />
+          <div className="mt-8 grid w-full grid-cols-2 gap-4">
+            {ABILITY_CARDS.map((el) => (
+              <AbilityCard
+                key={el.id}
+                {...el}
+                title={titles(el.title)}
+                description={descriptions(el.description)}
+              />
+            ))}
           </div>
         </div>
       </section>
