@@ -1,5 +1,7 @@
+'use client';
+
 import clsx from 'clsx';
-import type { InputHTMLAttributes } from 'react';
+import { type InputHTMLAttributes } from 'react';
 
 import { Icon } from '@/src/core/components/Icon/Icon';
 import type { TIcon } from '@/src/core/types';

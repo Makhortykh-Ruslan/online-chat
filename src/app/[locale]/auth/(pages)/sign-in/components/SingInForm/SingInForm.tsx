@@ -1,14 +1,13 @@
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useActionState, useEffect } from 'react';
 
-import { Input } from '@/src/core/components';
-import { Button } from '@/src/core/components/Button/Button';
+import { Button, Input } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ErrorModel } from '@/src/core/models';
 import { signInServer } from '@/src/core/services';
+import { Link } from '@/src/i18n/routing';
 
 const initialState: ErrorModel = {
   error: '',
@@ -16,7 +15,9 @@ const initialState: ErrorModel = {
 
 export const SingInForm = () => {
   const labels = useTranslations('labels');
+  const button = useTranslations('button');
   const placeholders = useTranslations('placeholders');
+  const descriptions = useTranslations('descriptions');
 
   const [state, formAction, isPending] = useActionState(
     signInServer,
@@ -30,45 +31,45 @@ export const SingInForm = () => {
   }, [state.error]);
 
   return (
-    <section>
+    <section className="w-full max-w-[448px]">
       <form action={formAction}>
         <Input
+          className="mb-[16px] w-full"
+          name="email"
           leftIcon="email"
           id="userNameOrEmail"
-          placeholder={placeholders('yourEmail')}
-          label={labels('emailAddress')}
+          label={labels('email')}
+          placeholder={placeholders('email')}
         />
 
-        {/*<div>*/}
-        {/*  <label htmlFor="userNameOrEmail">User name or Email</label>*/}
-        {/*  <input*/}
-        {/*    id="userNameOrEmail"*/}
-        {/*    type="text"*/}
-        {/*    name="email"*/}
-        {/*    placeholder="Enter your user name or email"*/}
-        {/*  />*/}
-        {/*</div>*/}
-
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-          />
-        </div>
+        <Input
+          className="w-full"
+          name="password"
+          id="Password"
+          type="password"
+          leftIcon="lock"
+          rightIcon="eye-open"
+          label={labels('password')}
+          placeholder={placeholders('password')}
+        />
 
         <Button
+          className="mt-[32px] w-full"
           disabled={isPending}
           color="blue"
-          text={isPending ? 'Pending...' : 'Log in'}
+          text={isPending ? button('pending') : button('logIn')}
           type="submit"
         />
       </form>
-      <p>
-        Don’t have an account? <Link href={appRoutes.auth.signUp}>Sign up</Link>
-      </p>
+      <div className="text-14 mt-[20px] flex justify-center gap-[4px] text-gray-700">
+        {descriptions('notHaveAccount')}
+        <Link
+          className="text-14 font-medium text-indigo-600"
+          href={appRoutes.auth.signUp}
+        >
+          {descriptions('signUp')}
+        </Link>
+      </div>
     </section>
   );
 };

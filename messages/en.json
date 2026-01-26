@@ -17,16 +17,28 @@
     "collaborateTogether": "Collaborate together",
     "endToEndEncrypted": "End-to-end encrypted",
     "lightingQuick": "Lightning quick",
-    "introducing": "Experience seamless messaging with real-time chat,\n voice calls, and group collaboration."
+    "introducing": "Experience seamless messaging with real-time chat,\n voice calls, and group collaboration.",
+    "notHaveAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signUp": "Sign up",
+    "signIn": "Sign in",
+    "fillDetail": "Fill in your details to get started"
   },
   "labels": {
     "fullName": "Full Name",
-    "emailAddress": "Email Address",
+    "email": "Email Address",
     "password": "Password",
     "confirmPassword": "Confirm Password"
   },
   "placeholders": {
     "yourName": "Your Name",
-    "yourEmail": "Your Email"
+    "email": "Enter your user name or email",
+    "password": "Enter password",
+    "confirmPassword": "Enter confirm password"
+  },
+  "button": {
+    "logIn": "Log in",
+    "signUp": "Sign up",
+    "pending": "Pending..."
   }
 }

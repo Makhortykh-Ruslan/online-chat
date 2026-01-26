@@ -5,4 +5,6 @@ export type TIcon =
   | 'flesh'
   | 'cloud'
   | 'email'
-  | 'lock';
+  | 'lock'
+  | 'eye-open'
+  | 'user';
