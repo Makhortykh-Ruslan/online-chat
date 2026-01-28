@@ -43,12 +43,11 @@ export const SingInForm = () => {
         />
 
         <Input
+          isPasswordFlow
           className="w-full"
           name="password"
-          id="Password"
-          type="password"
+          id="password"
           leftIcon="lock"
-          rightIcon="eye-open"
           label={labels('password')}
           placeholder={placeholders('password')}
         />

@@ -1,19 +1,11 @@
 'use client';
 
-import clsx from 'clsx';
-import { type InputHTMLAttributes } from 'react';
+import React, { type MouseEvent, useState } from 'react';
 
 import { Icon } from '@/src/core/components/Icon/Icon';
-import type { TIcon } from '@/src/core/types';
 
-type Props = {
-  id: string;
-  label?: string;
-  error?: string;
-  className?: string;
-  leftIcon?: TIcon;
-  rightIcon?: TIcon;
-} & InputHTMLAttributes<HTMLInputElement>;
+import { getInputStyles } from './Input.style';
+import type { TInputProps } from './type/t-input.props';
 
 export const Input = ({
   id,
@@ -22,56 +14,71 @@ export const Input = ({
   className = '',
   leftIcon,
   rightIcon,
+  isPasswordFlow,
+  type = 'text',
   ...restProps
-}: Props) => {
+}: TInputProps) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const isError = !!error;
+  const styles = getInputStyles(isError, className);
 
-  const baseContainer =
-    'group mt-[10px] gap-[10px] rounded-[12px] border px-[12px] py-[8px] transition-all flex items-center shadow-none';
+  const currentType = isPasswordFlow
+    ? isPasswordVisible
+      ? 'text'
+      : 'password'
+    : type;
+  const currentRightIcon = isPasswordFlow
+    ? isPasswordVisible
+      ? 'eye-open'
+      : 'eye-close'
+    : rightIcon;
 
-  const resultClassName = clsx(baseContainer, className, {
-    'text-14 border-gray-300 bg-gray-50 focus-within:border-indigo-400 focus-within:bg-indigo-50':
-      !isError,
-    'border-red-600 bg-gray-0 focus-within:border-red-600 focus-within:bg-gray-0':
-      isError,
-  });
+  const handleTogglePassword = (e: MouseEvent) => {
+    e.preventDefault();
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
-  const inputClassName = clsx(
-    'w-full appearance-none border-none bg-transparent outline-none placeholder:text-gray-400',
-    {
-      'text-gray-700 focus:text-indigo-400': !isError,
-      'text-red-600 focus:text-red-600': isError,
-    },
-  );
-
-  const iconClassName = clsx('w-[18px] h-[18px]', {
-    'text-gray-500 group-focus-within:text-indigo-400': !isError,
-    'text-red-600': isError,
-  });
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setIsPasswordVisible(!isPasswordVisible);
+    }
+  };
 
   return (
-    <div className="flex w-full flex-col">
+    <div className={styles.component}>
       {label && (
-        <label
-          htmlFor={id}
-          className={clsx(
-            'text-14 font-medium transition-colors',
-            isError ? 'text-red-600' : 'text-gray-900',
-          )}
-        >
+        <label htmlFor={id} className={styles.label}>
           {label}
         </label>
       )}
-      <div className={resultClassName}>
-        {leftIcon && <Icon name={leftIcon} className={iconClassName} />}
 
-        <input id={id} className={inputClassName} {...restProps} />
+      <div className={styles.component_input_wrapper}>
+        {leftIcon && <Icon name={leftIcon} className={styles.icon} />}
 
-        {rightIcon && <Icon name={rightIcon} className={iconClassName} />}
+        <input
+          id={id}
+          className={styles.input}
+          type={currentType}
+          {...restProps}
+        />
+
+        {currentRightIcon && (
+          <button
+            type="button"
+            onKeyDown={handleKeyDown}
+            onMouseDown={handleTogglePassword}
+            className={
+              isPasswordFlow ? 'cursor-pointer' : 'pointer-events-none'
+            }
+          >
+            <Icon name={currentRightIcon} className={styles.icon} />
+          </button>
+        )}
       </div>
-      {isError && (
-        <p className="text-12 mt-1 font-medium text-red-600">{error}</p>
-      )}
+
+      {isError && <p className={styles.error}>{error}</p>}
     </div>
   );
 };

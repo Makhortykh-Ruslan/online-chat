@@ -7,4 +7,5 @@ export type TIcon =
   | 'email'
   | 'lock'
   | 'eye-open'
+  | 'eye-close'
   | 'user';
