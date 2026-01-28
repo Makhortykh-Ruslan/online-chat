@@ -7,6 +7,7 @@ import type { LayoutProps } from '@/src/core/types';
 
 import { AbilityCard } from './components/AbilityCard';
 import { ABILITY_CARDS } from './constants/ability-cards';
+import { getLayoutStyle } from './layout.style';
 
 export async function generateMetadata({
   params,
@@ -33,19 +34,23 @@ export default async function AuthLayout({ children, params }: LayoutProps) {
     namespace: 'descriptions',
   });
 
+  const styles = getLayoutStyle();
+
   return (
-    <main className="flex min-h-screen flex-col md:flex-row">
-      <section className="bg-introducing relative flex w-full flex-1 flex-col items-center justify-center bg-cover bg-center px-5 py-10 text-white">
-        <div className="z-10 flex flex-col items-center text-center">
+    <main className={styles.page}>
+      <section className={styles.page_introducing}>
+        <div className={styles.page_introducing_container}>
           <Logo />
-          <h1 id="intro-title" className="text-24 md:text-36 mt-4 font-bold">
+
+          <h1 id="intro-title" className={styles.page_title}>
             LinkUp Chat
           </h1>
-          <p className="text-12 md:text-18 mt-2 leading-relaxed whitespace-pre-line opacity-90">
+
+          <p className={styles.page_description}>
             {descriptions('introducing')}
           </p>
 
-          <div className="mt-8 grid w-full grid-cols-2 gap-4">
+          <div className={styles.page_cards}>
             {ABILITY_CARDS.map((el) => (
               <AbilityCard
                 key={el.id}
@@ -58,8 +63,8 @@ export default async function AuthLayout({ children, params }: LayoutProps) {
         </div>
       </section>
 
-      <section className="relative -mt-4 flex flex-1 flex-col items-center justify-center rounded-t-[20px] bg-white px-6 py-8 md:mt-0 md:rounded-none">
-        <div className="w-full max-w-md">{children}</div>
+      <section className={styles.page_children}>
+        <div className={styles.page_children_item}>{children}</div>
       </section>
     </main>
   );
