@@ -1,4 +1,4 @@
-export const getSignUpFormStyles = () => ({
+export const getAuthFormStyle = () => ({
   component: `w-full max-w-[448px]`,
   component_input: `mb-[16px] w-full`,
   component_button: `mt-[32px] w-full`,

@@ -1,28 +1,28 @@
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useActionState, useEffect } from 'react';
 
 import { Button, Input } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ErrorModel } from '@/src/core/models';
-import { signUpServer } from '@/src/core/services';
+import { signInServer } from '@/src/core/services';
+import { Link } from '@/src/i18n/routing';
 
-import { getSignUpFormStyles } from './SignUpForm.style';
+import { getAuthFormStyle } from '../../styles';
 
 const initialState: ErrorModel = {
   error: '',
 };
 
-export const SingUpForm = () => {
+export const SingInForm = () => {
   const labels = useTranslations('labels');
   const button = useTranslations('button');
   const placeholders = useTranslations('placeholders');
   const descriptions = useTranslations('descriptions');
 
   const [state, formAction, isPending] = useActionState(
-    signUpServer,
+    signInServer,
     initialState,
   );
 
@@ -32,20 +32,11 @@ export const SingUpForm = () => {
     }
   }, [state.error]);
 
-  const styles = getSignUpFormStyles();
+  const styles = getAuthFormStyle();
 
   return (
     <section className={styles.component}>
       <form action={formAction}>
-        <Input
-          className={styles.component_input}
-          name="username"
-          leftIcon="user"
-          id="username"
-          label={labels('fullName')}
-          placeholder={placeholders('yourName')}
-        />
-
         <Input
           className={styles.component_input}
           name="email"
@@ -57,39 +48,26 @@ export const SingUpForm = () => {
 
         <Input
           className={styles.component_input}
+          isPasswordFlow
           name="password"
-          id="Password"
-          type="password"
+          id="password"
           leftIcon="lock"
-          rightIcon="eye-open"
           label={labels('password')}
           placeholder={placeholders('password')}
-        />
-
-        <Input
-          className={styles.component_input}
-          name="password"
-          id="Password"
-          type="password"
-          leftIcon="lock"
-          rightIcon="eye-open"
-          label={labels('confirmPassword')}
-          placeholder={placeholders('confirmPassword')}
         />
 
         <Button
           className={styles.component_button}
           disabled={isPending}
           color="blue"
-          text={isPending ? button('pending') : button('signUp')}
+          text={isPending ? button('pending') : button('logIn')}
           type="submit"
         />
       </form>
-
       <div className={styles.component_link_container}>
-        {descriptions('haveAccount')}
-        <Link className={styles.component_link} href={appRoutes.auth.signIn}>
-          {descriptions('signIn')}
+        {descriptions('notHaveAccount')}
+        <Link className={styles.component_link} href={appRoutes.auth.signUp}>
+          {descriptions('signUp')}
         </Link>
       </div>
     </section>

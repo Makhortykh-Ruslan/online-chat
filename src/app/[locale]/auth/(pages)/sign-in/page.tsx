@@ -2,7 +2,8 @@ import { getTranslations } from 'next-intl/server';
 
 import type { LayoutProps } from '@/src/core/types';
 
-import { SingInForm } from './components/SingInForm/SingInForm';
+import { SingInForm } from '../components';
+import { getPageStyles } from '../styles';
 
 export default async function SignInPage({ params }: LayoutProps) {
   const { locale } = await params;
@@ -13,13 +14,13 @@ export default async function SignInPage({ params }: LayoutProps) {
     namespace: 'descriptions',
   });
 
+  const styles = getPageStyles();
+
   return (
     <>
-      <header className="mb-[32px] flex flex-col items-center justify-center">
-        <h2 className="text-24 text-center font-bold text-gray-900">
-          {titles('welcomeBack')}
-        </h2>
-        <p className="text-16 pt-[8px] text-center text-gray-700">
+      <header className={styles.page}>
+        <h2 className={styles.page_title}>{titles('welcomeBack')}</h2>
+        <p className={styles.page_description}>
           {descriptions('enterCredentials')}
         </p>
       </header>
