@@ -1,12 +1,6 @@
-import type { TIcon } from '@/src/core/types';
+import type { TIconProps } from './type/t-icon.props';
 
-type IconProps = {
-  name: TIcon;
-  className?: string;
-  onClick?: () => void;
-};
-
-export const Icon = ({ name, className = '', onClick }: IconProps) => {
+export const Icon = ({ name, className = '', onClick }: TIconProps) => {
   return (
     <svg
       preserveAspectRatio="xMidYMid meet"
