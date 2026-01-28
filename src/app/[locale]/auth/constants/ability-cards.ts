@@ -1,7 +1,8 @@
-import type { AbilityCardProps } from '@/src/app/[locale]/auth/components/AbilityCard/AbilityCard';
 import { generateIdUtil } from '@/src/core/utils';
 
-export const ABILITY_CARDS: AbilityCardProps[] = [
+import type { TAbilityCardProps } from '../components/AbilityCard/type/t-ability.props';
+
+export const ABILITY_CARDS: TAbilityCardProps[] = [
   {
     iconName: 'message',
     title: 'realTimeChat',
