@@ -1,30 +1,23 @@
 import { Icon } from '@/src/core/components/Icon/Icon';
-import type { TIcon } from '@/src/core/types';
 
-export type AbilityCardProps = {
-  iconName: TIcon;
-  title: string;
-  description: string;
-  id: number;
-};
+import { getAbilityCardStyle } from './AbilityCard.style';
+import type { TAbilityCardProps } from './type/t-ability.props';
 
 export const AbilityCard = ({
   iconName,
   title,
   description,
-}: AbilityCardProps) => {
+}: TAbilityCardProps) => {
+  const styles = getAbilityCardStyle();
   return (
-    <div className="grid w-full gap-1 rounded-2xl border border-white/20 bg-white/25 p-2 backdrop-blur-[30px] md:px-3 md:py-4">
-      <div className="flex gap-3">
-        <Icon
-          name={iconName}
-          className="text-gray-0 h-[18px] w-[18px] md:h-[24px] md:w-[24px]"
-        ></Icon>
+    <div className={styles.component}>
+      <div className={styles.container}>
+        <Icon name={iconName} className={styles.icon}></Icon>
 
-        <p className="text-12 md:text-14 text-gray-0">{title}</p>
+        <p className={styles.title}>{title}</p>
       </div>
 
-      <p className="text-12 text-gray-0 text-start">{description}</p>
+      <p className={styles.description}>{description}</p>
     </div>
   );
 };
