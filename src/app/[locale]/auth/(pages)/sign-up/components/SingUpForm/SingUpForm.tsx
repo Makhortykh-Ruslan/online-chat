@@ -9,6 +9,8 @@ import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ErrorModel } from '@/src/core/models';
 import { signUpServer } from '@/src/core/services';
 
+import { getSignUpFormStyles } from './SignUpForm.style';
+
 const initialState: ErrorModel = {
   error: '',
 };
@@ -30,11 +32,13 @@ export const SingUpForm = () => {
     }
   }, [state.error]);
 
+  const styles = getSignUpFormStyles();
+
   return (
-    <section className="w-full max-w-[448px]">
+    <section className={styles.component}>
       <form action={formAction}>
         <Input
-          className="mb-[16px] w-full"
+          className={styles.component_input}
           name="username"
           leftIcon="user"
           id="username"
@@ -43,7 +47,7 @@ export const SingUpForm = () => {
         />
 
         <Input
-          className="mb-[16px] w-full"
+          className={styles.component_input}
           name="email"
           leftIcon="email"
           id="userNameOrEmail"
@@ -52,7 +56,7 @@ export const SingUpForm = () => {
         />
 
         <Input
-          className="mb-[16px] w-full"
+          className={styles.component_input}
           name="password"
           id="Password"
           type="password"
@@ -63,7 +67,7 @@ export const SingUpForm = () => {
         />
 
         <Input
-          className="mb-[16px] w-full"
+          className={styles.component_input}
           name="password"
           id="Password"
           type="password"
@@ -74,7 +78,7 @@ export const SingUpForm = () => {
         />
 
         <Button
-          className="mt-[32px] w-full"
+          className={styles.component_button}
           disabled={isPending}
           color="blue"
           text={isPending ? button('pending') : button('signUp')}
@@ -82,12 +86,9 @@ export const SingUpForm = () => {
         />
       </form>
 
-      <div className="text-14 mt-[20px] flex justify-center gap-[4px] text-gray-700">
+      <div className={styles.component_link_container}>
         {descriptions('haveAccount')}
-        <Link
-          className="text-14 font-medium text-indigo-600"
-          href={appRoutes.auth.signIn}
-        >
+        <Link className={styles.component_link} href={appRoutes.auth.signIn}>
           {descriptions('signIn')}
         </Link>
       </div>
