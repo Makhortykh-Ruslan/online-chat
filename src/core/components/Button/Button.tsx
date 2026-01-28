@@ -1,11 +1,7 @@
-import React, { type ButtonHTMLAttributes } from 'react';
+import React from 'react';
 
-import type { TBtnColor } from '@/src/core/components/Button/type/t-btn-color';
-
-type Props = {
-  text: string;
-  color?: TBtnColor;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+import { getButtonStyles } from './Button.style';
+import type { TButtonProps } from './type';
 
 export const Button = ({
   disabled,
@@ -14,26 +10,16 @@ export const Button = ({
   className = '',
   type = 'button',
   ...restProps
-}: Props) => {
-  const baseClasses = `
-    flex items-center justify-center
-    transition-all duration-300 ease-in-out
-    cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 
-    rounded-[16px] text-16 font-medium h-[44px] w-full text-white
-  `;
-
-  const colorClasses =
-    color === 'blue'
-      ? 'bg-indigo-600 hover:enabled:bg-indigo-900'
-      : 'bg-red-600 hover:enabled:bg-red-900';
-
-  const combinedClasses = `${baseClasses} ${colorClasses} ${className}`.trim();
+}: TButtonProps) => {
+  const styles = getButtonStyles(color, className);
+  const classNameComponent =
+    `${styles.component} ${styles.component_color}`.trim();
 
   return (
     <button
       role="button"
       type={type}
-      className={combinedClasses}
+      className={classNameComponent}
       disabled={disabled}
       {...restProps}
     >
