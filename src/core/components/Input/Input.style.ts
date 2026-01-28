@@ -17,9 +17,6 @@ export const getInputStyles = (isError: boolean, className: string) => ({
     'text-gray-500 group-focus-within:text-indigo-400': !isError,
     'text-red-600': isError,
   }),
-  label: clsx(
-    'text-14 font-medium transition-colors',
-    isError ? 'text-red-600' : 'text-gray-900',
-  ),
+  label: 'text-14 font-medium transition-colors text-gray-900',
   error: 'text-12 mt-1 font-medium text-red-600',
 });

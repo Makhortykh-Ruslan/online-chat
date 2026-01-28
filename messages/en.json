@@ -40,5 +40,10 @@
     "logIn": "Log in",
     "signUp": "Sign up",
     "pending": "Pending..."
+  },
+  "validations": {
+    "required": "This field is required",
+    "invalidEmail": "Incorrect current email. Please enter it in the format: youremail@example.com",
+    "passwordNoSymbol": "At least 1 (!@#$&*^) symbol"
   }
 }

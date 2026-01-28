@@ -1,7 +1,9 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { useActionState, useEffect } from 'react';
+import { startTransition, useActionState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Button, Input } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
@@ -10,6 +12,7 @@ import { signInServer } from '@/src/core/services';
 import { Link } from '@/src/i18n/routing';
 
 import { getAuthFormStyle } from '../../styles';
+import { signInFormSchema, type TSignInFormSchema } from './constants';
 
 const initialState: ErrorModel = {
   error: '',
@@ -18,13 +21,20 @@ const initialState: ErrorModel = {
 export const SingInForm = () => {
   const labels = useTranslations('labels');
   const button = useTranslations('button');
+  const validations = useTranslations('validations');
   const placeholders = useTranslations('placeholders');
   const descriptions = useTranslations('descriptions');
 
-  const [state, formAction, isPending] = useActionState(
-    signInServer,
-    initialState,
-  );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<TSignInFormSchema>({
+    resolver: zodResolver(signInFormSchema),
+    mode: 'onTouched',
+  });
+
+  const [state, formAction] = useActionState(signInServer, initialState);
 
   useEffect(() => {
     if (state.error) {
@@ -32,35 +42,54 @@ export const SingInForm = () => {
     }
   }, [state.error]);
 
+  const onSubmit = (data: TSignInFormSchema) => {
+    const formData = new FormData();
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+
+    startTransition(() => formAction(formData));
+  };
+
   const styles = getAuthFormStyle();
+  const isDisableSubmit = isSubmitting || !isValid;
 
   return (
     <section className={styles.component}>
-      <form action={formAction}>
-        <Input
-          className={styles.component_input}
-          name="email"
-          leftIcon="email"
-          id="userNameOrEmail"
-          label={labels('email')}
-          placeholder={placeholders('email')}
-        />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.component_input}>
+          <Input
+            leftIcon="email"
+            id="userNameOrEmail"
+            label={labels('email')}
+            placeholder={placeholders('email')}
+            {...register('email')}
+            error={
+              errors.email?.message ? validations(errors.email?.message) : ''
+            }
+          />
+        </div>
 
-        <Input
-          className={styles.component_input}
-          isPasswordFlow
-          name="password"
-          id="password"
-          leftIcon="lock"
-          label={labels('password')}
-          placeholder={placeholders('password')}
-        />
+        <div className={styles.component_input}>
+          <Input
+            isPasswordFlow
+            id="password"
+            leftIcon="lock"
+            label={labels('password')}
+            placeholder={placeholders('password')}
+            {...register('password')}
+            error={
+              errors.password?.message
+                ? validations(errors.password?.message)
+                : ''
+            }
+          />
+        </div>
 
         <Button
           className={styles.component_button}
-          disabled={isPending}
+          disabled={isDisableSubmit}
           color="blue"
-          text={isPending ? button('pending') : button('logIn')}
+          text={isSubmitting ? button('pending') : button('logIn')}
           type="submit"
         />
       </form>
