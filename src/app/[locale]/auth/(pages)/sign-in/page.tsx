@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 
 import type { LayoutProps } from '@/src/core/types';
 
-import { SingInForm } from '../components';
+import { SignInFrom } from '../components';
 import { getPageStyles } from '../styles';
 
 export default async function SignInPage({ params }: LayoutProps) {
@@ -24,7 +24,7 @@ export default async function SignInPage({ params }: LayoutProps) {
           {descriptions('enterCredentials')}
         </p>
       </header>
-      <SingInForm />
+      <SignInFrom />
     </>
   );
 }
