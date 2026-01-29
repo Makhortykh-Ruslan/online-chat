@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Input } from '@/src/core/components';
+import { Button, Input, Loader } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import { Link } from '@/src/i18n/routing';
 
@@ -57,11 +57,11 @@ export const SignInFrom = () => {
           className={styles.component_button}
           disabled={isDisableSubmit}
           color="blue"
-          text={
-            isLoading ? translate.button('pending') : translate.button('logIn')
-          }
           type="submit"
-        />
+        >
+          {isLoading && <Loader />}
+          {isLoading ? translate.button('pending') : translate.button('logIn')}
+        </Button>
       </form>
       <div className={styles.component_link_container}>
         {translate.descriptions('notHaveAccount')}

@@ -5,10 +5,10 @@ import type { TButtonProps } from './type';
 
 export const Button = ({
   disabled,
-  text,
   color = 'blue',
   className = '',
   type = 'button',
+  children,
   ...restProps
 }: TButtonProps) => {
   const styles = getButtonStyles(color, className);
@@ -23,7 +23,7 @@ export const Button = ({
       disabled={disabled}
       {...restProps}
     >
-      {text}
+      {children}
     </button>
   );
 };
