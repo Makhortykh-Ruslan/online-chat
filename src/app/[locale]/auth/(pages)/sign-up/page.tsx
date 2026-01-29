@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 
 import type { LayoutProps } from '@/src/core/types';
 
-import { SingUpForm } from '../components';
+import { SignUpForm } from '../components';
 import { getPageStyles } from '../styles';
 
 export default async function SignUpPage({ params }: LayoutProps) {
@@ -22,7 +22,7 @@ export default async function SignUpPage({ params }: LayoutProps) {
         <h2 className={styles.page_title}>{titles('createAccount')}</h2>
         <p className={styles.page_description}>{descriptions('fillDetail')}</p>
       </header>
-      <SingUpForm />
+      <SignUpForm />
     </>
   );
 }

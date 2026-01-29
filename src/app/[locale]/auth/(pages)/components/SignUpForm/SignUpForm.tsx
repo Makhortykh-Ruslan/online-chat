@@ -15,7 +15,7 @@ const initialState: ErrorModel = {
   error: '',
 };
 
-export const SingUpForm = () => {
+export const SignUpForm = () => {
   const labels = useTranslations('labels');
   const button = useTranslations('button');
   const placeholders = useTranslations('placeholders');
