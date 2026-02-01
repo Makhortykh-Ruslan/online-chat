@@ -3,8 +3,9 @@
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 
+import { Input } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
-import type { ConversationDTO } from '@/src/core/models/conversation.dto';
+import type { ConversationDTO } from '@/src/core/dto/conversation.dto';
 
 import { ConversationItem } from './components/ConversationItem/ConversationItem';
 
@@ -25,9 +26,9 @@ export const Conversations = ({ conversations }: Props) => {
   );
 
   return (
-    <div>
+    <section>
       <header>
-        <input type="Search coversations" />
+        <Input id="search" placeholder="Search conversations" />
       </header>
 
       <main>
@@ -43,6 +44,6 @@ export const Conversations = ({ conversations }: Props) => {
 
         {conversations.length === 0 && <div>Empty Conversations</div>}
       </main>
-    </div>
+    </section>
   );
 };

@@ -96,7 +96,7 @@
     }
 
     .dark {
-        --color-main-bg: var(--color-brand-925);
+        --color-main-bg: var(--color-brand-950);
         --color-main-text: var(--color-gray-50);
         --color-border: var(--color-brand-800);
     }

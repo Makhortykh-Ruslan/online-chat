@@ -8,4 +8,7 @@ export type TIcon =
   | 'lock'
   | 'eye-open'
   | 'eye-close'
-  | 'user';
+  | 'user'
+  | 'plus'
+  | 'search'
+  | 'settings';

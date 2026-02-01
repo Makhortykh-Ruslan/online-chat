@@ -2,7 +2,7 @@
 
 import React, { memo } from 'react';
 
-import type { ConversationDTO } from '@/src/core/models/conversation.dto';
+import type { ConversationDTO } from '@/src/core/dto/conversation.dto';
 
 type Props = Partial<ConversationDTO> & {
   onClick?: () => void;
