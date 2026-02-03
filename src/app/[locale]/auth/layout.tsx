@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
 import { Logo } from '@/src/core/components/Logo/Logo';
+import { ThemeToggle } from '@/src/core/components/ThemeToggle/ThemeToggle';
 import type { LayoutProps } from '@/src/core/types';
 
 import { AbilityCard } from './components/AbilityCard';
@@ -38,6 +39,7 @@ export default async function AuthLayout({ children, params }: LayoutProps) {
 
   return (
     <main className={styles.page}>
+      <ThemeToggle />
       <section className={styles.page_introducing}>
         <div className={styles.page_introducing_container}>
           <Logo />

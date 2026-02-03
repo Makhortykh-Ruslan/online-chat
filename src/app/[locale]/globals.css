@@ -85,6 +85,12 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+
+    --color-input-background: var(--color-gray-50);
+    --color-input-background-error: var(--color-gray-0);
+    --color-input-border: var(--color-gray-300);
+    --color-input-focus: var(--color-indigo-50);
+    --color-input-text: var(--color-gray-700);
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -99,5 +105,11 @@
         --color-main-bg: var(--color-brand-950);
         --color-main-text: var(--color-gray-50);
         --color-border: var(--color-brand-800);
+
+        --color-input-background: var(--color-brand-900);
+        --color-input-background-error: var(--color-brand-800);
+        --color-input-border: var(--color-brand-800);
+        --color-input-focus: var(--color-brand-800);
+        --color-input-text: var(--color-gray-400);
     }
 }
