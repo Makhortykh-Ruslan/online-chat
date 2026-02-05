@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useActionState, useEffect } from 'react';
 
-import { Button, Input } from '@/src/core/components';
+import { Button, Input, Loader } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ErrorModel } from '@/src/core/models';
 import { signUpServer } from '@/src/core/services';
@@ -79,9 +79,11 @@ export const SignUpForm = () => {
           className={styles.component_button}
           disabled={isPending}
           color="blue"
-          text={isPending ? button('pending') : button('signUp')}
           type="submit"
-        />
+        >
+          {isPending && <Loader />}
+          {isPending ? button('pending') : button('signUp')}
+        </Button>
       </form>
 
       <div className={styles.component_link_container}>

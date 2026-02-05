@@ -1,0 +1,8 @@
+@theme inline {
+    --background-image-logo-gradient: linear-gradient(to right, #6366f1, #a855f7);
+    --background-image-purple-logo: linear-gradient(154deg, #E4BAFF 2.15%, #A628F8 97.73%);
+    --background-image-introducing: url('/images/introducing-background.png');
+
+    --shadow-purple: 0 6.5px 9.75px -1.95px rgba(229, 231, 235, 0.40),
+    0 2.6px 3.9px -2.6px rgba(229, 231, 235, 0.40);
+}

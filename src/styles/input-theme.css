@@ -1,0 +1,35 @@
+@theme inline {
+    --color-label: var(--color-label);
+
+    --color-input-bg: var(--input-bg);
+    --color-input-bg-err: var(--input-bg-err);
+    --color-input-border: var(--input-border);
+    --color-input-focus-bg: var(--input-focus-bg);
+    --color-input-focus-border: var(--input-focus-border);
+    --color-input-text: var(--input-text);
+    --color-input-placeholder: var(--input-placeholder);
+}
+
+:root {
+    --color-label: var(--color-gray-900);
+
+    --input-bg: var(--color-gray-50);
+    --input-bg-err: var(--color-gray-0);
+    --input-border: var(--color-gray-300);
+    --input-focus-bg: var(--color-indigo-50);
+    --input-focus-border: var(--color-indigo-400);
+    --input-text: var(--color-gray-700);
+    --input-placeholder: var(--color-gray-700);
+}
+
+.dark {
+    --color-label: var(--color-gray-50);
+
+    --input-bg: var(--color-brand-900);
+    --input-bg-err: var(--color-brand-800);
+    --input-border: var(--color-brand-700);
+    --input-focus-bg: var(--color-brand-800);
+    --input-focus-border: var(--color-gray-50);
+    --input-text: var(--color-gray-50);
+    --input-placeholder: var(--color-gray-700);
+}

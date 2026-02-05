@@ -35,7 +35,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} bg-main-bg font-sans antialiased`}>
         <NextIntlClientProvider
           locale={locale}
           key={locale}

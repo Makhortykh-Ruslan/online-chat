@@ -1,115 +1,46 @@
 @import "tailwindcss";
 
+@import "../../styles/colors.css";
+@import "../../styles/typography.css";
+@import "../../styles/font-theme.css";
+
+@import "../../styles/input-theme.css";
+@import "../../styles/assets.css";
+
 @theme {
-    /* Primary */
-    --color-brand-200: #cfdbe8;
-    --color-brand-300: #a5bdd4;
-    --color-brand-400: #7499bc;
-    --color-brand-500: #527ca5;
-    --color-brand-600: #3f638a;
-    --color-brand-700: #345070;
-    --color-brand-800: #2e455e;
-    --color-brand-900: #2b3c4f;
-    --color-brand-925: #1e2938;
-    --color-brand-950: #101828;
-
-    /* Indigo */
-    --color-indigo-50: #ecf0ff;
-    --color-indigo-100: #dde3ff;
-    --color-indigo-200: #c1cbff;
-    --color-indigo-300: #9ca8ff;
-    --color-indigo-400: #747aff;
-    --color-indigo-500: #5a54ff;
-    --color-indigo-600: #4f39f6;
-    --color-indigo-700: #4129d9;
-    --color-indigo-800: #3424af;
-    --color-indigo-900: #2f258a;
-    --color-indigo-950: #1d1650;
-
-    /* Gray */
-    --color-gray-0: #ffffff;
-    --color-gray-50: #fbfcfd;
-    --color-gray-100: #f1f2f3;
-    --color-gray-200: #e7e8e9;
-    --color-gray-300: #d3d4d5;
-    --color-gray-400: #bfc0c1;
-    --color-gray-500: #abacad;
-    --color-gray-600: #979899;
-    --color-gray-700: #838485;
-    --color-gray-800: #5b5c5d;
-    --color-gray-900: #292a2b;
-    --color-gray-1000: #000000;
-
-    /* Red */
-    --color-red-500: #EF4343;
-    --color-red-600: #DC2626;
-    --color-red-700: #B91C1C;
-
-    /* Green */
-    --color-green-500: #0ABF7F;
-    --color-green-600: #009966;
-    --color-green-700: #007C56;
-
-    /* Dark Purple */
-    --color-purple-800: #354598;
-    --color-purple-900: #2f3d79;
-    --color-purple-950: #232a50;
-
-    --background-image-logo-gradient: linear-gradient(to right, #6366f1, #a855f7);
-    --background-image-purple-logo: linear-gradient(154deg, #E4BAFF 2.15%, #A628F8 97.73%);
-    --background-image-introducing: url('/images/introducing-background.png');
-
-    --shadow-purple: 0 6.5px 9.75px -1.95px rgba(229, 231, 235, 0.40),
-    0 2.6px 3.9px -2.6px rgba(229, 231, 235, 0.40);
-
-    --color-main-bg: var(--color-gray-50);
-    --color-main-text: var(--color-gray-900);
-    --color-border: var(--color-gray-300);
-
-    /* Fonts */
-    --font-sans: var(--font-inter);
-
-    --text-10: 0.625rem; /* 10px */
-    --text-12: 0.75rem;   /* 12px */
-    --text-14: 0.875rem;  /* 14px */
-    --text-16: 1rem;      /* 16px */
-    --text-18: 1.125rem;  /* 18px */
-    --text-20: 1.25rem;   /* 20px */
-    --text-24: 1.5rem;    /* 24px */
-    --text-28: 1.75rem;   /* 28px */
-    --text-30: 1.875rem;  /* 30px */
-    --text-32: 2rem;      /* 32px */
-    --text-36: 2.25rem;   /* 36px */
-
-    --font-weight-regular: 400;
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-
-    --color-input-background: var(--color-gray-50);
-    --color-input-background-error: var(--color-gray-0);
-    --color-input-border: var(--color-gray-300);
-    --color-input-focus: var(--color-indigo-50);
-    --color-input-text: var(--color-gray-700);
+    --color-main-bg: var(--main-bg);
+    --color-main-text: var(--main-text);
+    --color-border: var(--main-border);
 }
 
 @variant dark (&:where(.dark, .dark *));
 
 @layer base {
-
     :root {
         --font-inter: "Inter", sans-serif;
+
+        --main-bg: var(--color-gray-50);
+        --main-text: var(--color-gray-900);
+        --main-border: var(--color-gray-300);
     }
 
     .dark {
-        --color-main-bg: var(--color-brand-950);
-        --color-main-text: var(--color-gray-50);
-        --color-border: var(--color-brand-800);
+        --main-bg: var(--color-brand-950);
+        --main-text: var(--color-gray-50);
+        --main-border: var(--color-brand-800);
+    }
 
-        --color-input-background: var(--color-brand-900);
-        --color-input-background-error: var(--color-brand-800);
-        --color-input-border: var(--color-brand-800);
-        --color-input-focus: var(--color-brand-800);
-        --color-input-text: var(--color-gray-400);
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--color-input-bg); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-input-border);
+        border-radius: 10px;
+        border: 2px solid var(--color-input-bg);
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--color-input-focus-border); }
+
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-input-border) var(--color-input-bg);
     }
 }
