@@ -28,7 +28,11 @@ export const Conversations = ({ conversations }: Props) => {
   return (
     <section>
       <header>
-        <Input id="search" placeholder="Search conversations" />
+        <Input
+          leftIcon="search"
+          id="search"
+          placeholder="Search conversations"
+        />
       </header>
 
       <main>
