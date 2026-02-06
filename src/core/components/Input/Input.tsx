@@ -50,6 +50,10 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(
       }
     };
 
+    const component_input_wrapper = label
+      ? 'mt-[10px] ' + styles.component_input_wrapper
+      : styles.component_input_wrapper;
+
     return (
       <div className={styles.component}>
         {label && (
@@ -58,7 +62,7 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(
           </label>
         )}
 
-        <div className={styles.component_input_wrapper}>
+        <div className={component_input_wrapper}>
           {leftIcon && <Icon name={leftIcon} className={styles.icon} />}
 
           <input

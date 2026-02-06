@@ -10,7 +10,7 @@
 @theme {
     --color-main-bg: var(--main-bg);
     --color-main-text: var(--main-text);
-    --color-border: var(--main-border);
+    --color-main-border: var(--main-border);
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -27,7 +27,7 @@
     .dark {
         --main-bg: var(--color-brand-950);
         --main-text: var(--color-gray-50);
-        --main-border: var(--color-brand-800);
+        --main-border: var(--color-brand-700);
     }
 
     ::-webkit-scrollbar { width: 8px; height: 8px; }

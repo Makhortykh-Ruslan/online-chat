@@ -3,7 +3,7 @@ import clsx from 'clsx';
 export const getInputStyles = (isError: boolean, className: string) => ({
   component: 'flex w-full flex-col',
   component_input_wrapper: clsx(
-    'group mt-[10px] flex items-center gap-[10px] rounded-[12px] border px-[12px] py-[8px] transition-all shadow-none outline-none',
+    'group flex items-center gap-[10px] rounded-[12px] border px-[12px] py-[8px] transition-all shadow-none outline-none',
     isError
       ? 'border-red-600 bg-input-bg-err focus-within:border-red-600'
       : 'border-input-border bg-input-bg focus-within:border-input-focus-border focus-within:bg-input-focus-bg',

@@ -6,9 +6,9 @@ export async function SideBar() {
   const conversations = await getSidebarConversations();
 
   return (
-    <aside>
+    <section>
       <SideBarHeader />
       <Conversations conversations={conversations} />
-    </aside>
+    </section>
   );
 }
