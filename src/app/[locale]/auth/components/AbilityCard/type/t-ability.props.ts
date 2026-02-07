@@ -4,5 +4,5 @@ export type TAbilityCardProps = {
   iconName: TIcon;
   title: string;
   description: string;
-  id: number;
+  id: string;
 };

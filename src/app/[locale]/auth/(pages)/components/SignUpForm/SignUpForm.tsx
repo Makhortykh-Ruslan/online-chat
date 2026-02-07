@@ -9,7 +9,7 @@ import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ErrorModel } from '@/src/core/models';
 import { signUpServer } from '@/src/core/services';
 
-import { getAuthFormStyle } from '../../styles';
+import { getAuthFormStyles } from '../../styles';
 
 const initialState: ErrorModel = {
   error: '',
@@ -32,7 +32,7 @@ export const SignUpForm = () => {
     }
   }, [state.error]);
 
-  const styles = getAuthFormStyle();
+  const styles = getAuthFormStyles();
 
   return (
     <section className={styles.component}>

@@ -1,4 +1,4 @@
-import type { TIconProps } from './type/t-icon.props';
+import type { TIconProps } from './type';
 
 export const Icon = ({ name, className = '', onClick }: TIconProps) => {
   return (

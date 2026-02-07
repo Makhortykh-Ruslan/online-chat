@@ -1,5 +1,3 @@
-import { generateIdUtil } from '@/src/core/utils';
-
 import type { TAbilityCardProps } from '../components/AbilityCard/type/t-ability.props';
 
 export const ABILITY_CARDS: TAbilityCardProps[] = [
@@ -7,24 +5,24 @@ export const ABILITY_CARDS: TAbilityCardProps[] = [
     iconName: 'message',
     title: 'realTimeChat',
     description: 'instantMessaging',
-    id: generateIdUtil(),
+    id: 'message',
   },
   {
     iconName: 'users',
     title: 'groupChats',
     description: 'collaborateTogether',
-    id: generateIdUtil(),
+    id: 'users',
   },
   {
     iconName: 'secure',
     title: 'secure',
     description: 'endToEndEncrypted',
-    id: generateIdUtil(),
+    id: 'secure',
   },
   {
     iconName: 'flesh',
     title: 'flesh',
     description: 'lightingQuick',
-    id: generateIdUtil(),
+    id: 'flesh',
   },
 ];

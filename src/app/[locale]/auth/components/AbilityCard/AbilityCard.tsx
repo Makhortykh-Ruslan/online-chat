@@ -1,6 +1,6 @@
 import { Icon } from '@/src/core/components/Icon/Icon';
 
-import { getAbilityCardStyle } from './AbilityCard.style';
+import { getAbilityCardStyles } from './AbilityCard.styles';
 import type { TAbilityCardProps } from './type/t-ability.props';
 
 export const AbilityCard = ({
@@ -8,7 +8,8 @@ export const AbilityCard = ({
   title,
   description,
 }: TAbilityCardProps) => {
-  const styles = getAbilityCardStyle();
+  const styles = getAbilityCardStyles();
+
   return (
     <div className={styles.component}>
       <div className={styles.container}>

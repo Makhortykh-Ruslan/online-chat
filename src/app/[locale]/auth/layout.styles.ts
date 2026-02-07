@@ -1,4 +1,4 @@
-export const getLayoutStyle = () => ({
+export const getLayoutStyles = () => ({
   page: 'flex min-h-screen flex-col md:flex-row',
   page_introducing: `bg-introducing relative 
   flex w-full flex-1 flex-col items-center 

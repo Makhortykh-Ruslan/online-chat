@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
 import logo from '../../../../public/images/logo.png';
-import { getLogoStyle } from './Logo.style';
+import { getLogoStyles } from './Logo.styles';
 
 export const Logo = () => {
-  const styles = getLogoStyle();
+  const styles = getLogoStyles();
 
   return (
     <div className={styles.component}>

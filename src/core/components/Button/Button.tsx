@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getButtonStyles } from './Button.style';
+import { getButtonStyles } from './Button.styles';
 import type { TButtonProps } from './type';
 
 export const Button = ({
@@ -12,6 +12,7 @@ export const Button = ({
   ...restProps
 }: TButtonProps) => {
   const styles = getButtonStyles(color, className);
+
   const classNameComponent =
     `${styles.component} ${styles.component_color}`.trim();
 

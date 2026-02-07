@@ -1,4 +1,4 @@
-export const getLogoStyle = () => ({
+export const getLogoStyles = () => ({
   component: `shadow-purple bg-purple-logo flex h-[52px] 
     w-[52px] items-center justify-center rounded-[11px] 
     md:h-[80px] md:w-[80px]`,

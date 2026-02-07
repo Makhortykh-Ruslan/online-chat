@@ -1,4 +1,4 @@
-export const getAbilityCardStyle = () => ({
+export const getAbilityCardStyles = () => ({
   component: `grid w-full gap-1 rounded-2xl border 
   border-white/20 bg-white/25 p-2 backdrop-blur-[30px] md:px-3 md:py-4`,
   container: `flex gap-3`,

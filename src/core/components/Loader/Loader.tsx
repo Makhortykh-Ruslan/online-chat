@@ -1,5 +1,5 @@
-import { geLoaderStyle } from '@/src/core/components/Loader/Loader.style';
-import type { TLoaderSize } from '@/src/core/components/Loader/type/t-loader-size';
+import { geLoaderStyle } from './Loader.styles';
+import type { TLoaderSize } from './type';
 
 type props = {
   size?: TLoaderSize;

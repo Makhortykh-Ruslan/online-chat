@@ -8,7 +8,7 @@ import type { LayoutProps } from '@/src/core/types';
 
 import { AbilityCard } from './components/AbilityCard';
 import { ABILITY_CARDS } from './constants/ability-cards';
-import { getLayoutStyle } from './layout.style';
+import { getLayoutStyles } from './layout.styles';
 
 export async function generateMetadata({
   params,
@@ -35,7 +35,7 @@ export default async function AuthLayout({ children, params }: LayoutProps) {
     namespace: 'descriptions',
   });
 
-  const styles = getLayoutStyle();
+  const styles = getLayoutStyles();
 
   return (
     <main className={styles.page}>
