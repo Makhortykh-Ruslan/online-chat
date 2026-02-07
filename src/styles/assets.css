@@ -6,3 +6,19 @@
     --shadow-purple: 0 6.5px 9.75px -1.95px rgba(229, 231, 235, 0.40),
     0 2.6px 3.9px -2.6px rgba(229, 231, 235, 0.40);
 }
+
+@utility text-main-title {
+    font-size: var(--text-18);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-title);
+    font-style: normal;
+    line-height: 24px;
+}
+
+@utility text-main-description {
+    font-size: var(--text-14);
+    color: var(--color-description);
+    font-weight: var(--font-weight-regular);
+    font-style: normal;
+    line-height: 16px;
+}

@@ -1,7 +1,9 @@
 {
   "metadata": {
     "authTitle": "Authentication | LinkUp Chat",
-    "authDescription":"Login or Register to experience seamless messaging with LinkUp Chat."
+    "authDescription":"Login or Register to experience seamless messaging with LinkUp Chat.",
+    "chatTitle": "Chat | LinkUp Chat",
+    "chatDescription":"Chat texting calling and speaking each ather"
   },
   "titles": {
     "welcomeBack": "Welcome back",
@@ -9,7 +11,8 @@
     "realTimeChat": "Real-time Chat",
     "groupChats": "Group Chats",
     "secure": "Secure",
-    "flesh": "flesh"
+    "flesh": "flesh",
+    "selectAChat": "Select a chat to start messaging"
   },
   "descriptions": {
     "enterCredentials": "Enter your credentials to access your account",
@@ -22,7 +25,8 @@
     "haveAccount": "Already have an account?",
     "signUp": "Sign up",
     "signIn": "Sign in",
-    "fillDetail": "Fill in your details to get started"
+    "fillDetail": "Fill in your details to get started",
+    "chooseConversation": "Choose a conversation from the sidebar or search for users"
   },
   "labels": {
     "fullName": "Full Name",

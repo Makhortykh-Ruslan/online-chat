@@ -8,7 +8,6 @@
 
 @theme {
     --color-main-bg: var(--main-bg);
-    --color-main-text: var(--main-text);
     --color-main-border: var(--main-border);
 }
 
@@ -19,7 +18,6 @@
         --font-inter: "Inter", sans-serif;
 
         --main-bg: var(--color-gray-50);
-        --main-text: var(--color-gray-900);
         --main-border: var(--color-gray-300);
 
         --scroll-bg: var(--color-indigo-400);
@@ -28,7 +26,6 @@
 
     .dark {
         --main-bg: var(--color-brand-950);
-        --main-text: var(--color-gray-50);
         --main-border: var(--color-brand-700);
 
         --scroll-bg: var(--color-gray-50);
