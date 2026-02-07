@@ -1,9 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
-import { Input } from '@/src/core/components';
+import {
+  CONVERSATIONS_TAB_CONFIG,
+  type TTabConfigKey,
+} from '@/src/app/[locale]/(main)/chat/components/SideBar/constants/conversations-tab.config';
+import { Input, Tabs } from '@/src/core/components';
+import type { TTab } from '@/src/core/components/Tabs/type';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ConversationDTO } from '@/src/core/dto/conversation.dto';
 
@@ -15,6 +20,7 @@ type Props = {
 
 export const Conversations = ({ conversations }: Props) => {
   const router = useRouter();
+  const [activeTabId, setActiveTabId] = useState<TTabConfigKey>('all');
 
   const selectConversation = useCallback(
     (conversationId: string) => {
@@ -25,6 +31,10 @@ export const Conversations = ({ conversations }: Props) => {
     [router],
   );
 
+  const handleChangeTab = (event: TTab<TTabConfigKey>) => {
+    setActiveTabId(event.id);
+  };
+
   return (
     <section>
       <header>
@@ -34,6 +44,12 @@ export const Conversations = ({ conversations }: Props) => {
           placeholder="Search conversations"
         />
       </header>
+
+      <Tabs
+        tabs={CONVERSATIONS_TAB_CONFIG}
+        activeTabId={activeTabId}
+        onChangeTab={handleChangeTab}
+      />
 
       <main>
         {conversations.map((el) => (

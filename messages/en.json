@@ -28,7 +28,10 @@
     "fullName": "Full Name",
     "email": "Email Address",
     "password": "Password",
-    "confirmPassword": "Confirm Password"
+    "confirmPassword": "Confirm Password",
+    "all": "All",
+    "direct": "Direct",
+    "groups": "Groups"
   },
   "placeholders": {
     "yourName": "Your Name",

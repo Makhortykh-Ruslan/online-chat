@@ -3,3 +3,4 @@ export * from './Icon/Icon';
 export * from './Input/Input';
 export * from './Input/Input';
 export * from './Loader/Loader';
+export * from './Tabs/Tabs';

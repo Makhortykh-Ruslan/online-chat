@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { SideBar } from '@/src/app/[locale]/(main)/chat/components/SideBar/SideBar';
+import { ThemeToggle } from '@/src/core/components/ThemeToggle/ThemeToggle';
 
 import { getLayoutStyle } from './layout.style';
-import { ThemeToggle } from '@/src/core/components/ThemeToggle/ThemeToggle';
 
 export default function ChatLayout({
   children,

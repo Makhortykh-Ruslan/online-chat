@@ -28,7 +28,10 @@
     "fullName": "Повне ім'я",
     "email": "Електронна адреса",
     "password": "Пароль",
-    "confirmPassword": "Підтвердьте пароль"
+    "confirmPassword": "Підтвердьте пароль",
+    "all": "Усі",
+    "direct": "Директ",
+    "groups": "Групи"
   },
   "placeholders": {
     "yourName": "Ваше ім'я",
