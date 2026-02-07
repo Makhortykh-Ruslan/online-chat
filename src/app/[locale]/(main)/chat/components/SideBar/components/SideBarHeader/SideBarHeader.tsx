@@ -2,19 +2,33 @@
 
 import { Icon } from '@/src/core/components';
 
-import { getSideBarStyle } from './SideBarHeader.style';
+import { getSideBarStyles } from './SideBarHeader.styles';
 
 export const SideBarHeader = () => {
-  const styles = getSideBarStyle();
+  const handleRedirectToSettings = () => {
+    console.log('handleRedirectToSettings');
+  };
 
-  const iconPlus = styles.icon + ' ' + 'ml-auto h-[24px] w-[24px]';
+  const handleAddNewConversation = () => {
+    console.log('handleAddNewConversation');
+  };
+
+  const styles = getSideBarStyles();
+  const iconSearch = styles.icon + ' ' + 'ml-auto';
 
   return (
     <section className={styles.component}>
       <h3>Messages</h3>
-      <Icon name="plus" className={iconPlus} />
-      <Icon name="search" className={styles.icon} />
-      <Icon name="settings" className={styles.icon} />
+      <Icon
+        name="search"
+        className={iconSearch}
+        onClick={handleAddNewConversation}
+      />
+      <Icon
+        name="settings"
+        className={styles.icon}
+        onClick={handleRedirectToSettings}
+      />
     </section>
   );
 };

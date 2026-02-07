@@ -6,7 +6,7 @@ import { SideBar } from '@/src/app/[locale]/(main)/chat/components/SideBar/SideB
 import { ThemeToggle } from '@/src/core/components/ThemeToggle/ThemeToggle';
 import type { LayoutProps } from '@/src/core/types';
 
-import { getLayoutStyle } from './layout.style';
+import { getLayoutStyles } from './styles';
 
 export async function generateMetadata({
   params,
@@ -25,7 +25,7 @@ export default function ChatLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const styles = getLayoutStyle();
+  const styles = getLayoutStyles();
 
   return (
     <main className={styles.page}>

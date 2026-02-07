@@ -1,6 +1,6 @@
 import type { TTab } from '@/src/core/components/Tabs/type';
 
-export const CONVERSATIONS_TAB_CONFIG = [
+export const SIDEBAR_TABS_CONFIG = [
   {
     name: 'all',
     id: 'all',
@@ -15,4 +15,4 @@ export const CONVERSATIONS_TAB_CONFIG = [
   },
 ] as const satisfies readonly TTab[];
 
-export type TTabConfigKey = (typeof CONVERSATIONS_TAB_CONFIG)[number]['id'];
+export type TTabConfigKey = (typeof SIDEBAR_TABS_CONFIG)[number]['id'];

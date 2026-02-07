@@ -1,7 +1,7 @@
 import type { LayoutProps } from '@/src/core/types';
 
 import { EmptyBlock } from './components';
-import { pageStyles } from './page.styles';
+import { pageStyles } from './styles';
 
 export default async function ChatPage({ params }: LayoutProps) {
   const { locale } = await params;
