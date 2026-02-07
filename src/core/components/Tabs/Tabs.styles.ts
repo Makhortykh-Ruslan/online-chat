@@ -3,5 +3,5 @@ export const tabsStyles = () => ({
   component_item:
     'py-[6px] px-[12px] text-gray-700 dark:text-gray-50 cursor-pointer',
   component_item_active:
-    'rounded-[16px] bg-purple-200 dark:bg-purple-900 text-purple-800 dark:text-purple-200',
+    'rounded-[16px] bg-indigo-200 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200',
 });

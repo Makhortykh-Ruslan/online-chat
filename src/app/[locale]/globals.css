@@ -4,7 +4,6 @@
 @import "../../styles/typography.css";
 @import "../../styles/font-theme.css";
 
-@import "../../styles/input-theme.css";
 @import "../../styles/assets.css";
 
 @theme {
@@ -22,25 +21,31 @@
         --main-bg: var(--color-gray-50);
         --main-text: var(--color-gray-900);
         --main-border: var(--color-gray-300);
+
+        --scroll-bg: var(--color-indigo-400);
+        --scroll-border: var(--color-indigo-50);
     }
 
     .dark {
         --main-bg: var(--color-brand-950);
         --main-text: var(--color-gray-50);
         --main-border: var(--color-brand-700);
+
+        --scroll-bg: var(--color-gray-50);
+        --scroll-border: var(--color-green-700);
     }
 
     ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: var(--color-input-bg); border-radius: 10px; }
+    ::-webkit-scrollbar-track { background: var(--scroll-bg); border-radius: 10px; }
     ::-webkit-scrollbar-thumb {
-        background: var(--color-input-border);
+        background: var(--scroll-bg);
         border-radius: 10px;
-        border: 2px solid var(--color-input-bg);
+        border: 2px solid var(--scroll-border);
     }
-    ::-webkit-scrollbar-thumb:hover { background: var(--color-input-focus-border); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--scroll-bg); }
 
     * {
         scrollbar-width: thin;
-        scrollbar-color: var(--color-input-border) var(--color-input-bg);
+        scrollbar-color: var(--scroll-bg) var(--scroll-border);
     }
 }

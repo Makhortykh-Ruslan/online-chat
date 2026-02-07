@@ -7,7 +7,7 @@ export const geLoaderStyle = (
   size: TLoaderSize,
 ) => ({
   component: clsx(
-    'animate-spin rounded-full border-gray-300 border-t-purple-900',
+    'animate-spin rounded-full border-gray-300 border-t-indigo-900',
     className,
     size === 'small' && 'w-5 h-5 border-2',
   ),
