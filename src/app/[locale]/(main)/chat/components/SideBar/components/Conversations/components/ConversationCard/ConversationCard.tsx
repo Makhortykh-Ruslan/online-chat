@@ -19,20 +19,15 @@ const ConversationCardComponent = ({
   const styles = conversationCardStyles;
 
   return (
-    <article
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      className={styles.component}
-    >
-      <div>{avatarUrl}</div>
-      <div>
-        <p>{title}</p>
-        <p>3age min</p>
+    <article onClick={onClick} className={styles.component}>
+      <div className={styles.component_avatar}>{avatarUrl}</div>
+      <div className={styles.component_row}>
+        <p className={styles.component_title}>{title}</p>
+        <p className={styles.component_time}>2m ago</p>
       </div>
-      <div>
-        <p>{lastMessage?.content}</p>
-        <span>1</span>
+      <div className={styles.component_row}>
+        <p className={styles.component_message}>{lastMessage?.content}</p>
+        <div className={styles.component_count}>4</div>
       </div>
     </article>
   );

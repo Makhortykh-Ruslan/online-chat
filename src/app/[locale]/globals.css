@@ -29,7 +29,7 @@
         --main-border: var(--color-brand-700);
 
         --scroll-bg: var(--color-gray-50);
-        --scroll-border: var(--color-green-700);
+        --scroll-border: var(--color-brand-700);
     }
 
     ::-webkit-scrollbar { width: 8px; height: 8px; }

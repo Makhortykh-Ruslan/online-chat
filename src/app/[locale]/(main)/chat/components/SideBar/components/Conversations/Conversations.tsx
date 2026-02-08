@@ -5,11 +5,13 @@ import React, { useCallback, useState } from 'react';
 
 import { Input, Tabs } from '@/src/core/components';
 import type { TTab } from '@/src/core/components/Tabs/type';
+import { MOCK_CONVERSATIONS } from '@/src/core/constants';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ConversationDTO } from '@/src/core/dto/conversation.dto';
 
 import { ConversationCard } from './components';
 import { SIDEBAR_TABS_CONFIG, type TTabConfigKey } from './constants';
+import { ConversationsStyles } from './Conversations.styles';
 
 type Props = {
   conversations: ConversationDTO[];
@@ -28,28 +30,36 @@ export const Conversations = ({ conversations }: Props) => {
     [router],
   );
 
+  const testConversation = [...conversations, ...MOCK_CONVERSATIONS];
+
   const handleChangeTab = (event: TTab<TTabConfigKey>) => {
     setActiveTabId(event.id);
   };
 
+  const styles = ConversationsStyles(testConversation.length === 0);
+
   return (
-    <section>
+    <>
       <header>
-        <Input
-          leftIcon="search"
-          id="search"
-          placeholder="Search conversations"
-        />
+        <div className={styles.component_input}>
+          <Input
+            leftIcon="search"
+            id="search"
+            placeholder="Search conversations"
+          />
+        </div>
+
+        <div className={styles.component_tabs}>
+          <Tabs
+            tabs={SIDEBAR_TABS_CONFIG}
+            activeTabId={activeTabId}
+            onChangeTab={handleChangeTab}
+          />
+        </div>
       </header>
 
-      <Tabs
-        tabs={SIDEBAR_TABS_CONFIG}
-        activeTabId={activeTabId}
-        onChangeTab={handleChangeTab}
-      />
-
-      <main>
-        {conversations.map((el) => (
+      <main className={styles.component_main}>
+        {testConversation.map((el) => (
           <ConversationCard
             key={el.conversationId}
             title={el.title}
@@ -59,8 +69,8 @@ export const Conversations = ({ conversations }: Props) => {
           />
         ))}
 
-        {conversations.length === 0 && <div>Empty Conversations</div>}
+        {testConversation.length === 0 && <div>Empty Conversations</div>}
       </main>
-    </section>
+    </>
   );
 };

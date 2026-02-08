@@ -22,3 +22,10 @@
     font-style: normal;
     line-height: 16px;
 }
+
+@utility truncate {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
