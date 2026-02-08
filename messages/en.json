@@ -12,7 +12,9 @@
     "groupChats": "Group Chats",
     "secure": "Secure",
     "flesh": "flesh",
-    "selectAChat": "Select a chat to start messaging"
+    "selectAChat": "Select a chat to start messaging",
+    "messages": "Messages",
+    "emptyTitle": "Total silence..."
   },
   "descriptions": {
     "enterCredentials": "Enter your credentials to access your account",
@@ -26,7 +28,8 @@
     "signUp": "Sign up",
     "signIn": "Sign in",
     "fillDetail": "Fill in your details to get started",
-    "chooseConversation": "Choose a conversation from the sidebar or search for users"
+    "chooseConversation": "Choose a conversation from the sidebar or search for users",
+    "emptyDescription": "Looks like nobody needs you))) You just haven't made the first move yet. Change that!"
   },
   "labels": {
     "fullName": "Full Name",

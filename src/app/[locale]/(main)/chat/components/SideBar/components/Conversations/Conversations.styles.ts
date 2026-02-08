@@ -7,5 +7,7 @@ export const ConversationsStyles = (isEmptyConversations: boolean) => ({
     'h-[78vh] overflow-y-auto',
     isEmptyConversations && 'flex items-center justify-center',
   ),
-  component_empty_text: 'text-main-description text-12',
+  component_empty: 'flex flex-col items-center justify-center p-[16px]',
+  component_empty_title: 'text-main-title text-14',
+  component_empty_description: 'text-main-description text-12 text-center mt-[5px]',
 });

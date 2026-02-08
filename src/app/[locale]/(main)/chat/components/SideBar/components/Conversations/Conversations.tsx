@@ -1,11 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useCallback, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { Input, Tabs } from '@/src/core/components';
 import type { TTab } from '@/src/core/components/Tabs/type';
-import { MOCK_CONVERSATIONS } from '@/src/core/constants';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import type { ConversationDTO } from '@/src/core/dto/conversation.dto';
 
@@ -20,23 +20,33 @@ type Props = {
 export const Conversations = ({ conversations }: Props) => {
   const router = useRouter();
   const [activeTabId, setActiveTabId] = useState<TTabConfigKey>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const titles = useTranslations('titles');
+  const descriptions = useTranslations('descriptions');
+
+  const filteredConversations = useMemo(() => {
+    return conversations.filter((el) => {
+      const matchesTab = activeTabId === 'all' || el.type === activeTabId;
+      const matchesSearch = el.title
+        ?.toLowerCase()
+        .includes(searchQuery.toLowerCase());
+      return matchesTab && matchesSearch;
+    });
+  }, [conversations, activeTabId, searchQuery]);
 
   const selectConversation = useCallback(
     (conversationId: string) => {
-      const path = `${appRoutes.main.chat}/${conversationId}`;
-
-      router.push(path);
+      router.push(`${appRoutes.main.chat}/${conversationId}`);
     },
     [router],
   );
 
-  const testConversation = [...conversations, ...MOCK_CONVERSATIONS];
+  const handleChangeTab = useCallback((tab: TTab<TTabConfigKey>) => {
+    setActiveTabId(tab.id);
+  }, []);
 
-  const handleChangeTab = (event: TTab<TTabConfigKey>) => {
-    setActiveTabId(event.id);
-  };
-
-  const styles = ConversationsStyles(testConversation.length === 0);
+  const styles = ConversationsStyles(filteredConversations.length === 0);
 
   return (
     <>
@@ -46,6 +56,8 @@ export const Conversations = ({ conversations }: Props) => {
             leftIcon="search"
             id="search"
             placeholder="Search conversations"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
 
@@ -59,7 +71,7 @@ export const Conversations = ({ conversations }: Props) => {
       </header>
 
       <main className={styles.component_main}>
-        {testConversation.map((el) => (
+        {filteredConversations.map((el) => (
           <ConversationCard
             key={el.conversationId}
             title={el.title}
@@ -69,7 +81,16 @@ export const Conversations = ({ conversations }: Props) => {
           />
         ))}
 
-        {testConversation.length === 0 && <div>Empty Conversations</div>}
+        {filteredConversations.length === 0 && (
+          <div className={styles.component_empty}>
+            <p className={styles.component_empty_title}>
+              {titles('emptyTitle')}
+            </p>
+            <p className={styles.component_empty_description}>
+              {descriptions('emptyDescription')}
+            </p>
+          </div>
+        )}
       </main>
     </>
   );

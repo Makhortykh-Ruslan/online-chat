@@ -1,10 +1,14 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { Icon } from '@/src/core/components';
 
 import { getSideBarStyles } from './SideBarHeader.styles';
 
 export const SideBarHeader = () => {
+  const titles = useTranslations('titles');
+
   const handleRedirectToSettings = () => {
     console.log('handleRedirectToSettings');
   };
@@ -18,7 +22,7 @@ export const SideBarHeader = () => {
 
   return (
     <section className={styles.component}>
-      <h3>Messages</h3>
+      <h3>{titles('messages')}</h3>
       <Icon
         name="search"
         className={iconSearch}
