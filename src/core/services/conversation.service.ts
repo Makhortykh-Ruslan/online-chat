@@ -122,16 +122,13 @@ export async function getConversationDetails(
 
   const authUserId = authUser.id;
 
-  // Отримуємо conversation
   const conversation = await getConversationById(conversationId);
   if (!conversation) {
     return null;
   }
 
-  // Отримуємо всіх participants цього conversation
   const participants = await getParticipantsByConversationId(conversationId);
 
-  // Перевіряємо, чи поточний користувач є учасником
   const isParticipant = participants.some((p) => p.user_id === authUserId);
   if (!isParticipant) {
     throw new Error(
@@ -139,19 +136,15 @@ export async function getConversationDetails(
     );
   }
 
-  // Отримуємо userIds всіх participants
   const userIds = participants.map((p) => p.user_id);
 
-  // Отримуємо profiles всіх participants
   const profiles = await getProfilesByUsersId(userIds);
 
-  // Створюємо мапу profile по userId
   const profileByUserId = new Map<string, ProfileModel>();
   profiles.forEach((profile) => {
     profileByUserId.set(profile.id, profile);
   });
 
-  // Формуємо масив participants з profiles
   const participantsWithProfiles = participants
     .map((participant) => {
       const profile = profileByUserId.get(participant.user_id);
@@ -163,7 +156,6 @@ export async function getConversationDetails(
     })
     .filter((p): p is { userId: string; profile: ProfileModel } => p !== null);
 
-  // Для direct conversation знаходимо іншого учасника (не поточного користувача)
   let title: string | null = null;
   let avatarUrl: string | null = null;
 
@@ -176,19 +168,10 @@ export async function getConversationDetails(
       avatarUrl = otherParticipant.profile.avatar_url;
     }
   } else {
-    // Для group можна додати логіку отримання назви групи з conversation або з іншого джерела
-    // Поки що залишаємо null
     title = null;
     avatarUrl = null;
   }
 
-  console.log('hello', {
-    conversationId: conversation.id,
-    type: conversation.type as 'direct' | 'group',
-    title,
-    avatarUrl,
-    participants: participantsWithProfiles,
-  });
   return {
     conversationId: conversation.id,
     type: conversation.type as 'direct' | 'group',

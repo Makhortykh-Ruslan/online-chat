@@ -50,25 +50,23 @@ export const Conversations = ({ conversations }: Props) => {
 
   return (
     <>
-      <header>
-        <div className={styles.component_input}>
-          <Input
-            leftIcon="search"
-            id="search"
-            placeholder="Search conversations"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
+      <div className={styles.component_input}>
+        <Input
+          leftIcon="search"
+          id="search"
+          placeholder="Search conversations"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
 
-        <div className={styles.component_tabs}>
-          <Tabs
-            tabs={SIDEBAR_TABS_CONFIG}
-            activeTabId={activeTabId}
-            onChangeTab={handleChangeTab}
-          />
-        </div>
-      </header>
+      <div className={styles.component_tabs}>
+        <Tabs
+          tabs={SIDEBAR_TABS_CONFIG}
+          activeTabId={activeTabId}
+          onChangeTab={handleChangeTab}
+        />
+      </div>
 
       <main className={styles.component_main}>
         {filteredConversations.map((el) => (

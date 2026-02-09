@@ -5,6 +5,12 @@
 
     --shadow-purple: 0 6.5px 9.75px -1.95px rgba(229, 231, 235, 0.40),
     0 2.6px 3.9px -2.6px rgba(229, 231, 235, 0.40);
+
+    --shadow-smooth: 0 7px 2px 0 rgba(0, 0, 0, 0.00),
+    0 5px 2px 0 rgba(0, 0, 0, 0.01),
+    0 3px 2px 0 rgba(0, 0, 0, 0.02),
+    0 1px 1px 0 rgba(0, 0, 0, 0.03),
+    0 0 1px 0 rgba(0, 0, 0, 0.04);
 }
 
 @utility text-main-title {
