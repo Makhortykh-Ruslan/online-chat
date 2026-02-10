@@ -1,13 +1,20 @@
-import { signOutServer } from '@/src/core/services';
+import { Preferences, Session, SettingsHeader } from './components';
+import { SettingsPageStyles } from './page.styles';
 
 export default function SettingsPage() {
+  const styles = SettingsPageStyles;
   return (
-    <section>
-      <footer>
-        <form action={signOutServer}>
-          <button type="submit">Sign out</button>
-        </form>
-      </footer>
+    <section className={styles.page}>
+      <header className={styles.page_header}>
+        <div className={styles.page_header_item}>
+          <SettingsHeader />
+        </div>
+      </header>
+
+      <main className={styles.page_main}>
+        <Preferences />
+        <Session />
+      </main>
     </section>
   );
 }

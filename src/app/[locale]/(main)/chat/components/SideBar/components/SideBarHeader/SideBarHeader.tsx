@@ -3,14 +3,18 @@
 import { useTranslations } from 'next-intl';
 
 import { Icon } from '@/src/core/components';
+import { appRoutes } from '@/src/core/constants';
+import { useRouter } from '@/src/i18n/routing';
 
 import { getSideBarStyles } from './SideBarHeader.styles';
 
 export const SideBarHeader = () => {
+  const router = useRouter();
   const titles = useTranslations('titles');
 
   const handleRedirectToSettings = () => {
     console.log('handleRedirectToSettings');
+    router.push(appRoutes.main.settings);
   };
 
   const handleAddNewConversation = () => {

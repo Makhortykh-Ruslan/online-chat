@@ -14,7 +14,8 @@
     "flesh": "flesh",
     "selectAChat": "Select a chat to start messaging",
     "messages": "Messages",
-    "emptyTitle": "Total silence..."
+    "emptyTitle": "Total silence...",
+    "backToChat": "Back to chat"
   },
   "descriptions": {
     "enterCredentials": "Enter your credentials to access your account",
