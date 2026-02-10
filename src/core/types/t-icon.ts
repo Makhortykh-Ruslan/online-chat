@@ -11,4 +11,7 @@ export type TIcon =
   | 'user'
   | 'plus'
   | 'search'
-  | 'settings';
+  | 'settings'
+  | 'camera'
+  | 'call'
+  | 'dots';

@@ -12,17 +12,17 @@ export const Avatar = ({ src, alt, size = 'md' }: AvatarProps) => {
   const sizes = {
     sm: 'w-8 h-8',
     md: 'w-12 h-12',
-    lg: 'w-16 h-16',
+    lg: 'w-[40px] h-[40px]',
   };
 
-  const stylse = AvatarStyles(sizes[size]);
+  const styles = AvatarStyles(sizes[size]);
 
   return (
-    <div className={stylse.component}>
+    <div className={styles.component}>
       {src ? (
-        <Image src={src} alt={alt} fill className={stylse.component_img} />
+        <Image src={src} alt={alt} fill className={styles.component_img} />
       ) : (
-        <div className={stylse.component_alt}>{alt.substring(0, 2)}</div>
+        <div className={styles.component_alt}>{alt.substring(0, 2)}</div>
       )}
     </div>
   );
