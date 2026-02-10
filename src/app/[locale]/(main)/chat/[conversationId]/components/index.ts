@@ -1,2 +1,2 @@
 export * from './ConversationHeader/ConversationHeader';
-export * from './InputMessage/InputMessage';
+export * from './ConversationFooter/ConversationFooter';

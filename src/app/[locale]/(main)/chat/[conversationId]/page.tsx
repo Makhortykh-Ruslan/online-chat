@@ -1,11 +1,8 @@
-import {
-  ConversationHeader,
-  InputMessage,
-} from '@/src/app/[locale]/(main)/chat/[conversationId]/components';
 import { Message } from '@/src/core/components';
 import { getConversationDetails } from '@/src/core/services';
 import { getAuthData, getMessages } from '@/src/infrastructure/supabase';
 
+import { ConversationFooter, ConversationHeader } from './components';
 import { ConversationIdStyles } from './conversationId.styles';
 
 type props = {
@@ -50,7 +47,7 @@ export default async function ChatPage({ params }: props) {
           })}
       </main>
       <footer className={styles.page_footer}>
-        <InputMessage conversationId={conversationId} />
+        <ConversationFooter conversationId={conversationId} />
       </footer>
     </section>
   );

@@ -44,7 +44,8 @@
     "yourName": "Your Name",
     "email": "Enter your user name or email",
     "password": "Enter password",
-    "confirmPassword": "Enter confirm password"
+    "confirmPassword": "Enter confirm password",
+    "typeMessage": "Type a message..."
   },
   "button": {
     "logIn": "Log in",

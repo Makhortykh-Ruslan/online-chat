@@ -14,4 +14,6 @@ export type TIcon =
   | 'settings'
   | 'camera'
   | 'call'
-  | 'dots';
+  | 'dots'
+  | 'attach'
+  | 'audio';
