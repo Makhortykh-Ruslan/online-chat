@@ -2,6 +2,8 @@ import { z } from 'zod';
 
 import { EMAIL_REGEXP, PASSWORD_REGEXP } from '@/src/core/constants';
 
+export const fullNameControl = z.string().min(1, 'required');
+
 export const emailControl = z
   .string()
   .min(1, 'required')

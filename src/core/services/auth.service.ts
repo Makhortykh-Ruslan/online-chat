@@ -46,14 +46,14 @@ export async function signUpServer(prevData: ErrorModel, formData: FormData) {
     return { error: 'For sign up faild' };
   }
 
-  const username = formData.get(EControlName.USER_NAME) as string;
-  const display_name = formData.get(EControlName.DISPLAY_NAME) as string;
+  const fullName = formData.get(EControlName.FULL_NAME) as string;
 
   const profile: ProfileModel = {
+    email,
     avatar_url: '',
     id: user.id,
-    username,
-    display_name,
+    user_name: fullName,
+    display_name: fullName,
   };
 
   const { error: addNewProfileError } = await insertProfile(profile);

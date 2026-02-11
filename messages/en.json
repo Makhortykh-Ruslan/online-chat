@@ -42,8 +42,8 @@
     "groups": "Groups"
   },
   "placeholders": {
-    "yourName": "Your Name",
-    "email": "Enter your user name or email",
+    "fullName": "Enter the full name",
+    "email": "Enter your email",
     "password": "Enter password",
     "confirmPassword": "Enter confirm password",
     "typeMessage": "Type a message..."

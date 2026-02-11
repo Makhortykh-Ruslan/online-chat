@@ -1,95 +1,105 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { useActionState, useEffect } from 'react';
 
+import { useSignUpForm } from '@/src/app/[locale]/auth/(pages)/components/SignUpForm/hooks';
 import { Button, Input, Loader } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
-import type { ErrorModel } from '@/src/core/models';
-import { signUpServer } from '@/src/core/services';
 
 import { getAuthFormStyles } from '../../styles';
 
-const initialState: ErrorModel = {
-  error: '',
-};
-
 export const SignUpForm = () => {
-  const labels = useTranslations('labels');
-  const button = useTranslations('button');
-  const placeholders = useTranslations('placeholders');
-  const descriptions = useTranslations('descriptions');
-
-  const [state, formAction, isPending] = useActionState(
-    signUpServer,
-    initialState,
-  );
-
-  useEffect(() => {
-    if (state.error) {
-      alert(state.error);
-    }
-  }, [state.error]);
+  const {
+    handleSubmit,
+    isDisableSubmit,
+    errors,
+    register,
+    translate,
+    isLoading,
+  } = useSignUpForm();
 
   const styles = getAuthFormStyles();
 
   return (
     <section className={styles.component}>
-      <form action={formAction}>
-        <Input
-          className={styles.component_input}
-          name="username"
-          leftIcon="user"
-          id="username"
-          label={labels('fullName')}
-          placeholder={placeholders('yourName')}
-        />
+      <form onSubmit={handleSubmit}>
+        <div className={styles.component_input}>
+          <Input
+            leftIcon="user"
+            id="fullName"
+            label={translate.labels('fullName')}
+            placeholder={translate.placeholders('fullName')}
+            {...register('fullName')}
+            error={
+              errors.fullName?.message
+                ? translate.validations(errors.fullName?.message)
+                : ''
+            }
+          />
+        </div>
 
-        <Input
-          className={styles.component_input}
-          name="email"
-          leftIcon="email"
-          id="userNameOrEmail"
-          label={labels('email')}
-          placeholder={placeholders('email')}
-        />
+        <div className={styles.component_input}>
+          <Input
+            leftIcon="email"
+            id="userNameOrEmail"
+            label={translate.labels('email')}
+            placeholder={translate.placeholders('email')}
+            {...register('email')}
+            error={
+              errors.email?.message
+                ? translate.validations(errors.email?.message)
+                : ''
+            }
+          />
+        </div>
 
-        <Input
-          className={styles.component_input}
-          isPasswordFlow
-          name="password"
-          id="password"
-          leftIcon="lock"
-          label={labels('password')}
-          placeholder={placeholders('password')}
-        />
+        <div className={styles.component_input}>
+          <Input
+            isPasswordFlow
+            id="password"
+            leftIcon="lock"
+            label={translate.labels('password')}
+            placeholder={translate.placeholders('password')}
+            {...register('password')}
+            error={
+              errors.password?.message
+                ? translate.validations(errors.password?.message)
+                : ''
+            }
+          />
+        </div>
 
-        <Input
-          className={styles.component_input}
-          isPasswordFlow
-          name="password"
-          id="password"
-          leftIcon="lock"
-          label={labels('confirmPassword')}
-          placeholder={placeholders('confirmPassword')}
-        />
+        <div className={styles.component_input}>
+          <Input
+            isPasswordFlow
+            id="password"
+            leftIcon="lock"
+            label={translate.labels('password')}
+            placeholder={translate.placeholders('password')}
+            {...register('password')}
+            error={
+              errors.password?.message
+                ? translate.validations(errors.password?.message)
+                : ''
+            }
+          />
+        </div>
 
         <Button
           className={styles.component_button}
-          disabled={isPending}
+          disabled={isDisableSubmit}
           color="blue"
           type="submit"
         >
-          {isPending && <Loader />}
-          {isPending ? button('pending') : button('signUp')}
+          {isLoading && <Loader />}
+          {isLoading ? translate.button('pending') : translate.button('logIn')}
         </Button>
       </form>
 
       <div className={styles.component_link_container}>
-        {descriptions('haveAccount')}
+        {translate.descriptions('haveAccount')}
         <Link className={styles.component_link} href={appRoutes.auth.signIn}>
-          {descriptions('signIn')}
+          {translate.descriptions('signIn')}
         </Link>
       </div>
     </section>
