@@ -1,18 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { startTransition, useActionState, useEffect } from 'react';
+import { startTransition, useActionState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { ErrorModel } from '@/src/core/models';
-import { signInServer } from '@/src/core/services';
+import type { ProfileDTO } from '@/src/core/dto';
+import { EControlName } from '@/src/core/enums';
+import { updateProfileInfo } from '@/src/core/services';
 
 import { profileFormSchema, type TProfileFormSchema } from '../constants';
 
-const initialState: ErrorModel = {
-  error: '',
-};
-
-export const useProfileForm = () => {
+export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
   const labels = useTranslations('labels');
   const button = useTranslations('button');
   const validations = useTranslations('validations');
@@ -30,28 +27,29 @@ export const useProfileForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting, isValid, isDirty },
   } = useForm<TProfileFormSchema>({
     resolver: zodResolver(profileFormSchema),
     mode: 'onTouched',
+    defaultValues: {
+      email,
+      fullName,
+      id,
+    },
   });
 
-  const [state, formAction, isPending] = useActionState(
-    signInServer,
-    initialState,
-  );
-
-  useEffect(() => {
-    if (state.error) {
-      alert(state.error);
-    }
-  }, [state.error]);
+  const [state, formAction, isPending] = useActionState(updateProfileInfo, {
+    success: false,
+    data: null,
+  });
 
   const onSubmit = (data: TProfileFormSchema) => {
     startTransition(() => {
       const formData = new FormData();
-      formData.append('fullName', data.fullName);
-      formData.append('email', data.email);
+
+      formData.append(EControlName.FULL_NAME, data.fullName);
+      formData.append(EControlName.EMAIL, data.email);
+      formData.append(EControlName.ID, data.id);
 
       formAction(formData);
     });
@@ -61,9 +59,9 @@ export const useProfileForm = () => {
     register,
     translate,
     errors,
-    serverError: state.error,
+    serverError: state.message,
     handleSubmit: handleSubmit(onSubmit),
     isLoading: isPending || isSubmitting,
-    isDisableSubmit: isPending || isSubmitting || !isValid,
+    isDisableSubmit: isPending || isSubmitting || !isValid || !isDirty,
   };
 };

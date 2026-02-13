@@ -53,7 +53,6 @@ export async function signUpServer(prevData: ErrorModel, formData: FormData) {
     avatar_url: '',
     id: user.id,
     user_name: fullName,
-    display_name: fullName,
   };
 
   const { error: addNewProfileError } = await insertProfile(profile);

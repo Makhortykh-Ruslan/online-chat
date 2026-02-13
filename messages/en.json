@@ -51,7 +51,8 @@
   "button": {
     "logIn": "Log in",
     "signUp": "Sign up",
-    "pending": "Pending..."
+    "pending": "Pending...",
+    "save": "Save Changes"
   },
   "validations": {
     "required": "This field is required",

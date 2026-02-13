@@ -95,7 +95,7 @@ export async function getSidebarConversations(): Promise<ConversationDTO[]> {
     return {
       conversationId: conversation.id,
       type: conversation.type,
-      title: profile?.display_name ?? '',
+      title: profile?.user_name ?? '',
       avatarUrl: profile?.avatar_url ?? null,
       lastMessage: lastMessage ?? null,
     };
@@ -164,7 +164,7 @@ export async function getConversationDetails(
       (p) => p.userId !== authUserId,
     );
     if (otherParticipant) {
-      title = otherParticipant.profile.display_name;
+      title = otherParticipant.profile.user_name;
       avatarUrl = otherParticipant.profile.avatar_url;
     }
   } else {

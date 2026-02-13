@@ -20,3 +20,12 @@ export async function getAuthData() {
   const { data } = await supabase.auth.getUser();
   return data.user;
 }
+
+export async function updateAuthUser(email: string, password?: string) {
+  const supabase = await createClient();
+
+  return await supabase.auth.updateUser({
+    ...(email && { email }),
+    ...(password && { password }),
+  });
+}
