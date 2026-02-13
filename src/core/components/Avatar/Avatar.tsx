@@ -5,7 +5,7 @@ import { AvatarStyles } from './Avatar.styles';
 type AvatarProps = {
   src?: string | null;
   alt: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
 };
 
 export const Avatar = ({ src, alt, size = 'md' }: AvatarProps) => {
@@ -13,6 +13,7 @@ export const Avatar = ({ src, alt, size = 'md' }: AvatarProps) => {
     sm: 'w-8 h-8',
     md: 'w-12 h-12',
     lg: 'w-[40px] h-[40px]',
+    xl: 'w-[96px] h-[96px]',
   };
 
   const styles = AvatarStyles(sizes[size]);

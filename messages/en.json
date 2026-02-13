@@ -15,7 +15,8 @@
     "selectAChat": "Select a chat to start messaging",
     "messages": "Messages",
     "emptyTitle": "Total silence...",
-    "backToChat": "Back to chat"
+    "backToChat": "Back to chat",
+    "profile": "Profile"
   },
   "descriptions": {
     "enterCredentials": "Enter your credentials to access your account",
@@ -52,7 +53,8 @@
     "logIn": "Log in",
     "signUp": "Sign up",
     "pending": "Pending...",
-    "save": "Save Changes"
+    "save": "Save Changes",
+    "changeAvatar": "Change avatar"
   },
   "validations": {
     "required": "This field is required",

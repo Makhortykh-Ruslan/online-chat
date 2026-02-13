@@ -10,6 +10,7 @@ import { updateProfileInfo } from '@/src/core/services';
 import { profileFormSchema, type TProfileFormSchema } from '../constants';
 
 export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
+  const titles = useTranslations('titles');
   const labels = useTranslations('labels');
   const button = useTranslations('button');
   const validations = useTranslations('validations');
@@ -17,6 +18,7 @@ export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
   const descriptions = useTranslations('descriptions');
 
   const translate = {
+    titles,
     labels,
     button,
     validations,

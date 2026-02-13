@@ -1,1 +1,1 @@
-export type TBtnColor = 'blue' | 'red';
+export type TBtnColor = 'blue' | 'red' | 'transparent';
