@@ -1,9 +1,33 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+import { useActionState } from 'react';
+
+import { Button, Loader } from '@/src/core/components';
 import { signOutServer } from '@/src/core/services';
 
+import { SessionStyles } from './Session.styles';
+
 export const Session = () => {
+  const titles = useTranslations('titles');
+  const button = useTranslations('button');
+  const descriptions = useTranslations('descriptions');
+
+  const [state, formAction, isPending] = useActionState(signOutServer, null);
+
+  const styles = SessionStyles;
+
   return (
-    <form action={signOutServer}>
-      <button type="submit">Sign out</button>
+    <form action={formAction} className={styles.component}>
+      <h2 className={styles.component_title}>{titles('session')}</h2>
+      <p className={styles.component_description}>
+        {descriptions('signOutDescription')}
+      </p>
+
+      <Button color="red" type="submit">
+        {isPending && <Loader />}
+        {isPending ? '' : button('signOut')}
+      </Button>
     </form>
   );
 };

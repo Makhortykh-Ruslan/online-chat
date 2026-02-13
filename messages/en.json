@@ -16,7 +16,8 @@
     "messages": "Messages",
     "emptyTitle": "Total silence...",
     "backToChat": "Back to chat",
-    "profile": "Profile"
+    "profile": "Profile",
+    "session": "Session"
   },
   "descriptions": {
     "enterCredentials": "Enter your credentials to access your account",
@@ -31,7 +32,8 @@
     "signIn": "Sign in",
     "fillDetail": "Fill in your details to get started",
     "chooseConversation": "Choose a conversation from the sidebar or search for users",
-    "emptyDescription": "Looks like nobody needs you))) You just haven't made the first move yet. Change that!"
+    "emptyDescription": "Looks like nobody needs you))) You just haven't made the first move yet. Change that!",
+    "signOutDescription": "Sign out of your account on this device."
   },
   "labels": {
     "fullName": "Full Name",
@@ -54,7 +56,8 @@
     "signUp": "Sign up",
     "pending": "Pending...",
     "save": "Save Changes",
-    "changeAvatar": "Change avatar"
+    "changeAvatar": "Change avatar",
+    "signOut": "Sign out"
   },
   "validations": {
     "required": "This field is required",
