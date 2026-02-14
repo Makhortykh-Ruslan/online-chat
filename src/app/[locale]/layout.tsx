@@ -37,7 +37,12 @@ export default async function RootLayout({ children, params }: LayoutProps) {
           key={locale}
           messages={messages}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            storageKey="resetTheme"
+          >
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
