@@ -1,3 +1,5 @@
+'use server';
+
 import { createClient } from './server.supabase';
 
 export async function signUp(email: string, password: string) {

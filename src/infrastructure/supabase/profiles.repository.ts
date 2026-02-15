@@ -1,3 +1,5 @@
+'use server';
+
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js';
 
 import { EBDTableName, EControlName } from '@/src/core/enums';

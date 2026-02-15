@@ -6,4 +6,7 @@ export const EControlName = {
   PASSWORD: 'password',
   CONTENT: 'content',
   CONVERSATION_ID: 'conversationId',
+  LANGUAGE: 'language',
+  THEME: 'theme',
+  USER_ID: 'userId',
 } as const;

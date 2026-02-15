@@ -1,3 +1,5 @@
+'use server';
+
 import type { MessageDTO } from '@/src/core/dto';
 import { EBDTableName } from '@/src/core/enums';
 import type { MessageModel } from '@/src/core/models/message.model';

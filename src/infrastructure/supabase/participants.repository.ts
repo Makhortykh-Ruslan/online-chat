@@ -1,3 +1,5 @@
+'use server';
+
 import { EBDTableName } from '@/src/core/enums';
 import type { Participant } from '@/src/core/models';
 import { createClient } from '@/src/infrastructure/supabase/server.supabase';

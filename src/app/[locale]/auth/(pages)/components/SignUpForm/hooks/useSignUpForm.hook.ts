@@ -1,18 +1,18 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
+import { useTheme } from 'next-themes';
 import { startTransition, useActionState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { ErrorModel } from '@/src/core/models';
 import { signUpServer } from '@/src/core/services';
 
 import { signUpFormSchema, type TSignIUpFormSchema } from '../constants';
 
-const initialState: ErrorModel = {
-  error: '',
-};
-
 export const useSignUpForm = () => {
+  const { resolvedTheme } = useTheme();
+  const locale = useLocale();
+
   const labels = useTranslations('labels');
   const button = useTranslations('button');
   const validations = useTranslations('validations');
@@ -36,16 +36,18 @@ export const useSignUpForm = () => {
     mode: 'onTouched',
   });
 
-  const [state, formAction, isPending] = useActionState(
-    signUpServer,
-    initialState,
-  );
+  const [state, formAction, isPending] = useActionState(signUpServer, {
+    success: false,
+    data: null,
+  });
 
   useEffect(() => {
-    if (state.error) {
-      alert(state.error);
+    if (!state.message) return;
+
+    if (!state.success) {
+      alert(state.message);
     }
-  }, [state.error]);
+  }, [state]);
 
   const onSubmit = (data: TSignIUpFormSchema) => {
     startTransition(() => {
@@ -54,6 +56,8 @@ export const useSignUpForm = () => {
       formData.append('fullName', data.fullName);
       formData.append('email', data.email);
       formData.append('password', data.password);
+      formData.append('language', locale);
+      formData.append('theme', resolvedTheme || 'system');
 
       formAction(formData);
     });
@@ -63,7 +67,7 @@ export const useSignUpForm = () => {
     register,
     translate,
     errors,
-    serverError: state.error,
+    serverError: state.message,
     handleSubmit: handleSubmit(onSubmit),
     isLoading: isPending || isSubmitting,
     isDisableSubmit: isPending || isSubmitting || !isValid,

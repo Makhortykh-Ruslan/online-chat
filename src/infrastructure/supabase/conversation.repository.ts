@@ -1,3 +1,5 @@
+'use server';
+
 import { EBDTableName } from '@/src/core/enums';
 import type { ConversationModel } from '@/src/core/models/conversation.model';
 import type { TConversationType } from '@/src/core/types';
