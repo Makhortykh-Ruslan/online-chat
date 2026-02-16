@@ -22,7 +22,7 @@ export default async function SettingsPage() {
 
       <main className={styles.page_main}>
         <Profile {...profileData.data} />
-        <Preferences />
+        <Preferences {...profileData.data} />
         <Session />
       </main>
     </section>

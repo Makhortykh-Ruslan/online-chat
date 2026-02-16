@@ -10,6 +10,7 @@ import {
   updateAuthUser,
   updateProfile,
 } from '@/src/infrastructure/supabase';
+import { ERROR_DEFAULT_RESPONSE_MODEL, SUCCESS_DEFAULT_RESPONSE_MODEL } from '@/src/core/constants';
 
 export const updateProfileInfo = async (
   prevData: ResponseModel<null>,
@@ -40,7 +41,7 @@ export const getProfile = async (): Promise<
   const authUser = await getAuthData();
 
   if (!authUser) {
-    return { success: false, message: 'Not authenticated', data: null };
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Not authenticated' };
   }
 
   const authUserId = authUser.id;

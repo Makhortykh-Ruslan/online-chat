@@ -17,7 +17,9 @@
     "emptyTitle": "Total silence...",
     "backToChat": "Back to chat",
     "profile": "Profile",
-    "session": "Session"
+    "session": "Session",
+    "preferences": "Preferences",
+    "darkMode": "Dark Mode"
   },
   "descriptions": {
     "enterCredentials": "Enter your credentials to access your account",
@@ -33,7 +35,8 @@
     "fillDetail": "Fill in your details to get started",
     "chooseConversation": "Choose a conversation from the sidebar or search for users",
     "emptyDescription": "Looks like nobody needs you))) You just haven't made the first move yet. Change that!",
-    "signOutDescription": "Sign out of your account on this device."
+    "signOutDescription": "Sign out of your account on this device.",
+    "darkModeDescription": "Switch between light and night mode"
   },
   "labels": {
     "fullName": "Full Name",

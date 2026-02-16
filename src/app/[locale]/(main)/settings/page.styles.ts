@@ -3,5 +3,5 @@ export const SettingsPageStyles = {
   page_header:
     'fixed z-1000 w-full border-b border-main-border bg-gray-0 dark:bg-brand-925',
   page_header_item: 'w-full max-w-[640px] mx-auto py-[15px]',
-  page_main: 'mt-[90px] flex flex-col w-full max-w-[640px] gap-[15px] mx-auto',
+  page_main: 'mt-[90px] flex flex-col w-full max-w-[640px] gap-[32px] mx-auto',
 };

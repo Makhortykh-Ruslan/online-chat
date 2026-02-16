@@ -3,7 +3,6 @@ import { getTranslations } from 'next-intl/server';
 import React from 'react';
 
 import { SideBar } from '@/src/app/[locale]/(main)/chat/components/SideBar/SideBar';
-import { ThemeToggle } from '@/src/core/components/ThemeToggle/ThemeToggle';
 import type { LayoutProps } from '@/src/core/types';
 
 import { getLayoutStyles } from './styles';
@@ -29,7 +28,6 @@ export default function ChatLayout({
 
   return (
     <main className={styles.page}>
-      <ThemeToggle />
       <section className={styles.page_conversation}>
         <SideBar />
       </section>
