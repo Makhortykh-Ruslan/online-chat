@@ -6,3 +6,4 @@ export * from './Input/Input';
 export * from './Loader/Loader';
 export * from './Message/Message';
 export * from './Tabs/Tabs';
+export * from './Toggle/Toggle';
