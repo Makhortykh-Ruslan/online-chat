@@ -7,8 +7,12 @@ import { Icon } from '@/src/core/components';
 import { useSelectContext } from '../../context';
 import { TriggerStyles } from './Trigger.styles';
 
-export const Trigger = ({ placeholder }: { placeholder: string }) => {
-  const { isOpen, toggle, setCoords, selectedValue } = useSelectContext();
+export const Trigger = <V extends string, I extends string>({
+  placeholder,
+}: {
+  placeholder: string;
+}) => {
+  const { isOpen, toggle, setCoords, selectedValue } = useSelectContext<V, I>();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();

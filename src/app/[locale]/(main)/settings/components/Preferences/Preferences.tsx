@@ -8,12 +8,16 @@ import { Select, Toggle } from '@/src/core/components';
 import { DEFAULT_SELECTED_LANG, LANGUAGES_MOCK } from '@/src/core/constants';
 import type { ProfileDTO } from '@/src/core/dto';
 import type { TIdName } from '@/src/core/types';
+import { usePathname, useRouter } from '@/src/i18n/routing';
 
 import { PreferencesStyles } from './Preferences.styles';
 
 export const Preferences = (profileData: ProfileDTO) => {
   const titles = useTranslations('titles');
   const descriptions = useTranslations('descriptions');
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   const { theme, setTheme } = useTheme();
 
@@ -29,6 +33,8 @@ export const Preferences = (profileData: ProfileDTO) => {
 
   const handleChangeLanguages = (value: TIdName<string, string>) => {
     setLanguage(value);
+
+    router.replace({ pathname }, { locale: value.id });
   };
 
   const styles = PreferencesStyles;
