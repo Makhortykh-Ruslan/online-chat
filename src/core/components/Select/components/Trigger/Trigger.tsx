@@ -26,7 +26,7 @@ export const Trigger = ({ placeholder }: { placeholder: string }) => {
 
   return (
     <button onClick={handleClick} className={styles.component}>
-      {selectedValue || placeholder}
+      {selectedValue?.value || placeholder}
 
       <Icon name="arrow-down" className={styles.component_arrow} />
     </button>

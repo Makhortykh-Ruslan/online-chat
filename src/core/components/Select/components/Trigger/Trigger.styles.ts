@@ -1,6 +1,11 @@
 import clsx from 'clsx';
 
-export const TriggerStyles = (isOpen: boolean, selectedValue: string) => ({
+import type { TIdName } from '@/src/core/types';
+
+export const TriggerStyles = <V, I>(
+  isOpen: boolean,
+  selectedValue: TIdName<V, I> | null,
+) => ({
   component: clsx(
     `w-full flex items-center bg-gray-50 py-[8px] px-[12px] rounded-[12px] 
   border border-gray-300

@@ -1,4 +1,11 @@
-export const LANGUAGES_MOCK = [
+import type { TIdName } from '@/src/core/types';
+
+export const DEFAULT_SELECTED_LANG = {
+  value: '🇺🇸 English',
+  id: 'en',
+};
+
+export const LANGUAGES_MOCK: TIdName<string, string>[] = [
   {
     value: '🇺🇦 Ukrainian',
     id: 'uk',
@@ -7,41 +14,4 @@ export const LANGUAGES_MOCK = [
     value: '🇺🇸 English',
     id: 'en',
   },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-  {
-    value: '🇺🇸 English',
-    id: 'en',
-  },
-
 ];
