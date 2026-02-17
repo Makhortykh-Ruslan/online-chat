@@ -2,7 +2,10 @@
 
 import { type ReactNode, useState } from 'react';
 
-import { SelectContext } from '@/src/core/components/Select/context';
+import {
+  type Coords,
+  SelectContext,
+} from '@/src/core/components/Select/context';
 
 import { Content, Option, Trigger } from './components';
 
@@ -16,6 +19,7 @@ export const Select = ({
   value: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [coords, setCoords] = useState<Coords | null>(null);
 
   const toggle = () => setIsOpen(!isOpen);
   const onSelect = (val: string) => {
@@ -25,7 +29,14 @@ export const Select = ({
 
   return (
     <SelectContext.Provider
-      value={{ selectedValue: value, onSelect, isOpen, toggle }}
+      value={{
+        selectedValue: value,
+        onSelect,
+        isOpen,
+        toggle,
+        coords,
+        setCoords,
+      }}
     >
       <div className="relative inline-block w-full">{children}</div>
     </SelectContext.Provider>

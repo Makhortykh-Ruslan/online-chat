@@ -7,4 +7,41 @@ export const LANGUAGES_MOCK = [
     value: '🇺🇸 English',
     id: 'en',
   },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+  {
+    value: '🇺🇸 English',
+    id: 'en',
+  },
+
 ];

@@ -1,17 +1,31 @@
 'use client';
 
+import React from 'react';
+
 import { Icon } from '@/src/core/components';
 
 import { useSelectContext } from '../../context';
 import { TriggerStyles } from './Trigger.styles';
 
 export const Trigger = ({ placeholder }: { placeholder: string }) => {
-  const { toggle, selectedValue, isOpen } = useSelectContext();
+  const { isOpen, toggle, setCoords, selectedValue } = useSelectContext();
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    setCoords({
+      top: rect.bottom + window.scrollY,
+      left: rect.left + window.scrollX,
+      width: rect.width,
+    });
+
+    toggle();
+  };
 
   const styles = TriggerStyles(isOpen, selectedValue);
 
   return (
-    <button onClick={toggle} className={styles.component}>
+    <button onClick={handleClick} className={styles.component}>
       {selectedValue || placeholder}
 
       <Icon name="arrow-down" className={styles.component_arrow} />
