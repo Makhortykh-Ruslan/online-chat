@@ -4,7 +4,8 @@ import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
 
-import { Toggle } from '@/src/core/components';
+import { Select, Toggle } from '@/src/core/components';
+import { LANGUAGES_MOCK } from '@/src/core/constants';
 import type { ProfileDTO } from '@/src/core/dto';
 
 import { PreferencesStyles } from './Preferences.styles';
@@ -20,6 +21,10 @@ export const Preferences = (profileData: ProfileDTO) => {
     setToggle(value);
 
     setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  const handleChangeLanguages = (value: any) => {
+    console.log('handleChangeLanguages', value);
   };
 
   const styles = PreferencesStyles;
@@ -38,6 +43,18 @@ export const Preferences = (profileData: ProfileDTO) => {
 
         <Toggle value={toggle} onChange={handleToggleChange} />
       </div>
+
+      <Select value={'hello'} onChange={handleChangeLanguages}>
+        <Select.Trigger placeholder="Choose language" />
+
+        <Select.Content>
+          {LANGUAGES_MOCK.map((el) => (
+            <Select.Option key={el.id} value={el.value}>
+              {el.value}
+            </Select.Option>
+          ))}
+        </Select.Content>
+      </Select>
     </section>
   );
 };

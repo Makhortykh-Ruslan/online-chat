@@ -17,4 +17,5 @@ export type TIcon =
   | 'dots'
   | 'attach'
   | 'audio'
-  | 'arrow-left';
+  | 'arrow-left'
+  | 'arrow-down';
