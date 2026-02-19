@@ -19,7 +19,8 @@
     "profile": "Profil",
     "session": "Sesja",
     "preferences": "Preferencje",
-    "darkMode": "Tryb nocny"
+    "darkMode": "Tryb nocny",
+    "changePassword": "Zmień hasło"
   },
   "descriptions": {
     "enterCredentials": "Wprowadź swoje dane, aby uzyskać dostęp do konta",

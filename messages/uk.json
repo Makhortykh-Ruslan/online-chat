@@ -19,7 +19,8 @@
     "profile": "Профіль",
     "session": "Сесія",
     "preferences": "Налаштування",
-    "darkMode": "Темний режим"
+    "darkMode": "Темний режим",
+    "changePassword": "Змінити пароль"
   },
   "descriptions": {
     "enterCredentials": "Введіть свої дані, щоб увійти в акаунт",

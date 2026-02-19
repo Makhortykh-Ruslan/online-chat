@@ -19,7 +19,8 @@
     "profile": "Profile",
     "session": "Session",
     "preferences": "Preferences",
-    "darkMode": "Dark Mode"
+    "darkMode": "Dark Mode",
+    "changePassword": "Change Password"
   },
   "descriptions": {
     "enterCredentials": "Enter your credentials to access your account",

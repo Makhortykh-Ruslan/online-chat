@@ -1,6 +1,12 @@
 import { getProfile } from '@/src/core/services';
 
-import { Preferences, Profile, Session, SettingsHeader } from './components';
+import {
+  ChangePassword,
+  Preferences,
+  Profile,
+  Session,
+  SettingsHeader,
+} from './components';
 import { SettingsPageStyles } from './page.styles';
 
 export default async function SettingsPage() {
@@ -22,6 +28,7 @@ export default async function SettingsPage() {
 
       <main className={styles.page_main}>
         <Profile {...profileData.data} />
+        <ChangePassword />
         <Preferences {...profileData.data} />
         <Session />
       </main>
