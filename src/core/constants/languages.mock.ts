@@ -14,4 +14,8 @@ export const LANGUAGES_MOCK: TIdName<string, string>[] = [
     value: '🇺🇸 English',
     id: 'en',
   },
+  {
+    value: '🇵🇱 Polish',
+    id: 'pl',
+  },
 ];

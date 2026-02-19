@@ -53,7 +53,8 @@
     "password": "Enter password",
     "confirmPassword": "Enter confirm password",
     "typeMessage": "Type a message...",
-    "chooseLang": "Choose a language"
+    "chooseLang": "Choose a language",
+    "searchConversations": "Search conversations"
   },
   "button": {
     "logIn": "Log in",

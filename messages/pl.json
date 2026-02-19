@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "authTitle": "Uwierzytelnianie | LinkUp Chat",
+    "authDescription": "Zaloguj się lub zarejestruj, aby cieszyć się płynną komunikacją z LinkUp Chat.",
+    "chatTitle": "Czat | LinkUp Chat",
+    "chatDescription": "Czatuj, pisz, dzwoń i rozmawiaj ze sobą nawzajem."
+  },
+  "titles": {
+    "welcomeBack": "Witaj ponownie",
+    "createAccount": "Utwórz konto",
+    "realTimeChat": "Czat w czasie rzeczywistym",
+    "groupChats": "Czaty grupowe",
+    "secure": "Bezpieczeństwo",
+    "flesh": "flesh",
+    "selectAChat": "Wybierz czat, aby zacząć pisać",
+    "messages": "Wiadomości",
+    "emptyTitle": "Cisza jak makiem zasiał...",
+    "backToChat": "Powrót do czatu",
+    "profile": "Profil",
+    "session": "Sesja",
+    "preferences": "Preferencje",
+    "darkMode": "Tryb nocny"
+  },
+  "descriptions": {
+    "enterCredentials": "Wprowadź swoje dane, aby uzyskać dostęp do konta",
+    "instantMessaging": "Błyskawiczne wiadomości",
+    "collaborateTogether": "Współpracujcie razem",
+    "endToEndEncrypted": "Szyfrowanie end-to-end",
+    "lightingQuick": "Szybki jak błyskawica",
+    "introducing": "Doświadcz płynnej komunikacji dzięki czatowi w czasie rzeczywistym, połączeniom głosowym i współpracy grupowej.",
+    "notHaveAccount": "Nie masz konta?",
+    "haveAccount": "Masz już konto?",
+    "signUp": "Zarejestruj się",
+    "signIn": "Zaloguj się",
+    "fillDetail": "Wypełnij swoje dane, aby rozpocząć",
+    "chooseConversation": "Wybierz rozmowę z paska bocznego lub wyszukaj użytkowników",
+    "emptyDescription": "Wygląda na to, że nikt Cię nie potrzebuje))) Po prostu nie wykonałeś jeszcze pierwszego kroku. Zmień to!",
+    "signOutDescription": "Wyloguj się ze swojego konta na tym urządzeniu.",
+    "darkModeDescription": "Przełączaj między trybem jasnym a nocnym"
+  },
+  "labels": {
+    "fullName": "Imię i nazwisko",
+    "email": "Adres e-mail",
+    "password": "Hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "all": "Wszystkie",
+    "direct": "Bezpośrednie",
+    "groups": "Grupy"
+  },
+  "placeholders": {
+    "fullName": "Wpisz imię i nazwisko",
+    "email": "Wpisz swój e-mail",
+    "password": "Wpisz hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "typeMessage": "Napisz wiadomość...",
+    "chooseLang": "Wybierz język",
+    "searchConversations": "Szukaj rozmów"
+  },
+  "button": {
+    "logIn": "Zaloguj się",
+    "signUp": "Zarejestruj się",
+    "pending": "Oczekiwanie...",
+    "save": "Zapisz zmiany",
+    "changeAvatar": "Zmień awatar",
+    "signOut": "Wyloguj się"
+  },
+  "validations": {
+    "required": "To pole jest wymagane",
+    "invalidEmail": "Niepoprawny adres e-mail. Wpisz go w formacie: twojemail@example.com",
+    "passwordNoSymbol": "Co najmniej 1 symbol (!@#$&*^)"
+  }
+}

@@ -24,6 +24,7 @@ export const Conversations = ({ conversations }: Props) => {
 
   const titles = useTranslations('titles');
   const descriptions = useTranslations('descriptions');
+  const placeholders = useTranslations('placeholders');
 
   const filteredConversations = useMemo(() => {
     return conversations.filter((el) => {
@@ -54,7 +55,7 @@ export const Conversations = ({ conversations }: Props) => {
         <Input
           leftIcon="search"
           id="search"
-          placeholder="Search conversations"
+          placeholder={placeholders('searchConversations')}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />

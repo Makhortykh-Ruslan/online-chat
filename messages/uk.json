@@ -1,9 +1,9 @@
 {
   "metadata": {
     "authTitle": "Авторизація | LinkUp Chat",
-    "authDescription": "Увійдіть або зареєструйтеся, щоб насолоджуватися безперебійним спілкуванням у LinkUp Chat.",
+    "authDescription": "Увійдіть або зареєструйтеся, щоб почати спілкування в LinkUp Chat.",
     "chatTitle": "Чат | LinkUp Chat",
-    "chatDescription": "Переписуйтесь, телефонуйте та спілкуйтеся один з одним"
+    "chatDescription": "Спілкуйтеся, пишіть повідомлення та телефонуйте один одному."
   },
   "titles": {
     "welcomeBack": "З поверненням",
@@ -11,49 +11,50 @@
     "realTimeChat": "Чат у реальному часі",
     "groupChats": "Групові чати",
     "secure": "Безпека",
-    "flesh": "Миттєвість",
+    "flesh": "flesh",
     "selectAChat": "Оберіть чат, щоб почати спілкування",
     "messages": "Повідомлення",
-    "emptyTitle": "Ой, пусто...",
-    "backToChat": "Повернутися до чатів",
+    "emptyTitle": "Повна тиша...",
+    "backToChat": "Назад до чату",
     "profile": "Профіль",
     "session": "Сесія",
     "preferences": "Налаштування",
     "darkMode": "Темний режим"
   },
   "descriptions": {
-    "enterCredentials": "Введіть свої дані, щоб отримати доступ до акаунта",
+    "enterCredentials": "Введіть свої дані, щоб увійти в акаунт",
     "instantMessaging": "Миттєвий обмін повідомленнями",
-    "collaborateTogether": "Спільна робота разом",
+    "collaborateTogether": "Працюйте разом",
     "endToEndEncrypted": "Наскрізне шифрування",
-    "lightingQuick": "Блискавична швидкість",
-    "introducing": "Насолоджуйтесь безперебійним спілкуванням за допомогою чату в реальному часі,\n голосових дзвінків та групової співпраці.",
-    "notHaveAccount": "Немає акаунта?",
+    "lightingQuick": "Блискавично швидко",
+    "introducing": "Спробуйте зручний обмін повідомленнями в реальному часі, голосові дзвінки та групову співпрацю.",
+    "notHaveAccount": "Немає акаунту?",
     "haveAccount": "Вже є акаунт?",
     "signUp": "Зареєструватися",
     "signIn": "Увійти",
     "fillDetail": "Заповніть свої дані, щоб почати",
-    "chooseConversation": "Оберіть розмову на бічній панелі або знайдіть користувачів",
-    "emptyDescription": "Схоже, ти нікому не треба))) Просто ти ще не написав першим. Виправ це!",
-    "signOutDescription": "Вийдіть зі свого облікового запису на цьому пристрої.",
-    "darkModeDescription": "Перемикання між світловим та нічним режимами"
+    "chooseConversation": "Оберіть бесіду на бічній панелі або знайдіть користувачів",
+    "emptyDescription": "Схоже, ви нікому не потрібні))) Ви просто ще не зробили перший крок. Виправте це!",
+    "signOutDescription": "Вийти з акаунту на цьому пристрої.",
+    "darkModeDescription": "Перемикання між світлим та нічним режимами"
   },
   "labels": {
     "fullName": "Повне ім'я",
     "email": "Електронна пошта",
     "password": "Пароль",
-    "confirmPassword": "Підтвердження пароля",
+    "confirmPassword": "Підтвердіть пароль",
     "all": "Усі",
     "direct": "Особисті",
     "groups": "Групи"
   },
   "placeholders": {
-    "fullName": "Введіть ім'я",
-    "email": "Введіть пошту",
+    "fullName": "Введіть повне ім'я",
+    "email": "Введіть email",
     "password": "Введіть пароль",
-    "confirmPassword": "Підтвердьте пароль",
+    "confirmPassword": "Підтвердіть пароль",
     "typeMessage": "Напишіть повідомлення...",
-    "chooseLang": "Оберіть мову"
+    "chooseLang": "Оберіть мову",
+    "searchConversations": "Пошук бесід"
   },
   "button": {
     "logIn": "Увійти",
@@ -65,7 +66,7 @@
   },
   "validations": {
     "required": "Це поле є обов'язковим",
-    "invalidEmail": "Невірна електронна пошта. Будь ласка, введіть її у форматі: youremail@example.com",
+    "invalidEmail": "Неправильний email. Будь ласка, введіть його у форматі: youremail@example.com",
     "passwordNoSymbol": "Щонайменше 1 символ (!@#$&*^)"
   }
 }
