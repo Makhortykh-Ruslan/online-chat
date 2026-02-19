@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children, params }: LayoutProps) {
   const { locale } = await params;
+
   let messages;
 
   try {

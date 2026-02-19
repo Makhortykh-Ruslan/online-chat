@@ -3,6 +3,7 @@ import type { ProfileModel } from '@/src/core/models';
 
 export const mapProfileToDTO = (data: ProfileModel): ProfileDTO => {
   return {
+    ...data,
     id: data.id,
     email: data.email,
     createdAt: data.created_at,

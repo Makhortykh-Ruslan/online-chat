@@ -52,7 +52,8 @@
     "email": "Enter your email",
     "password": "Enter password",
     "confirmPassword": "Enter confirm password",
-    "typeMessage": "Type a message..."
+    "typeMessage": "Type a message...",
+    "chooseLang": "Choose a language"
   },
   "button": {
     "logIn": "Log in",

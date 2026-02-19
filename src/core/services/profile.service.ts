@@ -1,16 +1,22 @@
 'use server';
 
 import { mapProfileToDTO } from '@/src/core/adapters/profile.adapter';
+import {
+  ERROR_DEFAULT_RESPONSE_MODEL,
+  SUCCESS_DEFAULT_RESPONSE_MODEL,
+} from '@/src/core/constants';
 import type { ProfileDTO } from '@/src/core/dto';
 import { EControlName } from '@/src/core/enums';
+import type { ProfilesSettingsModel } from '@/src/core/models';
 import type { ResponseModel } from '@/src/core/models/response.model';
 import {
   getAuthData,
   getProfileByUserId,
+  getProfileSettingsById,
   updateAuthUser,
   updateProfile,
+  updateProfileSettings,
 } from '@/src/infrastructure/supabase';
-import { ERROR_DEFAULT_RESPONSE_MODEL, SUCCESS_DEFAULT_RESPONSE_MODEL } from '@/src/core/constants';
 
 export const updateProfileInfo = async (
   prevData: ResponseModel<null>,
@@ -46,13 +52,55 @@ export const getProfile = async (): Promise<
 
   const authUserId = authUser.id;
 
-  const { data, error } = await getProfileByUserId(authUserId);
+  const [profile, profileSettings] = await Promise.all([
+    getProfileByUserId(authUserId),
+    getProfileSettingsById(authUserId),
+  ]);
 
-  if (error) {
-    return { success: false, message: error.message, data: null };
+  const { data: dataProfile, error: errorProfile } = profile;
+  const { data: dataProfileSetting, error: errorProfileSetting } =
+    profileSettings;
+
+  if (errorProfile || errorProfileSetting) {
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message: 'Error profile details',
+    };
   }
 
-  const model = mapProfileToDTO(data);
+  const model = {
+    ...dataProfile,
+    theme: dataProfileSetting?.theme,
+    language: dataProfileSetting?.language,
+  };
 
-  return { success: true, message: 'Success', data: model };
+  const data = mapProfileToDTO(model);
+
+  return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
+};
+
+export const updateProfilePreference = async (
+  settings: ProfilesSettingsModel,
+) => {
+  const authUser = await getAuthData();
+
+  if (!authUser) {
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Not authenticated' };
+  }
+
+  const authUserId = authUser.id;
+
+  const { data, error } = await updateProfileSettings({
+    ...settings,
+    userId: authUserId,
+  });
+
+  if (error) {
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message: 'Error update profile settings details',
+    };
+  }
+
+  return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
 };

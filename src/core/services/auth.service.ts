@@ -12,7 +12,7 @@ import { EControlName } from '@/src/core/enums';
 import type { ErrorModel } from '@/src/core/models';
 import type { ResponseModel } from '@/src/core/models/response.model';
 import {
-  addProfilesSetting,
+  addProfilesSettings,
   insertProfile,
   signIn,
   signOut,
@@ -78,12 +78,14 @@ export async function signUpServer(
       email,
       user_name: fullName,
       avatar_url: '',
+      language: 'en',
+      theme: 'system',
     });
 
     if (profileError)
       return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: profileError.message };
 
-    const { error: settingsError } = await addProfilesSetting({
+    const { error: settingsError } = await addProfilesSettings({
       userId: authUserId,
       language,
       theme,

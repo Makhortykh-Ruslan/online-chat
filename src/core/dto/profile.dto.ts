@@ -4,4 +4,6 @@ export type ProfileDTO = Pick<ProfileModel, 'id' | 'email'> & {
   fullName: string;
   avatarUrl: string;
   createdAt?: string | undefined;
+  language: string;
+  theme: string;
 };
