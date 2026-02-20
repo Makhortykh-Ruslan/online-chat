@@ -9,17 +9,19 @@ import {
 } from '@/src/core/constants';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import { EControlName } from '@/src/core/enums';
-import type { ErrorModel } from '@/src/core/models';
 import type { ResponseModel } from '@/src/core/models/response.model';
 import {
-  addProfilesSettings,
+  insertSystemSettings,
   insertProfile,
   signIn,
   signOut,
   signUp,
 } from '@/src/infrastructure/supabase';
 
-export async function signInServer(prevData: ErrorModel, formData: FormData) {
+export async function signInServer(
+  prevData: ResponseModel<null>,
+  formData: FormData,
+): Promise<ResponseModel<null>> {
   let redirectPath: string | null = null;
 
   try {
@@ -29,19 +31,20 @@ export async function signInServer(prevData: ErrorModel, formData: FormData) {
     const { error } = await signIn(email, password);
 
     if (error) {
-      return { error: error.message };
+      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: error.message };
     }
 
     redirectPath = appRoutes.main.chat;
   } catch (err) {
-    console.error(err);
-    return { error: 'Something went wrong' };
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Something went wrong' };
   }
 
   if (redirectPath) {
     revalidatePath(redirectPath);
     redirect(redirectPath);
   }
+
+  return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, message: 'Success' };
 }
 
 export async function signUpServer(
@@ -79,13 +82,13 @@ export async function signUpServer(
       user_name: fullName,
       avatar_url: '',
       language: 'en',
-      theme: 'system',
+      theme: 'light',
     });
 
     if (profileError)
       return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: profileError.message };
 
-    const { error: settingsError } = await addProfilesSettings({
+    const { error: settingsError } = await insertSystemSettings({
       userId: authUserId,
       language,
       theme,

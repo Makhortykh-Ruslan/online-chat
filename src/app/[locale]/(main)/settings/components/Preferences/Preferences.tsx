@@ -1,8 +1,8 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Select, Toggle } from '@/src/core/components';
 import { DEFAULT_SELECTED_LANG, LANGUAGES_MOCK } from '@/src/core/constants';
@@ -18,20 +18,18 @@ export const Preferences = (profileData: ProfileDTO) => {
   const descriptions = useTranslations('descriptions');
   const placeholders = useTranslations('placeholders');
 
-  const locale = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
+  const router = useRouter();
+
+  const foundLang =
+    LANGUAGES_MOCK.find((el) => el.id === profileData.language) ||
+    DEFAULT_SELECTED_LANG;
 
   const { theme, setTheme } = useTheme();
   const [toggle, setToggle] = useState(profileData.theme === 'dark');
   const [language, setLanguage] = useState<TIdName<string, string> | null>(
-    LANGUAGES_MOCK.find((el) => el.id === profileData.language) ||
-      DEFAULT_SELECTED_LANG,
+    foundLang,
   );
-
-  useEffect(() => {
-    initData();
-  }, []);
 
   const handleToggleChange = async (isDark: boolean) => {
     setToggle(isDark);
@@ -57,31 +55,6 @@ export const Preferences = (profileData: ProfileDTO) => {
     }
 
     router.replace({ pathname }, { locale: value.id, scroll: false });
-  };
-
-  const initData = async () => {
-    let resolvedTheme = profileData.theme;
-
-    if (profileData.theme === 'system') {
-      resolvedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-
-      await updateProfilePreference({
-        language: profileData.language,
-        theme: resolvedTheme,
-      });
-    }
-
-    setTheme(resolvedTheme);
-    setToggle(resolvedTheme === 'dark');
-
-    if (profileData.language !== locale) {
-      router.replace(
-        { pathname },
-        { locale: profileData.language, scroll: false },
-      );
-    }
   };
 
   const styles = PreferencesStyles;

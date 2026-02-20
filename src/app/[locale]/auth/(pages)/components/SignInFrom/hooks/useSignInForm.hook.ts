@@ -3,14 +3,9 @@ import { useTranslations } from 'next-intl';
 import { startTransition, useActionState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { ErrorModel } from '@/src/core/models';
 import { signInServer } from '@/src/core/services';
 
 import { signInFormSchema, type TSignInFormSchema } from '../constants';
-
-const initialState: ErrorModel = {
-  error: '',
-};
 
 export const useSignInForm = () => {
   const labels = useTranslations('labels');
@@ -36,16 +31,18 @@ export const useSignInForm = () => {
     mode: 'onTouched',
   });
 
-  const [state, formAction, isPending] = useActionState(
-    signInServer,
-    initialState,
-  );
+  const [state, formAction, isPending] = useActionState(signInServer, {
+    success: false,
+    data: null,
+  });
 
   useEffect(() => {
-    if (state.error) {
-      alert(state.error);
+    if (!state.message) return;
+
+    if (!state.success) {
+      alert(state.message);
     }
-  }, [state.error]);
+  }, [state]);
 
   const onSubmit = (data: TSignInFormSchema) => {
     startTransition(() => {
@@ -61,7 +58,7 @@ export const useSignInForm = () => {
     register,
     translate,
     errors,
-    serverError: state.error,
+    serverError: state.message,
     handleSubmit: handleSubmit(onSubmit),
     isLoading: isPending || isSubmitting,
     isDisableSubmit: isPending || isSubmitting || !isValid,

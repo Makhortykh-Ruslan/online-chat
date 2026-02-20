@@ -16,24 +16,14 @@ export async function authProxy(request: NextRequest) {
   const isAuthenticated = !!user;
 
   const segments = pathname.split('/');
-  const currentLocaleFromPath = segments[1];
+  const currentLocaleFromPath = segments.at(1) as TLang;
 
-  const acceptLanguage = request.headers.get('accept-language') || '';
-  const browserLang = (acceptLanguage.split(',').at(0) || '') as TLang;
-
-  const locale = routing.locales.includes(browserLang)
-    ? browserLang
-    : routing.defaultLocale;
-
-  const isLocaleValid = routing.locales.includes(currentLocaleFromPath as any);
+  const isLocaleValid = routing.locales.includes(currentLocaleFromPath);
+  const locale = isLocaleValid ? currentLocaleFromPath : routing.defaultLocale;
 
   if (!isLocaleValid) {
-    const browserLocale =
-      routing.locales.find((l) => browserLang.includes(l)) ||
-      routing.defaultLocale;
-
     return NextResponse.redirect(
-      new URL(`/${browserLocale}${appRoutes.auth.signIn}`, request.url),
+      new URL(`/${routing.defaultLocale}${appRoutes.auth.signIn}`, request.url),
     );
   }
 

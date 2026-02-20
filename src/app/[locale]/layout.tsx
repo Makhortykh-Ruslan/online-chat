@@ -6,7 +6,9 @@ import { NextIntlClientProvider } from 'next-intl';
 import { ThemeProvider } from 'next-themes';
 import React from 'react';
 
+import { appConfig } from '@/src/app/[locale]/config';
 import type { LayoutProps } from '@/src/core/types';
+import { redirect } from '@/src/i18n/routing';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -20,29 +22,35 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children, params }: LayoutProps) {
-  const { locale } = await params;
+  const { locale: urlLocale } = await params;
+  const { theme, dbLocale, messages } = await appConfig(urlLocale);
 
-  let messages;
-
-  try {
-    messages = (await import(`../../../messages/${locale}.json`)).default;
-  } catch (error) {
-    messages = (await import(`../../../messages/en.json`)).default;
+  if (dbLocale !== urlLocale) {
+    redirect({
+      href: {
+        pathname: '/',
+      },
+      locale: dbLocale,
+    });
   }
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={dbLocale} suppressHydrationWarning>
       <body className={`${inter.variable} bg-main-bg font-sans antialiased`}>
         <NextIntlClientProvider
-          locale={locale}
-          key={locale}
+          locale={dbLocale}
+          key={dbLocale}
           messages={messages}
         >
           <ThemeProvider
+            key={theme}
             attribute="class"
-            defaultTheme="system"
-            enableSystem
-            storageKey="resetTheme"
+            defaultTheme={theme}
+            value={{
+              light: 'light',
+              dark: 'dark',
+            }}
+            enableSystem={false}
           >
             {children}
           </ThemeProvider>

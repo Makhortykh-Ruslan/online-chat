@@ -3,5 +3,5 @@ export const EBDTableName = {
   CONVERSATIONS: 'conversations',
   CONVERSATION_PARTICIPANTS: 'conversation_participants',
   MESSAGES: 'messages',
-  PROFILES_SETTINGS: 'profiles_settings',
+  SYSTEM_SETTINGS: 'system_settings',
 } as const;

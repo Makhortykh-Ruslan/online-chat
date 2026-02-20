@@ -7,15 +7,15 @@ import {
 } from '@/src/core/constants';
 import type { ProfileDTO } from '@/src/core/dto';
 import { EControlName } from '@/src/core/enums';
-import type { ProfilesSettingsModel } from '@/src/core/models';
+import type { SystemSettingsModel } from '@/src/core/models';
 import type { ResponseModel } from '@/src/core/models/response.model';
 import {
   getAuthData,
   getProfileByUserId,
-  getProfileSettingsById,
+  getSystemSettingByUserId,
   updateAuthUser,
   updateProfile,
-  updateProfileSettings,
+  updateSystemSettings,
 } from '@/src/infrastructure/supabase';
 
 export const updateProfileInfo = async (
@@ -31,76 +31,88 @@ export const updateProfileInfo = async (
     const error = authRes.error || profRes.error;
 
     if (error) {
-      return { success: false, message: error.message, data: null };
+      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: error.message };
     }
 
     return { success: true, message: 'Success', data: null };
-  } catch (error: unknown) {
+  } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    return { success: false, message, data: null };
+
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
   }
 };
 
-export const getProfile = async (): Promise<
+export const getProfileInfo = async (): Promise<
   ResponseModel<ProfileDTO | null>
 > => {
-  const authUser = await getAuthData();
+  try {
+    const authUser = await getAuthData();
 
-  if (!authUser) {
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Not authenticated' };
-  }
+    if (!authUser) {
+      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Not authenticated' };
+    }
 
-  const authUserId = authUser.id;
+    const authUserId = authUser.id;
 
-  const [profile, profileSettings] = await Promise.all([
-    getProfileByUserId(authUserId),
-    getProfileSettingsById(authUserId),
-  ]);
+    const [profile, profileSettings] = await Promise.all([
+      getProfileByUserId(authUserId),
+      getSystemSettingByUserId(authUserId),
+    ]);
 
-  const { data: dataProfile, error: errorProfile } = profile;
-  const { data: dataProfileSetting, error: errorProfileSetting } =
-    profileSettings;
+    const { data: dataProfile, error: errorProfile } = profile;
+    const { data: dataProfileSetting, error: errorProfileSetting } =
+      profileSettings;
 
-  if (errorProfile || errorProfileSetting) {
-    return {
-      ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message: 'Error profile details',
+    if (errorProfile || errorProfileSetting) {
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'Error profile details',
+      };
+    }
+
+    const model = {
+      ...dataProfile,
+      theme: dataProfileSetting?.theme,
+      language: dataProfileSetting?.language,
     };
+
+    const data = mapProfileToDTO(model);
+
+    return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
   }
-
-  const model = {
-    ...dataProfile,
-    theme: dataProfileSetting?.theme,
-    language: dataProfileSetting?.language,
-  };
-
-  const data = mapProfileToDTO(model);
-
-  return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
 };
 
 export const updateProfilePreference = async (
-  settings: ProfilesSettingsModel,
+  settings: SystemSettingsModel,
 ) => {
-  const authUser = await getAuthData();
+  try {
+    const authUser = await getAuthData();
 
-  if (!authUser) {
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Not authenticated' };
+    if (!authUser) {
+      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Not authenticated' };
+    }
+
+    const { data, error } = await updateSystemSettings({
+      ...settings,
+      userId: authUser.id,
+    });
+
+    if (error) {
+      console.error('Supabase update error:', error);
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'Error update profile settings details',
+      };
+    }
+
+    return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
   }
-
-  const authUserId = authUser.id;
-
-  const { data, error } = await updateProfileSettings({
-    ...settings,
-    userId: authUserId,
-  });
-
-  if (error) {
-    return {
-      ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message: 'Error update profile settings details',
-    };
-  }
-
-  return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
 };
