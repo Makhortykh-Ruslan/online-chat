@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import type { ProfileDTO } from '@/src/core/dto';
 import { EControlName } from '@/src/core/enums';
-import { updateProfileInfo } from '@/src/core/services';
+import { updateProfileInfoService } from '@/src/core/services';
 
 import { profileFormSchema, type TProfileFormSchema } from '../constants';
 
@@ -40,7 +40,7 @@ export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
     },
   });
 
-  const [state, formAction, isPending] = useActionState(updateProfileInfo, {
+  const [state, formAction, isPending] = useActionState(updateProfileInfoService, {
     success: false,
     data: null,
   });

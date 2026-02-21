@@ -9,19 +9,19 @@ import {
 } from '@/src/core/constants';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import { EControlName } from '@/src/core/enums';
-import type { ResponseModel } from '@/src/core/models/response.model';
+import type { ResponseEmptyModel, TTheme } from '@/src/core/types';
 import {
-  insertSystemSettings,
-  insertProfile,
+  insertProfileRepository,
+  insertSystemSettingsRepository,
   signIn,
   signOut,
   signUp,
 } from '@/src/infrastructure/supabase';
 
-export async function signInServer(
-  prevData: ResponseModel<null>,
+export async function signInService(
+  prevData: ResponseEmptyModel,
   formData: FormData,
-): Promise<ResponseModel<null>> {
+): Promise<ResponseEmptyModel> {
   let redirectPath: string | null = null;
 
   try {
@@ -35,8 +35,10 @@ export async function signInServer(
     }
 
     redirectPath = appRoutes.main.chat;
-  } catch (err) {
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Something went wrong' };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
   }
 
   if (redirectPath) {
@@ -47,10 +49,10 @@ export async function signInServer(
   return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, message: 'Success' };
 }
 
-export async function signUpServer(
-  prevData: ResponseModel<null>,
+export async function signUpService(
+  prevData: ResponseEmptyModel,
   formData: FormData,
-): Promise<ResponseModel<null>> {
+): Promise<ResponseEmptyModel> {
   let redirectPath: string | null = null;
 
   try {
@@ -58,7 +60,7 @@ export async function signUpServer(
     const password = formData.get(EControlName.PASSWORD) as string;
     const fullName = formData.get(EControlName.FULL_NAME) as string;
     const language = formData.get(EControlName.LANGUAGE) as string;
-    const theme = formData.get(EControlName.THEME) as string;
+    const theme = formData.get(EControlName.THEME) as TTheme;
 
     const {
       error: signUpError,
@@ -76,7 +78,7 @@ export async function signUpServer(
         message: 'User ID generation failed',
       };
 
-    const { error: profileError } = await insertProfile({
+    const { error: profileError } = await insertProfileRepository({
       id: authUserId,
       email,
       user_name: fullName,
@@ -85,11 +87,12 @@ export async function signUpServer(
       theme: 'light',
     });
 
-    if (profileError)
+    if (profileError) {
       return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: profileError.message };
+    }
 
-    const { error: settingsError } = await insertSystemSettings({
-      userId: authUserId,
+    const { error: settingsError } = await insertSystemSettingsRepository({
+      user_id: authUserId,
       language,
       theme,
     });
@@ -101,9 +104,10 @@ export async function signUpServer(
       };
 
     redirectPath = appRoutes.main.chat;
-  } catch (err) {
-    console.error(err);
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Something went wrong' };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
   }
 
   if (redirectPath) {
@@ -114,7 +118,7 @@ export async function signUpServer(
   return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, message: 'Success' };
 }
 
-export async function signOutServer() {
+export async function signOutService() {
   await signOut();
 
   const pathRedirect = appRoutes.auth.signIn;

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useActionState } from 'react';
 
 import { Button, Loader } from '@/src/core/components';
-import { signOutServer } from '@/src/core/services';
+import { signOutService } from '@/src/core/services';
 
 import { SessionStyles } from './Session.styles';
 
@@ -13,7 +13,7 @@ export const Session = () => {
   const button = useTranslations('button');
   const descriptions = useTranslations('descriptions');
 
-  const [state, formAction, isPending] = useActionState(signOutServer, null);
+  const [state, formAction, isPending] = useActionState(signOutService, null);
 
   const styles = SessionStyles;
 

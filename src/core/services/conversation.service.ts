@@ -9,7 +9,7 @@ import {
   getConversationById,
   getConversationsByIds,
   getLastConversationMessage,
-  getProfilesByUsersId,
+  getProfilesByUsersIdRepository,
 } from '@/src/infrastructure/supabase';
 import {
   findExistingDirectConversationId,
@@ -70,7 +70,7 @@ export async function getSidebarConversations(): Promise<ConversationDTO[]> {
   const userIds = participantsInMyConversations.map((p) => p.user_id);
 
   const [profiles, messages, conversations] = await Promise.all([
-    getProfilesByUsersId(userIds),
+    getProfilesByUsersIdRepository(userIds),
     getLastConversationMessage(conversationIds),
     getConversationsByIds(conversationIds),
   ]);
@@ -138,7 +138,7 @@ export async function getConversationDetails(
 
   const userIds = participants.map((p) => p.user_id);
 
-  const profiles = await getProfilesByUsersId(userIds);
+  const profiles = await getProfilesByUsersIdRepository(userIds);
 
   const profileByUserId = new Map<string, ProfileModel>();
   profiles.forEach((profile) => {

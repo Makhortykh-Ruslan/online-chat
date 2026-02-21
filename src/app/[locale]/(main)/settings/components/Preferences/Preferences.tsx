@@ -1,13 +1,13 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
 import { useState } from 'react';
 
 import { Select, Toggle } from '@/src/core/components';
 import { DEFAULT_SELECTED_LANG, LANGUAGES_MOCK } from '@/src/core/constants';
+import { useThemeContext } from '@/src/core/context';
 import type { ProfileDTO } from '@/src/core/dto';
-import { updateProfilePreference } from '@/src/core/services';
+import { updateSystemService } from '@/src/core/services';
 import type { TIdName } from '@/src/core/types';
 import { usePathname, useRouter } from '@/src/i18n/routing';
 
@@ -25,8 +25,8 @@ export const Preferences = (profileData: ProfileDTO) => {
     LANGUAGES_MOCK.find((el) => el.id === profileData.language) ||
     DEFAULT_SELECTED_LANG;
 
-  const { theme, setTheme } = useTheme();
-  const [toggle, setToggle] = useState(profileData.theme === 'dark');
+  const { changeTheme, theme } = useThemeContext();
+  const [toggle, setToggle] = useState(theme === 'dark');
   const [language, setLanguage] = useState<TIdName<string, string> | null>(
     foundLang,
   );
@@ -34,12 +34,13 @@ export const Preferences = (profileData: ProfileDTO) => {
   const handleToggleChange = async (isDark: boolean) => {
     setToggle(isDark);
     const newTheme = isDark ? 'dark' : 'light';
-    setTheme(newTheme);
+    changeTheme(newTheme);
 
     if (language && newTheme) {
-      await updateProfilePreference({
+      await updateSystemService({
         language: language.id,
         theme: newTheme,
+        user_id: profileData.id,
       });
     }
   };
@@ -48,9 +49,10 @@ export const Preferences = (profileData: ProfileDTO) => {
     setLanguage(value);
 
     if (value && theme) {
-      await updateProfilePreference({
+      await updateSystemService({
         language: value.id,
         theme,
+        user_id: profileData.id,
       });
     }
 

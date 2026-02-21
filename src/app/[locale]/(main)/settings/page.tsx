@@ -1,4 +1,4 @@
-import { getProfileInfo } from '@/src/core/services';
+import { getProfileInfoService } from '@/src/core/services';
 
 import {
   ChangePassword,
@@ -10,7 +10,7 @@ import {
 import { SettingsPageStyles } from './page.styles';
 
 export default async function SettingsPage() {
-  const profileData = await getProfileInfo();
+  const profileData = await getProfileInfoService();
 
   if (!profileData.success || !profileData.data) {
     throw new Error(profileData.message || 'Failed to load profile');

@@ -1,5 +1,7 @@
+import type { TTheme } from '@/src/core/types';
+
 export type SystemSettingsModel = {
   language: string;
-  theme: string;
-  userId?: string;
+  theme: TTheme;
+  user_id: string;
 };

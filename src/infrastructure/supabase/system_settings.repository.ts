@@ -1,26 +1,27 @@
 'use server';
 
-import type { PostgrestSingleResponse } from '@supabase/postgrest-js';
-
 import { EBDTableName } from '@/src/core/enums';
 import type { SystemSettingsModel } from '@/src/core/models';
+import type { PostgrestSystemResponse } from '@/src/core/types';
 import { createClient } from '@/src/infrastructure/supabase/server.supabase';
 
-export async function insertSystemSettings(model: SystemSettingsModel) {
+export async function insertSystemSettingsRepository(
+  model: SystemSettingsModel,
+) {
   const supabase = await createClient();
 
-  const { language, theme, userId } = model;
+  const { language, theme, user_id } = model;
 
   return supabase.from(EBDTableName.SYSTEM_SETTINGS).insert({
     language,
     theme,
-    user_id: userId,
+    user_id,
   });
 }
 
-export async function getSystemSettingByUserId(
+export async function getSystemSettingByUserIdRepository(
   userId: string,
-): Promise<PostgrestSingleResponse<SystemSettingsModel>> {
+): Promise<PostgrestSystemResponse> {
   const supabase = await createClient();
 
   return supabase
@@ -30,15 +31,17 @@ export async function getSystemSettingByUserId(
     .single();
 }
 
-export async function updateSystemSettings(data: SystemSettingsModel) {
+export async function updateSystemSettingsRepository(
+  data: SystemSettingsModel,
+) {
   const supabase = await createClient();
 
-  const { userId, ...updatePayload } = data;
+  const { user_id, ...updatePayload } = data;
 
   return supabase
     .from(EBDTableName.SYSTEM_SETTINGS)
     .update(updatePayload)
-    .eq('user_id', userId)
+    .eq('user_id', user_id)
     .select()
     .single();
 }

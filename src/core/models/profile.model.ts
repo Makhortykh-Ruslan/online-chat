@@ -1,3 +1,5 @@
+import type { TTheme } from '@/src/core/types';
+
 export type ProfileModel = {
   email: string;
   id: string;
@@ -5,5 +7,5 @@ export type ProfileModel = {
   avatar_url: string;
   created_at?: string;
   language: string;
-  theme: string;
+  theme: TTheme;
 };

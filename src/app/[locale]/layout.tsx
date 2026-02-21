@@ -3,11 +3,11 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { ThemeProvider } from 'next-themes';
 import React from 'react';
 
 import { appConfig } from '@/src/app/[locale]/config';
-import type { LayoutProps } from '@/src/core/types';
+import { ThemeProvider } from '@/src/core/context';
+import type { LayoutProps, TTheme } from '@/src/core/types';
 import { redirect } from '@/src/i18n/routing';
 
 const inter = Inter({
@@ -35,23 +35,14 @@ export default async function RootLayout({ children, params }: LayoutProps) {
   }
 
   return (
-    <html lang={dbLocale} suppressHydrationWarning>
+    <html lang={dbLocale} suppressHydrationWarning className={theme}>
       <body className={`${inter.variable} bg-main-bg font-sans antialiased`}>
         <NextIntlClientProvider
           locale={dbLocale}
           key={dbLocale}
           messages={messages}
         >
-          <ThemeProvider
-            key={theme}
-            attribute="class"
-            defaultTheme={theme}
-            value={{
-              light: 'light',
-              dark: 'dark',
-            }}
-            enableSystem={false}
-          >
+          <ThemeProvider key={theme} initialTheme={theme as TTheme}>
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>

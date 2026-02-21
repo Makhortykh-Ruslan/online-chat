@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 import { startTransition, useActionState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { signInServer } from '@/src/core/services';
+import { signInService } from '@/src/core/services';
 
 import { signInFormSchema, type TSignInFormSchema } from '../constants';
 
@@ -31,7 +31,7 @@ export const useSignInForm = () => {
     mode: 'onTouched',
   });
 
-  const [state, formAction, isPending] = useActionState(signInServer, {
+  const [state, formAction, isPending] = useActionState(signInService, {
     success: false,
     data: null,
   });

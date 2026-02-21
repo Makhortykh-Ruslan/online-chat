@@ -1,44 +1,28 @@
 'use server';
 
-import type { PostgrestSingleResponse } from '@supabase/postgrest-js';
-
 import { EBDTableName, EControlName } from '@/src/core/enums';
 import type { ProfileModel } from '@/src/core/models';
-import { getAuthData } from '@/src/infrastructure/supabase/auth.repository';
+import type { PostgrestProfileResponse } from '@/src/core/types';
 import { createClient } from '@/src/infrastructure/supabase/server.supabase';
 
-export async function insertProfile(data: ProfileModel) {
+export async function insertProfileRepository(data: ProfileModel) {
   const supabase = await createClient();
   return supabase.from(EBDTableName.PROFILES).insert(data);
 }
 
-export async function getProfileByUserId(
-  id: string,
-): Promise<PostgrestSingleResponse<ProfileModel>> {
+export async function getProfileByUserIdRepository(
+  userId: string,
+): Promise<PostgrestProfileResponse> {
   const supabase = await createClient();
 
-  return supabase.from(EBDTableName.PROFILES).select().eq('id', id).single();
-}
-
-export async function getProfiles(): Promise<ProfileModel | null> {
-  const authUser = await getAuthData();
-
-  if (!authUser) return null;
-
-  const supabase = await createClient();
-
-  const { data: profile } = await supabase
+  return supabase
     .from(EBDTableName.PROFILES)
-    .select('*')
-    .eq('id', authUser.id)
+    .select()
+    .eq('id', userId)
     .single();
-
-  if (!profile) return null;
-
-  return profile;
 }
 
-export async function getProfilesByUsersId(
+export async function getProfilesByUsersIdRepository(
   userIds: string[],
 ): Promise<ProfileModel[]> {
   const supabase = await createClient();
@@ -55,7 +39,9 @@ export async function getProfilesByUsersId(
   return data ?? [];
 }
 
-export async function updateProfile(formData: FormData) {
+export async function updateProfileRepository(
+  formData: FormData,
+): Promise<PostgrestProfileResponse> {
   const supabase = await createClient();
 
   const fullName = formData.get(EControlName.FULL_NAME) as string;

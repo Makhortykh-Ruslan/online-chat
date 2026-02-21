@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 import { startTransition, useActionState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { signUpServer } from '@/src/core/services';
+import { signUpService } from '@/src/core/services';
 
 import { signUpFormSchema, type TSignIUpFormSchema } from '../constants';
 
@@ -36,7 +36,7 @@ export const useSignUpForm = () => {
     mode: 'onTouched',
   });
 
-  const [state, formAction, isPending] = useActionState(signUpServer, {
+  const [state, formAction, isPending] = useActionState(signUpService, {
     success: false,
     data: null,
   });
