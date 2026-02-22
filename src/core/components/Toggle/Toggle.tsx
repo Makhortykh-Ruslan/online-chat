@@ -12,6 +12,7 @@ export const Toggle = ({ value = false, onChange }: ToggleProps) => {
 
   return (
     <div
+      data-component="Toggle"
       className={styles.component}
       onClick={() => onChange(!value)}
       role="switch"

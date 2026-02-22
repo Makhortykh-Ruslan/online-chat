@@ -3,11 +3,12 @@ import type { TIconProps } from './type';
 export const Icon = ({ name, className = '', onClick }: TIconProps) => {
   return (
     <svg
+      data-component="Icon"
       preserveAspectRatio="xMidYMid meet"
       fill="currentColor"
       stroke="currentColor"
       strokeWidth="0"
-      className={`inline-block shrink-0 ${className}`}
+      className={`inline-block shrink-0 ${className} lu-icon`}
       aria-hidden="true"
       onClick={onClick}
     >

@@ -38,6 +38,7 @@ export const Content = ({ children }: { children: ReactNode }) => {
 
   return createPortal(
     <div
+      data-component="SelectContent"
       ref={contentRef}
       className={styles.component}
       style={{

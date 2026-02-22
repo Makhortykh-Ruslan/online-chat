@@ -7,7 +7,7 @@ export const Logo = () => {
   const styles = getLogoStyles();
 
   return (
-    <div className={styles.component}>
+    <div data-component="Logo" className={styles.component}>
       <Image src={logo} width={40} height={40} alt="logo" />
     </div>
   );

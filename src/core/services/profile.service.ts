@@ -23,10 +23,14 @@ export const updateProfileInfoService = async (
   formData: FormData,
 ): Promise<ResponseEmptyModel> => {
   try {
-    const email = formData.get(EControlName.EMAIL) as string;
+    const model = {
+      user_name: formData.get(EControlName.FULL_NAME) as string,
+      email: formData.get(EControlName.EMAIL) as string,
+      id: formData.get(EControlName.ID) as string,
+    };
 
-    const authResponse = await updateAuthUser(email);
-    const profileResponse = await updateProfileRepository(formData);
+    const authResponse = await updateAuthUser(model.email);
+    const profileResponse = await updateProfileRepository(model);
 
     const error = authResponse.error || profileResponse.error;
 

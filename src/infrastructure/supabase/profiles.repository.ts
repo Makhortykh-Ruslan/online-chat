@@ -1,6 +1,6 @@
 'use server';
 
-import { EBDTableName, EControlName } from '@/src/core/enums';
+import { EBDTableName } from '@/src/core/enums';
 import type { ProfileModel } from '@/src/core/models';
 import type { PostgrestProfileResponse } from '@/src/core/types';
 import { createClient } from '@/src/infrastructure/supabase/server.supabase';
@@ -40,21 +40,13 @@ export async function getProfilesByUsersIdRepository(
 }
 
 export async function updateProfileRepository(
-  formData: FormData,
+  data: Partial<ProfileModel>,
 ): Promise<PostgrestProfileResponse> {
   const supabase = await createClient();
-
-  const fullName = formData.get(EControlName.FULL_NAME) as string;
-  const email = formData.get(EControlName.EMAIL) as string;
-  const id = formData.get(EControlName.ID) as string;
-
   return supabase
     .from(EBDTableName.PROFILES)
-    .update({
-      user_name: fullName,
-      email: email,
-    })
-    .eq('id', id)
+    .update(data)
+    .eq('id', data.id)
     .select()
     .single();
 }

@@ -10,13 +10,7 @@ export async function insertSystemSettingsRepository(
 ) {
   const supabase = await createClient();
 
-  const { language, theme, user_id } = model;
-
-  return supabase.from(EBDTableName.SYSTEM_SETTINGS).insert({
-    language,
-    theme,
-    user_id,
-  });
+  return supabase.from(EBDTableName.SYSTEM_SETTINGS).insert(model);
 }
 
 export async function getSystemSettingByUserIdRepository(

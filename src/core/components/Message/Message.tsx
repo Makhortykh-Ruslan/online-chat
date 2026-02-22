@@ -16,7 +16,7 @@ export const Message = ({ content, createdAt, isMine }: MessageProps) => {
   const time = formatMessageTime(createdAt, local as 'uk' | 'en');
 
   return (
-    <div className={styles.component}>
+    <div data-component="Message" className={styles.component}>
       <p className={styles.component_title}>{content}</p>
       <p className={styles.component_time}>{time}</p>
     </div>

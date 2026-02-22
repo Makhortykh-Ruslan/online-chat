@@ -20,7 +20,7 @@ export const SettingsHeader = () => {
   return (
     <div className={styles.component} onClick={handleBackTo}>
       <Icon name="arrow-left" className={styles.component_icon} />
-      <p>{titles('backToChat')}</p>
+      <p className={styles.component_title}>{titles('backToChat')}</p>
     </div>
   );
 };

@@ -54,7 +54,7 @@ export const Input = forwardRef<HTMLInputElement, TInputProps>(
       : styles.component_input_wrapper;
 
     return (
-      <div className={styles.component}>
+      <div data-component="Input" className={styles.component}>
         {label && (
           <label htmlFor={id} className={styles.label}>
             {label}

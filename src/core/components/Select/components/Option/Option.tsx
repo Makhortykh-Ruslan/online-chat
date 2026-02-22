@@ -20,7 +20,11 @@ export const Option = <V, I>({
   const styles = OptionStyles(isSelected);
 
   return (
-    <div onClick={() => onSelect(value)} className={styles.component}>
+    <div
+      data-component="SelectOption"
+      onClick={() => onSelect(value)}
+      className={styles.component}
+    >
       {children}
     </div>
   );

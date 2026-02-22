@@ -21,6 +21,6 @@ export const getInputStyles = (isError: boolean, className: string) => ({
       !isError,
     'text-red-600': isError,
   }),
-  label: 'text-14 font-medium transition-colors text-label',
+  label: 'text-14 text-main-title font-medium transition-colors text-label',
   error: 'text-12 mt-1 font-medium text-red-600',
 });

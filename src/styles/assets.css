@@ -29,6 +29,10 @@
     line-height: 16px;
 }
 
+@utility lu-icon {
+    color: var(--color-title);
+}
+
 @utility truncate {
     width: 100%;
     min-width: 0;

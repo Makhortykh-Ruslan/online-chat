@@ -18,6 +18,7 @@ export const Button = ({
 
   return (
     <button
+      data-component="Button"
       role="button"
       type={type}
       className={classNameComponent}

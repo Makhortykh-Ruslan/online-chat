@@ -9,5 +9,5 @@ type props = {
 export const Loader = ({ className, size = 'small' }: props) => {
   const style = geLoaderStyle(className, size);
 
-  return <div className={style.component}></div>;
+  return <div data-component="Loader" className={style.component}></div>;
 };

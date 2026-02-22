@@ -16,7 +16,7 @@ export const Tabs = <T extends string>({
   const styles = tabsStyles();
 
   return (
-    <div className={styles.component}>
+    <div data-component="tabs" className={styles.component}>
       {tabs.map((el) => (
         <button
           key={el.id}

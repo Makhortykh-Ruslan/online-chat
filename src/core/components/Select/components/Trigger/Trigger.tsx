@@ -29,7 +29,11 @@ export const Trigger = <V extends string, I extends string>({
   const styles = TriggerStyles(isOpen, selectedValue);
 
   return (
-    <button onClick={handleClick} className={styles.component}>
+    <button
+      data-component="SelectTrigger"
+      onClick={handleClick}
+      className={styles.component}
+    >
       {selectedValue?.value || placeholder}
 
       <Icon name="arrow-down" className={styles.component_arrow} />

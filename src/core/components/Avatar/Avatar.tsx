@@ -19,7 +19,7 @@ export const Avatar = ({ src, alt, size = 'md' }: AvatarProps) => {
   const styles = AvatarStyles(sizes[size]);
 
   return (
-    <div className={styles.component}>
+    <div data-component="Avatar" className={styles.component}>
       {src ? (
         <Image src={src} alt={alt} fill className={styles.component_img} />
       ) : (

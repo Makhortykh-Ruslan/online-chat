@@ -30,6 +30,7 @@ export const Select = <V, I>({
 
   return (
     <SelectContext.Provider
+      data-component="Select"
       value={{
         selectedValue: value,
         onSelect,
