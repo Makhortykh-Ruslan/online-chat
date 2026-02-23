@@ -1,3 +1,4 @@
+export * from './change-password.model';
 export * from './error.model';
 export * from './message.model';
 export * from './participant.model';

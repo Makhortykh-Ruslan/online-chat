@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useLocale } from 'next-intl';
-import { useTheme } from 'next-themes';
 import { startTransition, useActionState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -10,7 +9,6 @@ import { signUpService } from '@/src/core/services';
 import { signUpFormSchema, type TSignIUpFormSchema } from '../constants';
 
 export const useSignUpForm = () => {
-  const { resolvedTheme } = useTheme();
   const locale = useLocale();
 
   const labels = useTranslations('labels');
@@ -57,7 +55,6 @@ export const useSignUpForm = () => {
       formData.append('email', data.email);
       formData.append('password', data.password);
       formData.append('language', locale);
-      formData.append('theme', resolvedTheme || 'system');
 
       formAction(formData);
     });

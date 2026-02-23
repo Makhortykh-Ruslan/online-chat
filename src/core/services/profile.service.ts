@@ -6,6 +6,7 @@ import {
   SUCCESS_DEFAULT_RESPONSE_MODEL,
 } from '@/src/core/constants';
 import { EControlName } from '@/src/core/enums';
+import type { ChangePasswordModel } from '@/src/core/models';
 import type {
   ResponseEmptyModel,
   ResponseProfileDTOModel,
@@ -14,6 +15,7 @@ import {
   getAuthData,
   getProfileByUserIdRepository,
   getSystemSettingByUserIdRepository,
+  signIn,
   updateAuthUser,
   updateProfileRepository,
 } from '@/src/infrastructure/supabase';
@@ -92,3 +94,45 @@ export const getProfileInfoService =
       return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
     }
   };
+
+export const updatePasswordService = async (
+  prevData: ResponseEmptyModel,
+  model: ChangePasswordModel,
+): Promise<ResponseEmptyModel> => {
+  try {
+    const authUser = await getAuthData();
+
+    if (!authUser?.email) {
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'Not authenticated',
+      };
+    }
+
+    const { error: signInError } = await signIn(
+      authUser.email,
+      model.oldPassword,
+    );
+
+    if (signInError) {
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'Old password in not valid',
+      };
+    }
+
+    const { data, error: updateError } = await updateAuthUser(
+      authUser.email,
+      model.newPassword,
+    );
+
+    if (updateError) {
+      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: updateError.message };
+    }
+
+    return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Unknown error';
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+  }
+};

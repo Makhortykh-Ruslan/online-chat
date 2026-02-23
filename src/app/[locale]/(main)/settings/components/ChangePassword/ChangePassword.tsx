@@ -6,13 +6,19 @@ import { ChangePasswordStyles } from './ChangePassword.styles';
 import { useChangePasswordForm } from './hooks';
 
 export const ChangePassword = () => {
-  const { register, errors, isLoading, isDisableSubmit, translate } =
-    useChangePasswordForm();
+  const {
+    register,
+    handleSubmit,
+    errors,
+    isLoading,
+    isDisableSubmit,
+    translate,
+  } = useChangePasswordForm();
 
   const styles = ChangePasswordStyles;
 
   return (
-    <form className={styles.component}>
+    <form onSubmit={handleSubmit} className={styles.component}>
       <h2 className={styles.component_title}>
         {translate.titles('changePassword')}
       </h2>
@@ -23,10 +29,10 @@ export const ChangePassword = () => {
         leftIcon="lock"
         label={translate.labels('password')}
         placeholder={translate.placeholders('password')}
-        {...register('password')}
+        {...register('oldPassword')}
         error={
-          errors.password?.message
-            ? translate.validations(errors.password?.message)
+          errors.oldPassword?.message
+            ? translate.validations(errors.oldPassword?.message)
             : ''
         }
       />

@@ -1,13 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import { startTransition, useActionState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { updatePasswordService } from '@/src/core/services';
 
 import {
   changePasswordFormSchema,
   type TChangePasswordFormSchema,
 } from '../constants';
-import { useActionState } from 'react';
-import { updateProfileInfoService } from '@/src/core/services';
 
 export const useChangePasswordForm = () => {
   const titles = useTranslations('titles');
@@ -33,22 +34,28 @@ export const useChangePasswordForm = () => {
     mode: 'onChange',
   });
 
-  const [state, formAction, isPending] = useActionState(
-    updateProfileInfoService,
-    {
-      success: false,
-      data: null,
-    },
-  );
+  const [state, formAction, isPending] = useActionState(updatePasswordService, {
+    success: false,
+    data: null,
+  });
 
-  const onSubmit = (data: TChangePasswordFormSchema) => {
-    console.log('data', data);
+  const onSubmit = ({
+    oldPassword,
+    newPassword,
+  }: TChangePasswordFormSchema) => {
+    startTransition(() =>
+      formAction({
+        newPassword,
+        oldPassword,
+      }),
+    );
   };
 
   return {
     register,
     translate,
     errors,
+    serverError: state.message,
     handleSubmit: handleSubmit(onSubmit),
     isLoading: isPending || isSubmitting,
     isDisableSubmit: isPending || isSubmitting || !isValid || !isDirty,

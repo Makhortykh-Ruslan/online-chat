@@ -4,15 +4,15 @@ import { passwordRules } from '@/src/core/validations';
 
 export const changePasswordFormSchema = z
   .object({
-    password: passwordRules,
+    oldPassword: passwordRules,
     newPassword: passwordRules,
     confirmNewPassword: passwordRules,
   })
-  .refine((data) => data.password !== data.newPassword, {
+  .refine((data) => data.oldPassword !== data.newPassword, {
     message: 'newPasswordMustBeDifferent',
     path: ['newPassword'],
   })
-  .refine((data) => data.password !== data.confirmNewPassword, {
+  .refine((data) => data.oldPassword !== data.confirmNewPassword, {
     message: 'newPasswordMustBeDifferent',
     path: ['confirmNewPassword'],
   })
