@@ -15,10 +15,13 @@ export const updateSystemService = async (
     const authUser = await getAuthData();
 
     if (!authUser) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'Not authenticated' };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'Not authenticated',
+      };
     }
 
-    const { data, error } = await updateSystemSettingsRepository({
+    const { data: updateData, error } = await updateSystemSettingsRepository({
       ...settings,
       user_id: authUser.id,
     });
@@ -31,10 +34,16 @@ export const updateSystemService = async (
       };
     }
 
-    return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
+    return {
+      ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+      data: updateData,
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
 
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message,
+    };
   }
 };

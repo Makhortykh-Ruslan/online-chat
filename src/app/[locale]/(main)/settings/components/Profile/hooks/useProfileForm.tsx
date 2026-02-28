@@ -1,8 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { startTransition, useActionState } from 'react';
+import { startTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useActionInterceptor } from '@/src/core/hooks';
 import type { ProfileDTO } from '@/src/core/dto';
 import { EControlName } from '@/src/core/enums';
 import { updateProfileInfoService } from '@/src/core/services';
@@ -40,12 +41,8 @@ export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
     },
   });
 
-  const [state, formAction, isPending] = useActionState(
+  const { state, execute, isPending } = useActionInterceptor(
     updateProfileInfoService,
-    {
-      success: false,
-      data: null,
-    },
   );
 
   const onSubmit = (data: TProfileFormSchema) => {
@@ -56,7 +53,7 @@ export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
       formData.append(EControlName.EMAIL, data.email);
       formData.append(EControlName.ID, data.id);
 
-      formAction(formData);
+      execute(formData);
     });
   };
 

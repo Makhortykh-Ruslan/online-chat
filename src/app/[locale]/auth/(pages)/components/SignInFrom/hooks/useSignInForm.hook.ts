@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { startTransition, useActionState, useEffect } from 'react';
+import { startTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { ERROR_DEFAULT_RESPONSE_MODEL } from '@/src/core/constants';
+import { useActionInterceptor } from '@/src/core/hooks';
 import { signInService } from '@/src/core/services';
 
 import { signInFormSchema, type TSignInFormSchema } from '../constants';
@@ -32,20 +32,10 @@ export const useSignInForm = () => {
     mode: 'onTouched',
   });
 
-  const [state, formAction, isPending] = useActionState(signInService, {
-    ...ERROR_DEFAULT_RESPONSE_MODEL,
-  });
-
-  useEffect(() => {
-    if (!state.message) return;
-
-    if (!state.success) {
-      alert(state.message);
-    }
-  }, [state]);
+  const { state, execute, isPending } = useActionInterceptor(signInService);
 
   const onSubmit = (data: TSignInFormSchema) => {
-    startTransition(() => formAction(data));
+    startTransition(() => execute(data));
   };
 
   return {

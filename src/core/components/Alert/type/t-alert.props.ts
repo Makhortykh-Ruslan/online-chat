@@ -2,8 +2,8 @@ import type { TAlertNamespace } from './t-alert-namespace';
 import type { TAlertVariant } from './t-alert-variant';
 
 export type TAlertProps = {
-  namespace: TAlertNamespace;
-  messageKey: string;
+  title: string;
+  description?: string;
   variant: TAlertVariant;
   onDismiss?: () => void;
   autoHide?: boolean;

@@ -30,14 +30,20 @@ export async function signInService(
     const { error } = await signIn(email, password);
 
     if (error) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: error.message };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'authError',
+      };
     }
 
     redirectPath = appRoutes.main.chat;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
 
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message,
+    };
   }
 
   if (redirectPath) {
@@ -45,7 +51,10 @@ export async function signInService(
     redirect(redirectPath);
   }
 
-  return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, message: 'Success' };
+  return {
+    ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+    message: '',
+  };
 }
 
 export async function signUpService(
@@ -61,7 +70,10 @@ export async function signUpService(
     } = await signUp(model.email, model.password);
 
     if (signUpError) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: signUpError.message };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'authError',
+      };
     }
 
     const authUserId = user?.id;
@@ -69,7 +81,7 @@ export async function signUpService(
     if (!authUserId) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'User ID generation failed',
+        message: 'authError',
       };
     }
 
@@ -83,7 +95,10 @@ export async function signUpService(
     });
 
     if (profileError) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: profileError.message };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'authError',
+      };
     }
 
     const { error: settingsError } = await insertSystemSettingsRepository({
@@ -92,17 +107,21 @@ export async function signUpService(
       theme: 'light',
     });
 
-    if (settingsError)
+    if (settingsError) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: settingsError.message,
+        message: 'authError',
       };
+    }
 
     redirectPath = appRoutes.main.chat;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
 
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message,
+    };
   }
 
   if (redirectPath) {
@@ -110,7 +129,10 @@ export async function signUpService(
     redirect(redirectPath);
   }
 
-  return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, message: 'Success' };
+  return {
+    ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+    message: '',
+  };
 }
 
 export async function signOutService() {

@@ -1,10 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import React, { type ChangeEvent, useActionState, useState } from 'react';
+import React, { type ChangeEvent, startTransition, useState } from 'react';
 
 import { Button, Icon, Input } from '@/src/core/components';
-import type { ErrorModel } from '@/src/core/models';
+import { useActionInterceptor } from '@/src/core/hooks';
 import { sendMessageServer } from '@/src/core/services';
 import type { TIcon } from '@/src/core/types';
 
@@ -14,13 +14,9 @@ type InputMessageProps = {
   conversationId: string;
 };
 
-const initialState: ErrorModel = {
-  error: '',
-};
-
 export const ConversationFooter = ({ conversationId }: InputMessageProps) => {
   const [messageType, setMessageType] = useState<TIcon>('audio');
-  const [state, formAction] = useActionState(sendMessageServer, initialState);
+  const { execute } = useActionInterceptor(sendMessageServer);
 
   const placeholders = useTranslations('placeholders');
   const styles = ConversationFooterStyles;
@@ -29,8 +25,12 @@ export const ConversationFooter = ({ conversationId }: InputMessageProps) => {
     setMessageType(event.target.value ? 'message' : 'audio');
   };
 
+  const handleAction = (formData: FormData) => {
+    startTransition(() => execute(formData));
+  };
+
   return (
-    <form action={formAction} className={styles.component}>
+    <form action={handleAction} className={styles.component}>
       <input type="hidden" name="conversation_id" value={conversationId} />
 
       <Icon name="attach" className={styles.component_attach} />

@@ -1,4 +1,5 @@
 import type { ConversationDTO } from '@/src/core/dto/conversation.dto';
+import type { MessageModel } from '@/src/core/models/message.model';
 
 export const MOCK_CONVERSATIONS: ConversationDTO[] = [
   {
@@ -8,8 +9,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: null,
     lastMessage: {
       content: 'Олексій: Я замерджив ПР з табами 🚀',
-      createdAt: '2026-02-08T09:45:00Z',
-    } as any,
+      created_at: '2026-02-08T09:45:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '2',
@@ -18,8 +19,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=group1',
     lastMessage: {
       content: 'Марина: Хто подивиться нові іконки?',
-      createdAt: '2026-02-08T08:20:00Z',
-    } as any,
+      created_at: '2026-02-08T08:20:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '3',
@@ -28,8 +29,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: null,
     lastMessage: {
       content: 'Сергій: Вийшов Next.js 16.0, хто вже пробував?',
-      createdAt: '2026-02-07T15:40:00Z',
-    } as any,
+      created_at: '2026-02-07T15:40:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '4',
@@ -38,8 +39,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=group3',
     lastMessage: {
       content: 'BTC to the moon! 🚀🚀🚀',
-      createdAt: '2026-02-05T23:50:00Z',
-    } as any,
+      created_at: '2026-02-05T23:50:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '5',
@@ -48,8 +49,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: null,
     lastMessage: {
       content: 'Мама: Чекаємо тебе на вечерю',
-      createdAt: '2026-02-05T12:00:00Z',
-    } as any,
+      created_at: '2026-02-05T12:00:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '6',
@@ -58,8 +59,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=group4',
     lastMessage: {
       content: 'Надіслано план на наступний тиждень',
-      createdAt: '2026-02-04T19:10:00Z',
-    } as any,
+      created_at: '2026-02-04T19:10:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '7',
@@ -68,8 +69,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: null,
     lastMessage: {
       content: 'Дмитро: Я замовлю піцу на всіх',
-      createdAt: '2026-02-03T14:00:00Z',
-    } as any,
+      created_at: '2026-02-03T14:00:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '8',
@@ -78,10 +79,9 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=group5',
     lastMessage: {
       content: 'Next meeting is on Tuesday at 7 PM',
-      createdAt: '2026-02-01T10:00:00Z',
-    } as any,
+      created_at: '2026-02-01T10:00:00Z',
+    } as MessageModel,
   },
-  // --- DIRECT CHATS ---
   {
     conversationId: '9',
     title: 'Олександр Петренко',
@@ -89,8 +89,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=1',
     lastMessage: {
       content: 'Привіт! Як справи? Домовилися?',
-      createdAt: '2026-02-08T10:00:00Z',
-    } as any,
+      created_at: '2026-02-08T10:00:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '10',
@@ -99,8 +99,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=3',
     lastMessage: {
       content: 'Дякую за допомогу!',
-      createdAt: '2026-02-08T09:30:00Z',
-    } as any,
+      created_at: '2026-02-08T09:30:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '11',
@@ -109,8 +109,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=5',
     lastMessage: {
       content: 'Ендпоінт для пагінації готовий',
-      createdAt: '2026-02-07T21:15:00Z',
-    } as any,
+      created_at: '2026-02-07T21:15:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '12',
@@ -119,8 +119,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=6',
     lastMessage: {
       content: 'Чи зручно завтра зідзвонитися?',
-      createdAt: '2026-02-07T18:00:00Z',
-    } as any,
+      created_at: '2026-02-07T18:00:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '13',
@@ -129,8 +129,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=9',
     lastMessage: {
       content: 'З днем народження! 🎉',
-      createdAt: '2026-02-06T10:00:00Z',
-    } as any,
+      created_at: '2026-02-06T10:00:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '14',
@@ -139,8 +139,8 @@ export const MOCK_CONVERSATIONS: ConversationDTO[] = [
     avatarUrl: 'https://i.pravatar.cc/150?u=12',
     lastMessage: {
       content: 'Я надіслав договір на пошту',
-      createdAt: '2026-02-05T16:20:00Z',
-    } as any,
+      created_at: '2026-02-05T16:20:00Z',
+    } as MessageModel,
   },
   {
     conversationId: '15',

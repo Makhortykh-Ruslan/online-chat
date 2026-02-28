@@ -16,7 +16,7 @@ const variantMessage = {
 
 export const getAlertStyles = (variant: TAlertVariant, isVisible?: boolean) => ({
   wrapper: clsx(
-    'fixed z-50 flex w-full max-w-[min(400px,calc(100vw-32px))]',
+    'fixed z-50 flex w-fit max-w-[min(400px,calc(100vw-32px))]',
     'bottom-4 right-4',
     'transition-all duration-200 ease-out',
     isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4',

@@ -6,7 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import React from 'react';
 
 import { appConfig } from '@/src/app/[locale]/config';
-import { ThemeProvider } from '@/src/core/context';
+import { AlertProvider, ThemeProvider } from '@/src/core/context';
 import type { LayoutProps, TTheme } from '@/src/core/types';
 import { redirect } from '@/src/i18n/routing';
 
@@ -43,7 +43,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
           messages={messages}
         >
           <ThemeProvider key={theme} initialTheme={theme as TTheme}>
-            {children}
+            <AlertProvider>{children}</AlertProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

@@ -21,7 +21,7 @@ import {
 } from '@/src/infrastructure/supabase';
 
 export const updateProfileInfoService = async (
-  prevData: ResponseEmptyModel,
+  _prevData: ResponseEmptyModel,
   formData: FormData,
 ): Promise<ResponseEmptyModel> => {
   try {
@@ -37,14 +37,23 @@ export const updateProfileInfoService = async (
     const error = authResponse.error || profileResponse.error;
 
     if (error) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: error.message };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'profileSavedError',
+      };
     }
 
-    return { success: true, message: 'Success', data: null };
+    return {
+      ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+      message: 'profileSaved',
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
 
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message,
+    };
   }
 };
 
@@ -87,16 +96,22 @@ export const getProfileInfoService =
 
       const data = mapProfileToDTO(model);
 
-      return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
+      return {
+        ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+        data,
+      };
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error';
 
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message,
+      };
     }
   };
 
 export const updatePasswordService = async (
-  prevData: ResponseEmptyModel,
+  _prevData: ResponseEmptyModel,
   model: ChangePasswordModel,
 ): Promise<ResponseEmptyModel> => {
   try {
@@ -121,18 +136,28 @@ export const updatePasswordService = async (
       };
     }
 
-    const { data, error: updateError } = await updateAuthUser(
+    const { data: updateData, error: updateError } = await updateAuthUser(
       authUser.email,
       model.newPassword,
     );
 
     if (updateError) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: updateError.message };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: updateError.message,
+      };
     }
 
-    return { ...SUCCESS_DEFAULT_RESPONSE_MODEL, data };
+    return {
+      ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+      data: updateData,
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message,
+    };
   }
 };

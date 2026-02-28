@@ -74,6 +74,10 @@
     "authError": {
       "title": "Błąd uwierzytelniania",
       "description": "Sprawdź e-mail i hasło i spróbuj ponownie."
+    },
+    "profileSavedError": {
+      "title": "Błąd aktualizacji",
+      "description": "Nie udało się zaktualizować profilu. Spróbuj ponownie później."
     }
   },
   "success": {

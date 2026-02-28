@@ -10,17 +10,14 @@ import type { TAlertProps } from './type';
 const DEFAULT_DURATION = 5000;
 
 export const Alert = ({
-  namespace,
-  messageKey,
+  title,
+  description,
   variant,
   onDismiss,
   autoHide = false,
   duration = DEFAULT_DURATION,
 }: TAlertProps) => {
-  const t = useTranslations(namespace);
   const [isVisible, setIsVisible] = useState(false);
-  const title = t(`${messageKey}.title`);
-  const description = t(`${messageKey}.description`);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setIsVisible(true));
