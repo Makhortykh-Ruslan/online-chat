@@ -1,12 +1,15 @@
 'use client';
 
-import { Avatar, Button, Input, Loader } from '@/src/core/components';
+import { useState } from 'react';
+
+import { Avatar, Button, Input, Loader, Modal } from '@/src/core/components';
 import type { ProfileDTO } from '@/src/core/dto';
 
 import { useProfileForm } from './hooks';
 import { ProfileStyles } from './Profile.styles';
 
 export const Profile = (profileData: ProfileDTO) => {
+  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
   const {
     translate,
     register,
@@ -19,6 +22,7 @@ export const Profile = (profileData: ProfileDTO) => {
   const styles = ProfileStyles;
 
   return (
+    <>
     <form onSubmit={handleSubmit} className={styles.component}>
       <h2 className={styles.component_title}>{translate.titles('profile')}</h2>
 
@@ -37,8 +41,10 @@ export const Profile = (profileData: ProfileDTO) => {
             {profileData.email}
           </p>
           <Button
+            type="button"
             color="transparent"
             className={styles.component_header_info_btn}
+            onClick={() => setIsAvatarModalOpen(true)}
           >
             {translate.button('changeAvatar')}
           </Button>
@@ -85,5 +91,26 @@ export const Profile = (profileData: ProfileDTO) => {
         {isLoading ? translate.button('pending') : translate.button('save')}
       </Button>
     </form>
+
+    <Modal
+      isOpen={isAvatarModalOpen}
+      onClose={() => setIsAvatarModalOpen(false)}
+      variant="fixed"
+    >
+      <div className="p-6">
+        <p className="text-gray-700 dark:text-gray-300">
+          Модалка зміни аватарки (тест)
+        </p>
+        <Button
+          type="button"
+          color="blue"
+          className="mt-4"
+          onClick={() => setIsAvatarModalOpen(false)}
+        >
+          Закрити
+        </Button>
+      </div>
+    </Modal>
+    </>
   );
 };
