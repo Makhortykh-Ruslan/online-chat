@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
-import { Avatar, Button, Icon, Modal } from '@/src/core/components';
+import { Avatar, Button, Icon, Loader, Modal } from '@/src/core/components';
+import { useAlert } from '@/src/core/context';
+import { deleteAvatarService, uploadAvatarService } from '@/src/core/services';
 import {
   captureVideoFrameAsDataUrl,
   getWebcamStream,
@@ -21,6 +23,7 @@ type ChangeAvatarModalProps = {
   onClose: () => void;
   fullName?: string | null;
   avatarUrl?: string | null;
+  onAvatarUploaded?: () => void;
 };
 
 export const ChangeAvatarModal = ({
@@ -28,13 +31,50 @@ export const ChangeAvatarModal = ({
   onClose,
   fullName,
   avatarUrl,
+  onAvatarUploaded,
 }: ChangeAvatarModalProps) => {
   const styles = ChangeAvatarModalStyles;
   const buttons = useTranslations('button');
+  const errors = useTranslations('errors');
+  const { showAlert } = useAlert();
   const [previewSrc, setPreviewSrc] = useState<string | null>(avatarUrl ?? null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isWebcamMode, setIsWebcamMode] = useState(false);
   const [webcamStream, setWebcamStream] = useState<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const uploadNewAvatar = async (dataUrl: string) => {
+    setIsUploading(true);
+    const result = await uploadAvatarService(dataUrl);
+    setIsUploading(false);
+    if (result.success && result.data) {
+      setPreviewSrc(result.data.avatarUrl);
+      onAvatarUploaded?.();
+    } else if (!result.success && result.message) {
+      showAlert({
+        variant: 'error',
+        title: errors('profileSavedError.title'),
+        description: result.message,
+      });
+    }
+  };
+
+  const handleDeleteAvatar = async () => {
+    setIsDeleting(true);
+    const result = await deleteAvatarService();
+    setIsDeleting(false);
+    if (result.success) {
+      setPreviewSrc(null);
+      onAvatarUploaded?.();
+    } else if (result.message) {
+      showAlert({
+        variant: 'error',
+        title: errors('profileSavedError.title'),
+        description: result.message,
+      });
+    }
+  };
 
   const stopWebcam = () => {
     stopMediaStream(webcamStream);
@@ -82,7 +122,10 @@ export const ChangeAvatarModal = ({
       if (!file) return;
 
       const dataUrl = await readImageAsDataUrl(file);
-      if (dataUrl) setPreviewSrc(dataUrl);
+      if (dataUrl) {
+        setPreviewSrc(dataUrl);
+        void uploadNewAvatar(dataUrl);
+      }
     }
   };
 
@@ -93,6 +136,7 @@ export const ChangeAvatarModal = ({
     const dataUrl = captureVideoFrameAsDataUrl(video, 'image/png');
     if (dataUrl) {
       setPreviewSrc(dataUrl);
+      void uploadNewAvatar(dataUrl);
     }
 
     setIsWebcamMode(false);
@@ -111,6 +155,7 @@ export const ChangeAvatarModal = ({
     const dataUrl = await readImageAsDataUrl(file);
     if (dataUrl) {
       setPreviewSrc(dataUrl);
+      void uploadNewAvatar(dataUrl);
     }
   };
 
@@ -137,11 +182,18 @@ export const ChangeAvatarModal = ({
               />
             </div>
           ) : (
-            <Avatar
-              src={previewSrc}
-              alt={fullName || 'Avatar'}
-              size="xl"
-            />
+            <div className={styles.avatarWithLoader}>
+              <Avatar
+                src={previewSrc}
+                alt={fullName || 'Avatar'}
+                size="xl"
+              />
+              {(isUploading || isDeleting) && (
+                <div className={styles.avatarLoader}>
+                  <Loader />
+                </div>
+              )}
+            </div>
           )}
           {fullName && <p className={styles.avatarName}>{fullName}</p>}
         </div>
@@ -172,7 +224,7 @@ export const ChangeAvatarModal = ({
             color="transparent"
             className={styles.button}
             onClick={handleOpenWebcam}
-            disabled={isWebcamMode}
+            disabled={isWebcamMode || isDeleting}
             type="button"
           >
             <Icon name="camera" className={styles.button_icon} />
@@ -183,13 +235,23 @@ export const ChangeAvatarModal = ({
             color="transparent"
             className={styles.button}
             onClick={handleFromDevice}
-            disabled={isWebcamMode}
+            disabled={isWebcamMode || isDeleting}
             type="button"
           >
             <Icon name="attach" className={styles.button_icon} />
             <span>{buttons('uploadFromDevice')}</span>
           </Button>
         </div>
+
+        <Button
+          color="red"
+          className={styles.deleteBtn}
+          onClick={handleDeleteAvatar}
+          disabled={!previewSrc || isUploading || isDeleting}
+          type="button"
+        >
+          {buttons('deleteAvatar')}
+        </Button>
       </div>
     </Modal>
   );

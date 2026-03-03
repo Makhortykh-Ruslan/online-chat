@@ -75,7 +75,8 @@
     "takePhoto": "Zrób zdjęcie",
     "edit": "Edytuj",
     "uploadFromDevice": "Prześlij z urządzenia",
-    "capturePhoto": "Zrób zdjęcie"
+    "capturePhoto": "Zrób zdjęcie",
+    "deleteAvatar": "Usuń awatar"
   },
   "errors": {
     "authError": {

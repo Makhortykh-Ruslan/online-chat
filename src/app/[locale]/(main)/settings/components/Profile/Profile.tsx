@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { Avatar, Button, Input, Loader } from '@/src/core/components';
 import type { ProfileDTO } from '@/src/core/dto';
+import { useRouter } from '@/src/i18n/routing';
 
 import { ChangeAvatarModal } from './components';
 import { useProfileForm } from './hooks';
@@ -11,6 +12,7 @@ import { ProfileStyles } from './Profile.styles';
 
 export const Profile = (profileData: ProfileDTO) => {
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
+  const router = useRouter();
 
   const {
     translate,
@@ -101,6 +103,9 @@ export const Profile = (profileData: ProfileDTO) => {
         onClose={() => setIsAvatarModalOpen(false)}
         fullName={profileData.fullName}
         avatarUrl={profileData.avatarUrl}
+        onAvatarUploaded={() => {
+          router.refresh();
+        }}
       />
     </>
   );

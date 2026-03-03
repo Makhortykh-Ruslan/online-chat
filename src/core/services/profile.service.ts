@@ -7,6 +7,7 @@ import {
 } from '@/src/core/constants';
 import { EControlName } from '@/src/core/enums';
 import type { ChangePasswordModel } from '@/src/core/models';
+import type { ResponseModel } from '@/src/core/models/response.model';
 import type {
   ResponseEmptyModel,
   ResponseProfileDTOModel,
@@ -15,9 +16,11 @@ import {
   getAuthData,
   getProfileByUserIdRepository,
   getSystemSettingByUserIdRepository,
+  removeAvatarRepository,
   signIn,
   updateAuthUser,
   updateProfileRepository,
+  uploadAvatarRepository,
 } from '@/src/infrastructure/supabase';
 
 export const updateProfileInfoService = async (
@@ -161,3 +164,100 @@ export const updatePasswordService = async (
     };
   }
 };
+
+function parseDataUrl(dataUrl: string): { buffer: Buffer; contentType: string } | null {
+  const match = /^data:(image\/[a-z]+);base64,(.+)$/i.exec(dataUrl);
+  if (!match || match[1] == null || match[2] == null) return null;
+  const contentType = match[1];
+  const base64 = match[2];
+  const buffer = Buffer.from(base64, 'base64');
+  return { buffer, contentType };
+}
+
+export async function uploadAvatarService(
+  dataUrl: string,
+): Promise<ResponseModel<{ avatarUrl: string }>> {
+  try {
+    const authUser = await getAuthData();
+    if (!authUser?.id) {
+      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'profileSavedError' };
+    }
+
+    const parsed = parseDataUrl(dataUrl);
+    if (!parsed) {
+      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'profileSavedError' };
+    }
+
+    const file = new File([new Uint8Array(parsed.buffer)], 'avatar.png', {
+      type: parsed.contentType,
+    });
+    const result = await uploadAvatarRepository(authUser.id, file);
+
+    if ('error' in result) {
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: result.error,
+        data: null,
+      };
+    }
+
+    const avatarUrlWithCacheBust = `${result.publicUrl}?t=${Date.now()}`;
+
+    const { error } = await updateProfileRepository({
+      id: authUser.id,
+      avatar_url: avatarUrlWithCacheBust,
+    });
+
+    if (error) {
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: error.message,
+        data: null,
+      };
+    }
+
+    return {
+      ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+      data: { avatarUrl: avatarUrlWithCacheBust },
+    };
+  } catch (err) {
+    const message =
+      err instanceof Error ? err.message : 'profileSavedError';
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message, data: null };
+  }
+}
+
+export async function deleteAvatarService(): Promise<ResponseEmptyModel> {
+  try {
+    const authUser = await getAuthData();
+    if (!authUser?.id) {
+      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'profileSavedError' };
+    }
+
+    const removeResult = await removeAvatarRepository(authUser.id);
+    if (removeResult.error) {
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: removeResult.error,
+      };
+    }
+
+    const { error } = await updateProfileRepository({
+      id: authUser.id,
+      avatar_url: '',
+    });
+
+    if (error) {
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: error.message,
+      };
+    }
+
+    return { ...SUCCESS_DEFAULT_RESPONSE_MODEL };
+  } catch (err) {
+    const message =
+      err instanceof Error ? err.message : 'profileSavedError';
+    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+  }
+}

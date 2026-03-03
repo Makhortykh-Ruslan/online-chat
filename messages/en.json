@@ -75,7 +75,8 @@
     "takePhoto": "Take photo",
     "edit": "Edit",
     "uploadFromDevice": "Upload from device",
-    "capturePhoto": "Capture"
+    "capturePhoto": "Capture",
+    "deleteAvatar": "Delete avatar"
   },
   "errors": {
     "authError": {
