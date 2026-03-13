@@ -3,13 +3,13 @@ import { useTranslations } from 'next-intl';
 import { startTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
-import type { ProfileDTO } from '@/src/core/dto';
+import type { UserDTO } from '@/src/core/dto';
 import { useActionInterceptor } from '@/src/core/hooks';
-import { updateProfileInfoService } from '@/src/core/services';
+import { updateUserInfoService } from '@/src/core/services';
 
-import { profileFormSchema, type TProfileFormSchema } from '../constants';
+import { userFormSchema, type TUserFormSchema } from '../constants';
 
-export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
+export const useUserForm = ({ email, fullName, id }: UserDTO) => {
   const titles = useTranslations('titles');
   const labels = useTranslations('labels');
   const button = useTranslations('button');
@@ -30,8 +30,8 @@ export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid, isDirty },
-  } = useForm<TProfileFormSchema>({
-    resolver: zodResolver(profileFormSchema),
+  } = useForm<TUserFormSchema>({
+    resolver: zodResolver(userFormSchema),
     mode: 'onChange',
     defaultValues: {
       email,
@@ -41,11 +41,11 @@ export const useProfileForm = ({ email, fullName, id }: ProfileDTO) => {
   });
 
   const { state, execute, isPending } = useActionInterceptor(
-    updateProfileInfoService,
+    updateUserInfoService,
   );
 
-  const onSubmit = (data: TProfileFormSchema) => {
-    startTransition(() => execute(data as ProfileDTO));
+  const onSubmit = (data: TUserFormSchema) => {
+    startTransition(() => execute(data as UserDTO));
   };
 
   return {

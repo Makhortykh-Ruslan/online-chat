@@ -3,14 +3,14 @@
 import { useState } from 'react';
 
 import { Avatar, Button, Input, Loader } from '@/src/core/components';
-import type { ProfileDTO } from '@/src/core/dto';
+import type { UserDTO } from '@/src/core/dto';
 import { useRouter } from '@/src/i18n/routing';
 
 import { ChangeAvatarModal } from './components';
-import { useProfileForm } from './hooks';
-import { ProfileStyles } from './Profile.styles';
+import { useUserForm } from './hooks';
+import { UserStyles } from './User.styles';
 
-export const Profile = (profileData: ProfileDTO) => {
+export const User = (userData: UserDTO) => {
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
   const router = useRouter();
 
@@ -21,30 +21,28 @@ export const Profile = (profileData: ProfileDTO) => {
     handleSubmit,
     isDisableSubmit,
     isLoading,
-  } = useProfileForm(profileData);
+  } = useUserForm(userData);
 
-  const styles = ProfileStyles;
+  const styles = UserStyles;
 
   return (
     <>
       <form onSubmit={handleSubmit} className={styles.component}>
-        <h2 className={styles.component_title}>
-          {translate.titles('profile')}
-        </h2>
+        <h2 className={styles.component_title}>{translate.titles('user')}</h2>
 
         <div className={styles.component_header}>
           <Avatar
-            src={profileData.avatarUrl}
-            alt={profileData.fullName || 'Avatar'}
+            src={userData.avatarUrl}
+            alt={userData.fullName || 'Avatar'}
             size="xl"
           />
 
           <div className={styles.component_header_info}>
             <p className={styles.component_header_info_title}>
-              {profileData.fullName}
+              {userData.fullName}
             </p>
             <p className={styles.component_header_info_description}>
-              {profileData.email}
+              {userData.email}
             </p>
             <Button
               type="button"
@@ -101,8 +99,8 @@ export const Profile = (profileData: ProfileDTO) => {
       <ChangeAvatarModal
         isOpen={isAvatarModalOpen}
         onClose={() => setIsAvatarModalOpen(false)}
-        fullName={profileData.fullName}
-        avatarUrl={profileData.avatarUrl}
+        fullName={userData.fullName}
+        avatarUrl={userData.avatarUrl}
         onAvatarUploaded={() => {
           router.refresh();
         }}

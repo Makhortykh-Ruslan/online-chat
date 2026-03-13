@@ -16,4 +16,3 @@ export const ChangeAvatarModalStyles = {
   button_icon: 'w-[20px] h-[20px]',
   deleteBtn: 'w-full',
 };
-

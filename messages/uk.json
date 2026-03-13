@@ -16,7 +16,7 @@
     "messages": "Повідомлення",
     "emptyTitle": "Повна тиша...",
     "backToChat": "Назад до чату",
-    "profile": "Профіль",
+    "user": "Користувач",
     "session": "Сесія",
     "preferences": "Налаштування",
     "darkMode": "Темний режим",
@@ -83,20 +83,20 @@
       "title": "Помилка авторизації",
       "description": "Перевірте email та пароль і спробуйте знову."
     },
-    "profileSavedError": {
+    "userSavedError": {
       "title": "Помилка оновлення",
-      "description": "Не вдалося оновити профіль. Спробуйте пізніше."
+      "description": "Не вдалося оновити дані користувача. Спробуйте пізніше."
     }
   },
   "success": {
-    "profileSaved": {
+    "userSaved": {
       "title": "Зміни збережено",
-      "description": "Ваш профіль успішно оновлено."
+      "description": "Дані користувача успішно оновлено."
     }
   },
   "warning": {
-    "incompleteProfile": {
-      "title": "Незавершений профіль",
+    "incompleteUser": {
+      "title": "Неповний профіль",
       "description": "Заповніть ім'я та email для повного доступу."
     }
   },

@@ -11,7 +11,7 @@ import { appRoutes } from '@/src/core/constants/router-paths';
 import type { SignInModel, SignUpModel } from '@/src/core/models';
 import type { ResponseEmptyModel } from '@/src/core/types';
 import {
-  insertProfileRepository,
+  insertUserRepository,
   insertSystemSettingsRepository,
   signIn,
   signOut,
@@ -85,7 +85,7 @@ export async function signUpService(
       };
     }
 
-    const { error: profileError } = await insertProfileRepository({
+    const { error: userError } = await insertUserRepository({
       id: authUserId,
       email: model.email,
       user_name: model.fullName,
@@ -94,7 +94,7 @@ export async function signUpService(
       theme: 'light',
     });
 
-    if (profileError) {
+    if (userError) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
         message: 'authError',

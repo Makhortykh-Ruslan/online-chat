@@ -6,14 +6,14 @@ import { useState } from 'react';
 import { Select, Toggle } from '@/src/core/components';
 import { DEFAULT_SELECTED_LANG, LANGUAGES_MOCK } from '@/src/core/constants';
 import { useThemeContext } from '@/src/core/context';
-import type { ProfileDTO } from '@/src/core/dto';
+import type { UserDTO } from '@/src/core/dto';
 import { updateSystemService } from '@/src/core/services';
 import type { TIdName } from '@/src/core/types';
 import { usePathname, useRouter } from '@/src/i18n/routing';
 
 import { PreferencesStyles } from './Preferences.styles';
 
-export const Preferences = (profileData: ProfileDTO) => {
+export const Preferences = (userData: UserDTO) => {
   const titles = useTranslations('titles');
   const descriptions = useTranslations('descriptions');
   const placeholders = useTranslations('placeholders');
@@ -22,7 +22,7 @@ export const Preferences = (profileData: ProfileDTO) => {
   const router = useRouter();
 
   const foundLang =
-    LANGUAGES_MOCK.find((el) => el.id === profileData.language) ||
+    LANGUAGES_MOCK.find((el) => el.id === userData.language) ||
     DEFAULT_SELECTED_LANG;
 
   const { changeTheme, theme } = useThemeContext();
@@ -40,7 +40,7 @@ export const Preferences = (profileData: ProfileDTO) => {
       await updateSystemService({
         language: language.id,
         theme: newTheme,
-        user_id: profileData.id,
+        user_id: userData.id,
       });
     }
   };
@@ -52,7 +52,7 @@ export const Preferences = (profileData: ProfileDTO) => {
       await updateSystemService({
         language: value.id,
         theme,
-        user_id: profileData.id,
+        user_id: userData.id,
       });
     }
 

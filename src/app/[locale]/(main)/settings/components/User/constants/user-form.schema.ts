@@ -6,10 +6,10 @@ import {
   idControl,
 } from '@/src/core/validations';
 
-export const profileFormSchema = z.object({
+export const userFormSchema = z.object({
   fullName: defaultRequiredRule,
   email: emailRule.min(1, 'required'),
   id: idControl,
 });
 
-export type TProfileFormSchema = z.infer<typeof profileFormSchema>;
+export type TUserFormSchema = z.infer<typeof userFormSchema>;

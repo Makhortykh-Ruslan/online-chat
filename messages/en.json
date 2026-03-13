@@ -16,7 +16,7 @@
     "messages": "Messages",
     "emptyTitle": "Total silence...",
     "backToChat": "Back to chat",
-    "profile": "Profile",
+    "user": "User",
     "session": "Session",
     "preferences": "Preferences",
     "darkMode": "Dark Mode",
@@ -83,20 +83,20 @@
       "title": "Authentication error",
       "description": "Please check your email and password and try again."
     },
-    "profileSavedError": {
+    "userSavedError": {
       "title": "Update error",
-      "description": "Failed to update your profile. Please try again later."
+      "description": "Failed to update your user. Please try again later."
     }
   },
   "success": {
-    "profileSaved": {
+    "userSaved": {
       "title": "Changes saved",
-      "description": "Your profile has been updated successfully."
+      "description": "Your user has been updated successfully."
     }
   },
   "warning": {
-    "incompleteProfile": {
-      "title": "Incomplete profile",
+    "incompleteUser": {
+      "title": "Incomplete user",
       "description": "Fill in your name and email for full access."
     }
   },

@@ -28,7 +28,7 @@ export const updateSystemService = async (settings: SystemSettingsModel) => {
       console.error('Supabase update error:', error);
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'Error update profile settings details',
+        message: 'Error update user settings details',
       };
     }
 

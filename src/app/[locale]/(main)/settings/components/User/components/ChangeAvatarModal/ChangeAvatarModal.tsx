@@ -56,7 +56,7 @@ export const ChangeAvatarModal = ({
     } else if (!result.success && result.message) {
       showAlert({
         variant: 'error',
-        title: errors('profileSavedError.title'),
+        title: errors('userSavedError.title'),
         description: result.message,
       });
     }
@@ -72,7 +72,7 @@ export const ChangeAvatarModal = ({
     } else if (result.message) {
       showAlert({
         variant: 'error',
-        title: errors('profileSavedError.title'),
+        title: errors('userSavedError.title'),
         description: result.message,
       });
     }

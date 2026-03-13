@@ -16,7 +16,7 @@
     "messages": "Wiadomości",
     "emptyTitle": "Cisza jak makiem zasiał...",
     "backToChat": "Powrót do czatu",
-    "profile": "Profil",
+    "user": "Użytkownik",
     "session": "Sesja",
     "preferences": "Preferencje",
     "darkMode": "Tryb nocny",
@@ -83,19 +83,19 @@
       "title": "Błąd uwierzytelniania",
       "description": "Sprawdź e-mail i hasło i spróbuj ponownie."
     },
-    "profileSavedError": {
+    "userSavedError": {
       "title": "Błąd aktualizacji",
-      "description": "Nie udało się zaktualizować profilu. Spróbuj ponownie później."
+      "description": "Nie udało się zaktualizować danych użytkownika. Spróbuj ponownie później."
     }
   },
   "success": {
-    "profileSaved": {
+    "userSaved": {
       "title": "Zmiany zapisane",
-      "description": "Twój profil został pomyślnie zaktualizowany."
+      "description": "Dane użytkownika zostały pomyślnie zaktualizowane."
     }
   },
   "warning": {
-    "incompleteProfile": {
+    "incompleteUser": {
       "title": "Niekompletny profil",
       "description": "Uzupełnij imię i e-mail, aby uzyskać pełny dostęp."
     }

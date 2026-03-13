@@ -1,14 +1,14 @@
 import type { PostgrestSingleResponse } from '@supabase/postgrest-js';
 
-import type { ProfileDTO } from '@/src/core/dto';
-import type { ProfileModel, SystemSettingsModel } from '@/src/core/models';
+import type { UserDTO } from '@/src/core/dto';
+import type { UserModel, SystemSettingsModel } from '@/src/core/models';
 import type { ResponseModel } from '@/src/core/models/response.model';
 
 export type PostgrestSystemResponse =
   PostgrestSingleResponse<SystemSettingsModel>;
 
-export type PostgrestProfileResponse = PostgrestSingleResponse<ProfileModel>;
+export type PostgrestUserResponse = PostgrestSingleResponse<UserModel>;
 
 export type ResponseEmptyModel = ResponseModel<null>;
 
-export type ResponseProfileDTOModel = ResponseModel<ProfileDTO>;
+export type ResponseUserDTOModel = ResponseModel<UserDTO>;

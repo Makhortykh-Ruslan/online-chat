@@ -1,5 +1,5 @@
 export const EBDTableName = {
-  PROFILES: 'profiles',
+  USERS: 'users',
   CONVERSATIONS: 'conversations',
   CONVERSATION_PARTICIPANTS: 'conversation_participants',
   MESSAGES: 'messages',

@@ -1,4 +1,4 @@
-export const ProfileStyles = {
+export const UserStyles = {
   component:
     'p-[24px] rounded-[12px] border border-main-border bg-gray-0 dark:bg-brand-925',
   component_title: 'text-main-title font-semibold mb-[16px]',

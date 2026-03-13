@@ -1,19 +1,19 @@
-import { getProfileInfoService } from '@/src/core/services';
+import { getUserInfoService } from '@/src/core/services';
 
 import {
   ChangePassword,
   Preferences,
-  Profile,
+  User,
   Session,
   SettingsHeader,
 } from './components';
 import { SettingsPageStyles } from './page.styles';
 
 export default async function SettingsPage() {
-  const profileData = await getProfileInfoService();
+  const userData = await getUserInfoService();
 
-  if (!profileData.success || !profileData.data) {
-    throw new Error(profileData.message || 'Failed to load profile');
+  if (!userData.success || !userData.data) {
+    throw new Error(userData.message || 'Failed to load user');
   }
 
   const styles = SettingsPageStyles;
@@ -27,9 +27,9 @@ export default async function SettingsPage() {
       </header>
 
       <main className={styles.page_main}>
-        <Profile {...profileData.data} />
+        <User {...userData.data} />
         <ChangePassword />
-        <Preferences {...profileData.data} />
+        <Preferences {...userData.data} />
         <Session />
       </main>
     </section>
