@@ -14,23 +14,15 @@ import type {
 } from '@/src/core/types';
 import {
   getAuthData,
-  getSystemSettingByUserIdRepository,
-  getUserByIdRepository,
   getUsersExceptCurrentUserRepository,
+  getUserByIdRepository,
+  getSystemSettingByUserIdRepository,
   removeAvatarRepository,
   signIn,
   updateAuthUser,
   updateUserRepository,
   uploadAvatarRepository,
 } from '@/src/infrastructure/supabase';
-
-export async function setUserOnlineStatusAction(isOnline: boolean) {
-  const authUser = await getAuthData();
-  if (!authUser?.id) return;
-
-  console.log('isOnline', isOnline);
-  await updateUserRepository({ id: authUser.id, is_online: isOnline });
-}
 
 export const updateUserInfoService = async (
   _prevData: ResponseEmptyModel,
@@ -70,57 +62,58 @@ export const updateUserInfoService = async (
   }
 };
 
-export const getUserInfoService = async (): Promise<ResponseUserDTOModel> => {
-  try {
-    const authUser = await getAuthData();
+export const getUserInfoService =
+  async (): Promise<ResponseUserDTOModel> => {
+    try {
+      const authUser = await getAuthData();
 
-    if (!authUser) {
+      if (!authUser) {
+        return {
+          ...ERROR_DEFAULT_RESPONSE_MODEL,
+          message: 'Not authenticated',
+        };
+      }
+
+      const authUserId = authUser.id;
+
+      const [user, system] = await Promise.all([
+        getUserByIdRepository(authUserId),
+        getSystemSettingByUserIdRepository(authUserId),
+      ]);
+
+      const { data: dataUser, error: errorUser } = user;
+      const { data: dataSystem, error: errorSystem } = system;
+
+      if (errorUser || errorSystem) {
+        return {
+          ...ERROR_DEFAULT_RESPONSE_MODEL,
+          message: 'Error user details',
+        };
+      }
+
+      const { theme, language } = dataSystem;
+
+      const model = {
+        ...dataUser,
+        theme,
+        language,
+      };
+
+      const data = mapUserToDTO(model);
+
+      return {
+        ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+        data,
+      };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown error';
+
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'Not authenticated',
+        message,
       };
     }
-
-    const authUserId = authUser.id;
-
-    const [user, system] = await Promise.all([
-      getUserByIdRepository(authUserId),
-      getSystemSettingByUserIdRepository(authUserId),
-    ]);
-
-    const { data: dataUser, error: errorUser } = user;
-    const { data: dataSystem, error: errorSystem } = system;
-
-    if (errorUser || errorSystem) {
-      return {
-        ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'Error user details',
-      };
-    }
-
-    const { theme, language } = dataSystem;
-
-    const model = {
-      ...dataUser,
-      theme,
-      language,
-    };
-
-    const data = mapUserToDTO(model);
-
-    return {
-      ...SUCCESS_DEFAULT_RESPONSE_MODEL,
-      data,
-    };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-
-    return {
-      ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message,
-    };
-  }
-};
+  };
 
 export const updatePasswordService = async (
   _prevData: ResponseEmptyModel,
