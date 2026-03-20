@@ -7,7 +7,7 @@ import React from 'react';
 
 import { appConfig } from '@/src/app/[locale]/config';
 import { AlertProvider, ThemeProvider } from '@/src/core/context';
-import type { LayoutProps, TTheme } from '@/src/core/types';
+import type { LayoutProps } from '@/src/core/types';
 import { redirect } from '@/src/i18n/routing';
 
 const inter = Inter({
@@ -42,7 +42,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
           key={dbLocale}
           messages={messages}
         >
-          <ThemeProvider key={theme} initialTheme={theme as TTheme}>
+          <ThemeProvider key={theme} initialTheme={theme}>
             <AlertProvider>{children}</AlertProvider>
           </ThemeProvider>
         </NextIntlClientProvider>

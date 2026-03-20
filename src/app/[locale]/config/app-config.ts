@@ -1,3 +1,4 @@
+import type { TTheme } from '@/src/core/types';
 import {
   getAuthData,
   getSystemSettingByUserIdRepository,
@@ -10,7 +11,7 @@ export async function getMessages(locale: string) {
 export async function appConfig(urlLocale: string) {
   const authUser = await getAuthData();
 
-  let theme = 'light';
+  let theme: TTheme = 'light';
   let dbLocale = urlLocale;
 
   if (authUser) {
