@@ -7,4 +7,5 @@ export const UsersModalStyles = {
   close_icon: `w-[24px] h-[24px]`,
   main: 'flex flex-col w-full px-4 pb-4',
   input: 'w-full',
+  list: 'flex flex-col gap-2 mt-4 max-h-[min(400px,50vh)] overflow-y-auto',
 };

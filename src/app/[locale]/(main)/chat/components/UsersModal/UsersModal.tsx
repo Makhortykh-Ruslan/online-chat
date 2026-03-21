@@ -1,9 +1,13 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { type ChangeEvent, useMemo, useState } from 'react';
 
 import { Icon, Input, Modal } from '@/src/core/components';
+import { debounce } from '@/src/core/utils';
 
+import { SearchedUser } from './components';
+import { MOCK_USERS } from './mock-users';
 import { UsersModalStyles } from './UsersModal.styles';
 
 type UsersModalProps = {
@@ -14,6 +18,31 @@ type UsersModalProps = {
 export const UsersModal = ({ isOpen, onClose }: UsersModalProps) => {
   const titles = useTranslations('titles');
   const placeholders = useTranslations('placeholders');
+
+  const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
+
+  const scheduleDebouncedSearch = useMemo(
+    () => debounce((value: string) => setDebouncedSearch(value), 300),
+    [],
+  );
+
+  const filteredUsers = useMemo(() => {
+    const q = debouncedSearch.trim().toLowerCase();
+    if (!q) {
+      return [];
+    }
+    return MOCK_USERS.filter((user) => user.fullName.toLowerCase().includes(q));
+  }, [debouncedSearch]);
+
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearch(value);
+    scheduleDebouncedSearch(value);
+
+    console.log('value', value);
+  };
+
   const styles = UsersModalStyles;
 
   return (
@@ -38,8 +67,23 @@ export const UsersModal = ({ isOpen, onClose }: UsersModalProps) => {
               placeholder={placeholders('searchUsers')}
               leftIcon="search"
               aria-label={titles('searchUsers')}
+              value={search}
+              onChange={handleSearchChange}
             />
           </div>
+          {filteredUsers.length > 0 && (
+            <div className={styles.list}>
+              {filteredUsers.map((user) => (
+                <SearchedUser
+                  key={user.id}
+                  fullName={user.fullName}
+                  email={user.email}
+                  avatarUrl={user.avatarUrl}
+                  isOnline={user.isOnline}
+                />
+              ))}
+            </div>
+          )}
         </main>
       </section>
     </Modal>
