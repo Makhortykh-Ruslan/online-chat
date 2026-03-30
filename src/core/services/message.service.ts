@@ -4,13 +4,13 @@ import {
   ERROR_DEFAULT_RESPONSE_MODEL,
   SUCCESS_DEFAULT_RESPONSE_MODEL,
 } from '@/src/core/constants';
-import { EControlName } from '@/src/core/enums';
+import type { SendMessageModel } from '@/src/core/models/message.model';
 import type { ResponseEmptyModel } from '@/src/core/types';
 import { getAuthData, insertMessage } from '@/src/infrastructure/supabase';
 
 export async function sendMessageServer(
   _prevData: ResponseEmptyModel,
-  formData: FormData,
+  model: SendMessageModel,
 ): Promise<ResponseEmptyModel> {
   try {
     const authUser = await getAuthData();
@@ -22,11 +22,7 @@ export async function sendMessageServer(
       };
     }
 
-    const sender_id = authUser.id;
-    const content = formData.get(EControlName.CONTENT) as string;
-    const conversation_id = formData.get(
-      EControlName.CONVERSATION_ID,
-    ) as string;
+    const { content, conversation_id } = model;
 
     if (!content || !conversation_id) {
       return {
@@ -35,18 +31,18 @@ export async function sendMessageServer(
       };
     }
 
-    const model = {
+    const insertModel = {
       content,
-      sender_id,
+      sender_id: authUser.id,
       conversation_id,
     };
 
-    const { error } = await insertMessage(model);
+    const { error: insertError } = await insertMessage(insertModel);
 
-    if (error) {
+    if (insertError) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: error.message,
+        message: insertError.message,
       };
     }
 
@@ -54,8 +50,8 @@ export async function sendMessageServer(
       ...SUCCESS_DEFAULT_RESPONSE_MODEL,
       message: '',
     };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
 
     return {
       ...ERROR_DEFAULT_RESPONSE_MODEL,

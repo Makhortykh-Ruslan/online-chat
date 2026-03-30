@@ -1,50 +1,54 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import React, { type ChangeEvent, startTransition, useState } from 'react';
+import React, { startTransition, useEffect, useState } from 'react';
 
 import { Button, Icon, Input } from '@/src/core/components';
 import { useActionInterceptor } from '@/src/core/hooks';
 import { sendMessageServer } from '@/src/core/services';
-import type { TIcon } from '@/src/core/types';
 
 import { ConversationFooterStyles } from './ConversationFooter.styles';
 
-type InputMessageProps = {
+type Props = {
   conversationId: string;
 };
 
-export const ConversationFooter = ({ conversationId }: InputMessageProps) => {
-  const [messageType, setMessageType] = useState<TIcon>('audio');
-  const { execute } = useActionInterceptor(sendMessageServer);
-
+export const ConversationFooter = ({ conversationId }: Props) => {
+  const { execute, state } = useActionInterceptor(sendMessageServer);
+  const [content, setContent] = useState('');
   const placeholders = useTranslations('placeholders');
   const styles = ConversationFooterStyles;
 
-  const handleMessageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setMessageType(event.target.value ? 'message' : 'audio');
-  };
+  useEffect(() => {
+    if (state.success) {
+      setContent('');
+    }
+  }, [state.timestamp]);
 
-  const handleAction = (formData: FormData) => {
-    startTransition(() => execute(formData));
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!content.trim()) return;
+
+    startTransition(() =>
+      execute({ content, conversation_id: conversationId }),
+    );
   };
 
   return (
-    <form action={handleAction} className={styles.component}>
-      <input type="hidden" name="conversation_id" value={conversationId} />
-
+    <form onSubmit={handleSubmit} className={styles.component}>
       <Icon name="attach" className={styles.component_attach} />
 
       <Input
         className={styles.component_input}
-        name="content"
         id="message"
         placeholder={placeholders('typeMessage')}
-        onChange={handleMessageChange}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
       />
 
       <Button type="submit" className={styles.component_btn}>
-        <Icon className={styles.component_btn_icon} name={messageType} />
+        <Icon className={styles.component_btn_icon} name="message" />
       </Button>
     </form>
   );

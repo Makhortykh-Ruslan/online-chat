@@ -2,10 +2,10 @@
 
 import type { MessageDTO } from '@/src/core/dto';
 import { EBDTableName } from '@/src/core/enums';
-import type { MessageModel } from '@/src/core/models/message.model';
+import type { CreateMessageModel, MessageModel } from '@/src/core/models/message.model';
 import { createClient } from '@/src/infrastructure/supabase/server.supabase';
 
-export async function insertMessage(data: MessageModel) {
+export async function insertMessage(data: CreateMessageModel) {
   const supabase = await createClient();
 
   return supabase.from(EBDTableName.MESSAGES).insert(data);
@@ -39,12 +39,17 @@ export async function getLastConversationMessage(
     .from(EBDTableName.MESSAGES)
     .select('*')
     .in('conversation_id', conversationsIds)
-    .order('created_at', { ascending: false })
-    .limit(1);
+    .order('created_at', { ascending: false });
 
   if (error) {
     throw new Error(error.message);
   }
 
-  return data ?? [];
+  const seen = new Set<string>();
+
+  return (data ?? []).filter((m) => {
+    if (seen.has(m.conversation_id)) return false;
+    seen.add(m.conversation_id);
+    return true;
+  });
 }

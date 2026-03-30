@@ -18,7 +18,9 @@ export const Message = ({ content, createdAt, isMine }: MessageProps) => {
   return (
     <div data-component="Message" className={styles.component}>
       <p className={styles.component_title}>{content}</p>
-      <p className={styles.component_time}>{time}</p>
+      <p className={styles.component_time} suppressHydrationWarning>
+        {time}
+      </p>
     </div>
   );
 };

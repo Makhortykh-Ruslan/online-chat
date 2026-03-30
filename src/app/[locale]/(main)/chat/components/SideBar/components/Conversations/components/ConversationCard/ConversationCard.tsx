@@ -1,9 +1,11 @@
 'use client';
 
+import { useLocale } from 'next-intl';
 import React, { memo } from 'react';
 
 import { Avatar } from '@/src/core/components';
 import type { ConversationDTO } from '@/src/core/dto/conversation.dto';
+import { formatMessageTime } from '@/src/core/utils';
 
 import { conversationCardStyles } from './ConversationCard.styles';
 
@@ -19,7 +21,12 @@ const ConversationCardComponent = ({
   onClick,
   isActive = false,
 }: Props) => {
+  const locale = useLocale();
   const styles = conversationCardStyles;
+
+  const time = lastMessage?.created_at
+    ? formatMessageTime(lastMessage.created_at, locale as 'uk' | 'en')
+    : '';
 
   return (
     <article onClick={onClick} className={styles.component(isActive)}>
@@ -34,8 +41,8 @@ const ConversationCardComponent = ({
           </p>
         </div>
         <div className={styles.component_meta}>
-          <span className={styles.component_time}>
-            {lastMessage?.created_at || ''}
+          <span className={styles.component_time} suppressHydrationWarning>
+            {time}
           </span>
           <div className={styles.component_count} />
         </div>

@@ -5,3 +5,14 @@ export type MessageModel = {
   sender_id: string;
   conversation_id: string;
 };
+
+export type CreateMessageModel = {
+  content: string;
+  sender_id: string;
+  conversation_id: string;
+};
+
+export type SendMessageModel = {
+  content: string;
+  conversation_id: string;
+};
