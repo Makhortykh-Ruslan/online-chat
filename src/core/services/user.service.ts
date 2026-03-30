@@ -23,6 +23,10 @@ import {
   updateUserRepository,
   uploadAvatarRepository,
 } from '@/src/infrastructure/supabase';
+import {
+  getOtherParticipantsInMyConversations,
+  getParticipantsByUserId,
+} from '@/src/infrastructure/supabase/participants.repository';
 
 export const updateUserInfoService = async (
   _prevData: ResponseEmptyModel,
@@ -299,7 +303,22 @@ export async function getUsersWithFiltersService(
       };
     }
 
-    const data = (users ?? []).map(mapUserToDTO);
+    const myParticipants = await getParticipantsByUserId(authUser.id);
+    const myConversationIds = myParticipants.map((p) => p.conversation_id);
+
+    let existingUserIds = new Set<string>();
+
+    if (myConversationIds.length > 0) {
+      const otherParticipants = await getOtherParticipantsInMyConversations(
+        authUser.id,
+        myConversationIds,
+      );
+      existingUserIds = new Set(otherParticipants.map((p) => p.user_id));
+    }
+
+    const data = (users ?? [])
+      .filter((u) => !existingUserIds.has(u.id))
+      .map(mapUserToDTO);
 
     return {
       ...SUCCESS_DEFAULT_RESPONSE_MODEL,
