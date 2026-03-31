@@ -18,7 +18,7 @@ export const ChangePassword = () => {
   const styles = ChangePasswordStyles;
 
   return (
-    <form onSubmit={handleSubmit} className={styles.component}>
+    <form data-component="ChangePassword" onSubmit={handleSubmit} className={styles.component}>
       <h2 className={styles.component_title}>
         {translate.titles('changePassword')}
       </h2>

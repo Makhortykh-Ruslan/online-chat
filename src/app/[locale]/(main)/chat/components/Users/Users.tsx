@@ -18,12 +18,12 @@ export function Users({ data }: UsersProps) {
   };
 
   return (
-    <>
+    <div data-component="Users">
       {data.map((user) => (
         <div key={user.id} onClick={() => handleClick(user)}>
           {user.user_name}
         </div>
       ))}
-    </>
+    </div>
   );
 }

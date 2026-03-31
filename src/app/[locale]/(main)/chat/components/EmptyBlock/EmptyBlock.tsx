@@ -24,7 +24,7 @@ export const EmptyBlock = async ({
   const styles = emptyBlockStyles();
 
   return (
-    <section className={styles.component}>
+    <section data-component="EmptyBlock" className={styles.component}>
       <div className={styles.component_icon_container}>
         <Icon name="users" className={styles.component_icon} />
       </div>

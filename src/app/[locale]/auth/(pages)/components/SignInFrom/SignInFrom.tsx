@@ -20,7 +20,7 @@ export const SignInFrom = () => {
   const styles = getAuthFormStyles();
 
   return (
-    <section className={styles.component}>
+    <section data-component="SignInForm" className={styles.component}>
       <form onSubmit={handleSubmit}>
         <div className={styles.component_input}>
           <Input

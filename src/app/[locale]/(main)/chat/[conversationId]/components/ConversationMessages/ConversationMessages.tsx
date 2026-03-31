@@ -47,7 +47,7 @@ export const ConversationMessages = ({
 
   return (
     <>
-      <div className="mt-auto" />
+      <div data-component="ConversationMessages" className="mt-auto" />
       {messages.map((el) => {
         const isMine = el.senderId === authUserId;
 

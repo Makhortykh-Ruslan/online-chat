@@ -29,7 +29,7 @@ const ConversationCardComponent = ({
     : '';
 
   return (
-    <article onClick={onClick} className={styles.component(isActive)}>
+    <article data-component="ConversationCard" onClick={onClick} className={styles.component(isActive)}>
       <div className={styles.component_avatar}>
         <Avatar src={avatarUrl || ''} alt={title || 'Avatar'} size="lg" />
       </div>

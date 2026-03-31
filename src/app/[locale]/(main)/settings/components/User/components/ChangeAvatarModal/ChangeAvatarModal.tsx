@@ -169,7 +169,7 @@ export const ChangeAvatarModal = ({
       }}
       variant="fixed"
     >
-      <div className={styles.component}>
+      <div data-component="ChangeAvatarModal" className={styles.component}>
         <div className={styles.avatarWrapper}>
           {isWebcamMode ? (
             <div className={styles.livePreview}>

@@ -77,7 +77,7 @@ export const Conversations = ({
         />
       </div>
 
-      <main className={styles.component_main}>
+      <main data-component="Conversations" className={styles.component_main}>
         {filteredConversations.map((el) => (
           <ConversationCard
             key={el.conversationId}

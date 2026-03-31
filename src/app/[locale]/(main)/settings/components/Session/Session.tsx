@@ -18,7 +18,7 @@ export const Session = () => {
   const styles = SessionStyles;
 
   return (
-    <form action={formAction} className={styles.component}>
+    <form data-component="Session" action={formAction} className={styles.component}>
       <h2 className={styles.component_title}>{titles('session')}</h2>
       <p className={styles.component_description}>
         {descriptions('signOutDescription')}

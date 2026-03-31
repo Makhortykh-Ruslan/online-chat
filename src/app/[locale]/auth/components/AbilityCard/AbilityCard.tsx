@@ -11,7 +11,7 @@ export const AbilityCard = ({
   const styles = getAbilityCardStyles();
 
   return (
-    <div className={styles.component}>
+    <div data-component="AbilityCard" className={styles.component}>
       <div className={styles.container}>
         <Icon name={iconName} className={styles.icon}></Icon>
 

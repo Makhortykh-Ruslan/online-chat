@@ -62,7 +62,7 @@ export const Preferences = (userData: UserDTO) => {
   const styles = PreferencesStyles;
 
   return (
-    <section className={styles.component}>
+    <section data-component="Preferences" className={styles.component}>
       <h2 className={styles.component_title}>{titles('preferences')}</h2>
 
       <Select value={language} onChange={handleChangeLanguages}>
