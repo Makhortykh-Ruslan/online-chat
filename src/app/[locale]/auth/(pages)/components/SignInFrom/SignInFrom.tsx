@@ -4,7 +4,7 @@ import { Button, Input, Loader } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import { Link } from '@/src/i18n/routing';
 
-import { getAuthFormStyles } from '../../styles';
+import { getSignInFormStyles } from './SignInFrom.styles';
 import { useSignInForm } from './hooks';
 
 export const SignInFrom = () => {
@@ -17,7 +17,7 @@ export const SignInFrom = () => {
     isLoading,
   } = useSignInForm();
 
-  const styles = getAuthFormStyles();
+  const styles = getSignInFormStyles();
 
   return (
     <section data-component="SignInForm" className={styles.component}>

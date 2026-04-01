@@ -6,7 +6,7 @@ import { useSignUpForm } from '@/src/app/[locale]/auth/(pages)/components/SignUp
 import { Button, Input, Loader } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
 
-import { getAuthFormStyles } from '../../styles';
+import { getSignUpFormStyles } from './SignUpForm.styles';
 
 export const SignUpForm = () => {
   const {
@@ -18,7 +18,7 @@ export const SignUpForm = () => {
     isLoading,
   } = useSignUpForm();
 
-  const styles = getAuthFormStyles();
+  const styles = getSignUpFormStyles();
 
   return (
     <section data-component="SignUpForm" className={styles.component}>

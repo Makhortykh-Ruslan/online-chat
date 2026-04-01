@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import type { LayoutProps } from '@/src/core/types';
 
 import { SignUpForm } from '../components';
-import { getPageStyles } from '../styles';
+import { getPageStyles } from './page.styles';
 
 export default async function SignUpPage({ params }: LayoutProps) {
   const { locale } = await params;
