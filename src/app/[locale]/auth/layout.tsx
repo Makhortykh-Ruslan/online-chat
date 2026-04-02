@@ -37,7 +37,7 @@ export default async function AuthLayout({ children, params }: LayoutProps) {
   const styles = getLayoutStyles();
 
   return (
-    <main className={styles.page}>
+    <main data-component="auth-layout" className={styles.page}>
       <section className={styles.page_introducing}>
         <div className={styles.page_introducing_container}>
           <Logo />

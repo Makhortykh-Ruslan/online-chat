@@ -21,7 +21,7 @@ export function ChatLayoutClient({ sidebar, children }: Props) {
   const styles = getChatLayoutStyles(conversationOpen);
 
   return (
-    <main className={styles.page}>
+    <main data-component="chat-layout" className={styles.page}>
       <section className={styles.sidebar}>{sidebar}</section>
       <section className={styles.children}>{children}</section>
     </main>

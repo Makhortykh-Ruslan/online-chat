@@ -36,7 +36,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
 
   return (
     <html lang={dbLocale} suppressHydrationWarning className={theme}>
-      <body className={`${inter.variable} bg-main-bg font-sans antialiased`}>
+      <body data-component="root-layout" className={`${inter.variable} bg-main-bg font-sans antialiased`}>
         <NextIntlClientProvider
           locale={dbLocale}
           key={dbLocale}
