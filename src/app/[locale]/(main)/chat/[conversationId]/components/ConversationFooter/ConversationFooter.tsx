@@ -36,9 +36,11 @@ export const ConversationFooter = ({ conversationId }: Props) => {
   };
 
   return (
-    <form data-component="ConversationFooter" onSubmit={handleSubmit} className={styles.component}>
-      <Icon name="attach" className={styles.component_attach} />
-
+    <form
+      data-component="ConversationFooter"
+      onSubmit={handleSubmit}
+      className={styles.component}
+    >
       <Input
         className={styles.component_input}
         id="message"

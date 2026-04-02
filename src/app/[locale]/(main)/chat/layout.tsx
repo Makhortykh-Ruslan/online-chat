@@ -5,7 +5,7 @@ import React from 'react';
 import { SideBar } from '@/src/app/[locale]/(main)/chat/components/SideBar/SideBar';
 import type { LayoutProps } from '@/src/core/types';
 
-import { getLayoutStyles } from './styles';
+import { ChatLayoutClient } from './components/ChatLayoutClient';
 
 export async function generateMetadata({
   params,
@@ -24,14 +24,5 @@ export default function ChatLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const styles = getLayoutStyles();
-
-  return (
-    <main className={styles.page}>
-      <section className={styles.page_conversation}>
-        <SideBar />
-      </section>
-      <section className={styles.page_children}>{children}</section>
-    </main>
-  );
+  return <ChatLayoutClient sidebar={<SideBar />}>{children}</ChatLayoutClient>;
 }

@@ -29,7 +29,11 @@ const ConversationCardComponent = ({
     : '';
 
   return (
-    <article data-component="ConversationCard" onClick={onClick} className={styles.component(isActive)}>
+    <article
+      data-component="ConversationCard"
+      onClick={onClick}
+      className={styles.component(isActive)}
+    >
       <div className={styles.component_avatar}>
         <Avatar src={avatarUrl || ''} alt={title || 'Avatar'} size="lg" />
       </div>
@@ -44,7 +48,6 @@ const ConversationCardComponent = ({
           <span className={styles.component_time} suppressHydrationWarning>
             {time}
           </span>
-          <div className={styles.component_count} />
         </div>
       </div>
     </article>
