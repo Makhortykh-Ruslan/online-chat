@@ -43,20 +43,21 @@ export const updateProfileInfoService = async (
     if (error) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'profileSavedError',
+        message: 'Update error',
+        description: error.message,
       };
     }
 
     return {
       ...SUCCESS_DEFAULT_RESPONSE_MODEL,
-      message: 'profileSaved',
+      message: 'Changes saved',
+      description: 'Your profile has been updated successfully.',
     };
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-
     return {
       ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message,
+      message: 'Update error',
+      description: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 };
@@ -70,6 +71,7 @@ export const getProfileInfoService =
         return {
           ...ERROR_DEFAULT_RESPONSE_MODEL,
           message: 'Not authenticated',
+          description: 'Please sign in to continue.',
         };
       }
 
@@ -86,7 +88,9 @@ export const getProfileInfoService =
       if (errorProfile || errorSystem) {
         return {
           ...ERROR_DEFAULT_RESPONSE_MODEL,
-          message: 'Error profile details',
+          message: 'Failed to load profile',
+          description:
+            errorProfile?.message ?? errorSystem?.message ?? 'Unknown error',
         };
       }
 
@@ -105,11 +109,10 @@ export const getProfileInfoService =
         data,
       };
     } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown error';
-
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message,
+        message: 'Failed to load profile',
+        description: error instanceof Error ? error.message : 'Unknown error',
       };
     }
   };
@@ -125,6 +128,7 @@ export const updatePasswordService = async (
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
         message: 'Not authenticated',
+        description: 'Please sign in to continue.',
       };
     }
 
@@ -136,7 +140,8 @@ export const updatePasswordService = async (
     if (signInError) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'Old password in not valid',
+        message: 'Incorrect password',
+        description: 'The current password you entered is not valid.',
       };
     }
 
@@ -148,20 +153,22 @@ export const updatePasswordService = async (
     if (updateError) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: updateError.message,
+        message: 'Password update failed',
+        description: updateError.message,
       };
     }
 
     return {
       ...SUCCESS_DEFAULT_RESPONSE_MODEL,
+      message: 'Password updated',
+      description: 'Your password has been changed successfully.',
       data: null,
     };
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-
     return {
       ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message,
+      message: 'Password update failed',
+      description: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 };
@@ -183,12 +190,20 @@ export async function uploadAvatarService(
   try {
     const authUser = await getAuthData();
     if (!authUser?.id) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'profileSavedError' };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'Not authenticated',
+        description: 'Please sign in to continue.',
+      };
     }
 
     const parsed = parseDataUrl(dataUrl);
     if (!parsed) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'profileSavedError' };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'Invalid image',
+        description: 'Could not process the selected image.',
+      };
     }
 
     const file = new File([new Uint8Array(parsed.buffer)], 'avatar.png', {
@@ -199,7 +214,8 @@ export async function uploadAvatarService(
     if ('error' in result) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: result.error,
+        message: 'Upload failed',
+        description: result.error,
         data: null,
       };
     }
@@ -214,7 +230,8 @@ export async function uploadAvatarService(
     if (error) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: error.message,
+        message: 'Upload failed',
+        description: error.message,
         data: null,
       };
     }
@@ -224,8 +241,12 @@ export async function uploadAvatarService(
       data: { avatarUrl: avatarUrlWithCacheBust },
     };
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'profileSavedError';
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message, data: null };
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message: 'Upload failed',
+      description: err instanceof Error ? err.message : 'Unknown error',
+      data: null,
+    };
   }
 }
 
@@ -233,14 +254,19 @@ export async function deleteAvatarService(): Promise<ResponseEmptyModel> {
   try {
     const authUser = await getAuthData();
     if (!authUser?.id) {
-      return { ...ERROR_DEFAULT_RESPONSE_MODEL, message: 'profileSavedError' };
+      return {
+        ...ERROR_DEFAULT_RESPONSE_MODEL,
+        message: 'Not authenticated',
+        description: 'Please sign in to continue.',
+      };
     }
 
     const removeResult = await removeAvatarRepository(authUser.id);
     if (removeResult.error) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: removeResult.error,
+        message: 'Failed to delete avatar',
+        description: removeResult.error,
       };
     }
 
@@ -252,13 +278,17 @@ export async function deleteAvatarService(): Promise<ResponseEmptyModel> {
     if (error) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: error.message,
+        message: 'Failed to delete avatar',
+        description: error.message,
       };
     }
 
     return { ...SUCCESS_DEFAULT_RESPONSE_MODEL };
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'profileSavedError';
-    return { ...ERROR_DEFAULT_RESPONSE_MODEL, message };
+    return {
+      ...ERROR_DEFAULT_RESPONSE_MODEL,
+      message: 'Failed to delete avatar',
+      description: err instanceof Error ? err.message : 'Unknown error',
+    };
   }
 }

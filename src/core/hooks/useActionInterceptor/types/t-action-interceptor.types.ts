@@ -1,11 +1,8 @@
-import type { TAlertNamespace } from '@/src/core/components/Alert/type/t-alert-namespace';
 import type { ResponseModel } from '@/src/core/models/response.model';
 
 export type TActionInterceptorOptions<R> = {
   onSuccess?: (data: R | null) => void;
   onError?: (message: string) => void;
-  errorNamespace?: TAlertNamespace;
-  successNamespace?: TAlertNamespace;
 };
 
 export type TActionInterceptorAction<T, R> = (

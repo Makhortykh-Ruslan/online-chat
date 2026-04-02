@@ -19,6 +19,7 @@ export async function sendMessageServer(
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
         message: 'Not authenticated',
+        description: 'Please sign in to continue.',
       };
     }
 
@@ -27,7 +28,8 @@ export async function sendMessageServer(
     if (!content || !conversation_id) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'Invalid form data.',
+        message: 'Invalid message',
+        description: 'Message content or conversation ID is missing.',
       };
     }
 
@@ -42,7 +44,8 @@ export async function sendMessageServer(
     if (insertError) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: insertError.message,
+        message: 'Failed to send message',
+        description: insertError.message,
       };
     }
 
@@ -51,11 +54,10 @@ export async function sendMessageServer(
       message: '',
     };
   } catch (err) {
-    const message = err instanceof Error ? err.message : 'Unknown error';
-
     return {
       ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message,
+      message: 'Failed to send message',
+      description: err instanceof Error ? err.message : 'Unknown error',
     };
   }
 }

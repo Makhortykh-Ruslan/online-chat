@@ -34,7 +34,8 @@ export async function signInService(
     if (error) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'authError',
+        message: 'Authentication error',
+        description: error.message,
       };
     }
 
@@ -47,11 +48,10 @@ export async function signInService(
 
     redirectPath = appRoutes.main.chat;
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-
     return {
       ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message,
+      message: 'Authentication error',
+      description: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 
@@ -82,7 +82,8 @@ export async function signUpService(
       await signOut();
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'authError',
+        message: 'Registration error',
+        description: signUpError.message,
       };
     }
 
@@ -92,7 +93,8 @@ export async function signUpService(
       await signOut();
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'authError',
+        message: 'Registration error',
+        description: 'Failed to retrieve user after sign up.',
       };
     }
 
@@ -108,7 +110,8 @@ export async function signUpService(
       await signOut();
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'authError',
+        message: 'Registration error',
+        description: userError.message,
       };
     }
 
@@ -121,18 +124,18 @@ export async function signUpService(
     if (settingsError) {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'authError',
+        message: 'Registration error',
+        description: settingsError.message,
       };
     }
 
     redirectPath = appRoutes.main.chat;
   } catch (error) {
     await signOut();
-    const message = error instanceof Error ? error.message : 'Unknown error';
-
     return {
       ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message,
+      message: 'Registration error',
+      description: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 

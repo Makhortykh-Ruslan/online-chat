@@ -16,6 +16,7 @@ export const updateSystemService = async (settings: SystemSettingsModel) => {
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
         message: 'Not authenticated',
+        description: 'Please sign in to continue.',
       };
     }
 
@@ -25,10 +26,10 @@ export const updateSystemService = async (settings: SystemSettingsModel) => {
     });
 
     if (error) {
-      console.error('Supabase update error:', error);
       return {
         ...ERROR_DEFAULT_RESPONSE_MODEL,
-        message: 'Error update user settings details',
+        message: 'Failed to update settings',
+        description: error.message,
       };
     }
 
@@ -37,11 +38,10 @@ export const updateSystemService = async (settings: SystemSettingsModel) => {
       data: updateData,
     };
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown error';
-
     return {
       ...ERROR_DEFAULT_RESPONSE_MODEL,
-      message,
+      message: 'Failed to update settings',
+      description: error instanceof Error ? error.message : 'Unknown error',
     };
   }
 };
