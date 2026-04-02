@@ -2,8 +2,14 @@
   "metadata": {
     "authTitle": "Авторизація | LinkUp Chat",
     "authDescription": "Увійдіть або зареєструйтеся, щоб почати спілкування в LinkUp Chat.",
+    "signInTitle": "Вхід | LinkUp Chat",
+    "signInDescription": "Увійдіть у свій акаунт LinkUp Chat та продовжуйте спілкування.",
+    "signUpTitle": "Реєстрація | LinkUp Chat",
+    "signUpDescription": "Створіть безкоштовний акаунт LinkUp Chat та починайте спілкуватися.",
     "chatTitle": "Чат | LinkUp Chat",
-    "chatDescription": "Спілкуйтеся, пишіть повідомлення та телефонуйте один одному."
+    "chatDescription": "Спілкуйтеся, пишіть повідомлення та телефонуйте один одному.",
+    "settingsTitle": "Налаштування | LinkUp Chat",
+    "settingsDescription": "Керуйте профілем, уподобаннями та налаштуваннями акаунту."
   },
   "titles": {
     "welcomeBack": "З поверненням",

@@ -2,8 +2,14 @@
   "metadata": {
     "authTitle": "Uwierzytelnianie | LinkUp Chat",
     "authDescription": "Zaloguj się lub zarejestruj, aby cieszyć się płynną komunikacją z LinkUp Chat.",
+    "signInTitle": "Logowanie | LinkUp Chat",
+    "signInDescription": "Zaloguj się na swoje konto LinkUp Chat i kontynuuj rozmowy.",
+    "signUpTitle": "Rejestracja | LinkUp Chat",
+    "signUpDescription": "Utwórz bezpłatne konto LinkUp Chat i zacznij pisać od razu.",
     "chatTitle": "Czat | LinkUp Chat",
-    "chatDescription": "Czatuj, pisz, dzwoń i rozmawiaj ze sobą nawzajem."
+    "chatDescription": "Czatuj, pisz, dzwoń i rozmawiaj ze sobą nawzajem.",
+    "settingsTitle": "Ustawienia | LinkUp Chat",
+    "settingsDescription": "Zarządzaj swoim profilem, preferencjami i ustawieniami konta."
   },
   "titles": {
     "welcomeBack": "Witaj ponownie",

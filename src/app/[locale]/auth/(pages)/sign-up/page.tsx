@@ -1,9 +1,22 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import type { LayoutProps } from '@/src/core/types';
 
 import { SignUpForm } from '../components';
 import { getPageStyles } from './page.styles';
+
+export async function generateMetadata({
+  params,
+}: LayoutProps): Promise<Metadata> {
+  const { locale } = await params;
+  const metadata = await getTranslations({ locale, namespace: 'metadata' });
+
+  return {
+    title: metadata('signUpTitle'),
+    description: metadata('signUpDescription'),
+  };
+}
 
 export default async function SignUpPage({ params }: LayoutProps) {
   const { locale } = await params;

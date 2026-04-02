@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import { getConversationDetails } from '@/src/core/services';
 import { getAuthData, getMessages } from '@/src/infrastructure/supabase';
 
@@ -13,6 +15,17 @@ type props = {
     conversationId: string;
   }>;
 };
+
+export async function generateMetadata({ params }: props): Promise<Metadata> {
+  const { conversationId } = await params;
+  const conversationDetails = await getConversationDetails(conversationId);
+
+  const title = conversationDetails?.title
+    ? `${conversationDetails.title} | LinkUp Chat`
+    : 'Chat | LinkUp Chat';
+
+  return { title };
+}
 
 export default async function ChatPage({ params }: props) {
   const { conversationId } = await params;

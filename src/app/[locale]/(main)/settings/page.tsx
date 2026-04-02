@@ -1,4 +1,8 @@
+import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+
 import { getUserInfoService } from '@/src/core/services';
+import type { LayoutProps } from '@/src/core/types';
 
 import {
   ChangePassword,
@@ -8,6 +12,18 @@ import {
   User,
 } from './components';
 import { SettingsPageStyles } from './page.styles';
+
+export async function generateMetadata({
+  params,
+}: LayoutProps): Promise<Metadata> {
+  const { locale } = await params;
+  const metadata = await getTranslations({ locale, namespace: 'metadata' });
+
+  return {
+    title: metadata('settingsTitle'),
+    description: metadata('settingsDescription'),
+  };
+}
 
 export default async function SettingsPage() {
   const userData = await getUserInfoService();

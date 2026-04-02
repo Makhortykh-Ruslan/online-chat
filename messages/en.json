@@ -2,8 +2,14 @@
   "metadata": {
     "authTitle": "Authentication | LinkUp Chat",
     "authDescription": "Login or Register to experience seamless messaging with LinkUp Chat.",
+    "signInTitle": "Sign In | LinkUp Chat",
+    "signInDescription": "Sign in to your LinkUp Chat account and continue your conversations.",
+    "signUpTitle": "Sign Up | LinkUp Chat",
+    "signUpDescription": "Create a free LinkUp Chat account and start messaging instantly.",
     "chatTitle": "Chat | LinkUp Chat",
-    "chatDescription": "Chat texting calling and speaking each ather"
+    "chatDescription": "Chat texting calling and speaking each ather",
+    "settingsTitle": "Settings | LinkUp Chat",
+    "settingsDescription": "Manage your profile, preferences, and account settings."
   },
   "titles": {
     "welcomeBack": "Welcome back",
