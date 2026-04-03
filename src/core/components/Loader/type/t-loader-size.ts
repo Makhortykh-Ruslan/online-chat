@@ -1,1 +1,1 @@
-export type TLoaderSize = 'small';
+export type TLoaderSize = 'small' | 'medium' | 'large';
