@@ -36,23 +36,19 @@ export const SideBarHeader = () => {
   };
 
   const styles = getSideBarStyles();
-  const iconSearch = styles.icon + ' ' + 'ml-auto';
 
   return (
     <>
       <section data-component="SideBarHeader" className={styles.component}>
         <h3 className={styles.title}>{titles('messages')}</h3>
-        <Icon
-          name="plus"
-          className={iconSearch}
-          onClick={handleOpenUsersModal}
-        />
 
-        <Icon
-          name="settings"
-          className={styles.icon}
-          onClick={handleRedirectToSettings}
-        />
+        <button className={styles.icon_btn} onClick={handleOpenUsersModal}>
+          <Icon name="plus" className={styles.icon} />
+        </button>
+
+        <button className={styles.icon_btn_settings} onClick={handleRedirectToSettings}>
+          <Icon name="settings" className={styles.icon} />
+        </button>
       </section>
 
       <UsersModal

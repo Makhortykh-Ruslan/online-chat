@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import React, { startTransition, useEffect, useState } from 'react';
 
 import { Button, Icon, Input } from '@/src/core/components';
+import { Loader } from '@/src/core/components/Loader/Loader';
 import { useActionInterceptor } from '@/src/core/hooks';
 import { sendMessageServer } from '@/src/core/services';
 
@@ -14,7 +15,7 @@ type Props = {
 };
 
 export const ConversationFooter = ({ conversationId }: Props) => {
-  const { execute, state } = useActionInterceptor(sendMessageServer);
+  const { execute, state, isPending } = useActionInterceptor(sendMessageServer);
   const [content, setContent] = useState('');
   const placeholders = useTranslations('placeholders');
   const styles = ConversationFooterStyles;
@@ -49,8 +50,16 @@ export const ConversationFooter = ({ conversationId }: Props) => {
         onChange={(e) => setContent(e.target.value)}
       />
 
-      <Button type="submit" className={styles.component_btn}>
-        <Icon className={styles.component_btn_icon} name="message" />
+      <Button
+        type="submit"
+        disabled={isPending}
+        className={styles.component_btn}
+      >
+        {isPending ? (
+          <Loader />
+        ) : (
+          <Icon className={styles.component_btn_icon} name="message" />
+        )}
       </Button>
     </form>
   );
