@@ -27,7 +27,11 @@ export const User = (userData: UserDTO) => {
 
   return (
     <>
-      <form data-component="User" onSubmit={handleSubmit} className={styles.component}>
+      <form
+        data-component="User"
+        onSubmit={handleSubmit}
+        className={styles.component}
+      >
         <h2 className={styles.component_title}>{translate.titles('user')}</h2>
 
         <div className={styles.component_header}>

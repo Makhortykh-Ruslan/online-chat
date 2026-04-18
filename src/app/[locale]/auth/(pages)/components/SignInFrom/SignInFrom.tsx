@@ -4,8 +4,8 @@ import { Button, Input, Loader } from '@/src/core/components';
 import { appRoutes } from '@/src/core/constants/router-paths';
 import { Link } from '@/src/i18n/routing';
 
-import { getSignInFormStyles } from './SignInFrom.styles';
 import { useSignInForm } from './hooks';
+import { getSignInFormStyles } from './SignInFrom.styles';
 
 export const SignInFrom = () => {
   const {

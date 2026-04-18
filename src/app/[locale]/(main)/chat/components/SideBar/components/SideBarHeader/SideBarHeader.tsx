@@ -46,15 +46,15 @@ export const SideBarHeader = () => {
           <Icon name="plus" className={styles.icon} />
         </button>
 
-        <button className={styles.icon_btn_settings} onClick={handleRedirectToSettings}>
+        <button
+          className={styles.icon_btn_settings}
+          onClick={handleRedirectToSettings}
+        >
           <Icon name="settings" className={styles.icon} />
         </button>
       </section>
 
-      <UsersModal
-        isOpen={isUsersModalOpen}
-        onClose={handleUsersModalClose}
-      />
+      <UsersModal isOpen={isUsersModalOpen} onClose={handleUsersModalClose} />
     </>
   );
 };

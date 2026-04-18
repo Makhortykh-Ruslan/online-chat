@@ -80,7 +80,11 @@ export const SignUpForm = () => {
             {...register('confirmPassword')}
             error={
               errors.confirmPassword?.message && touchedFields.confirmPassword
-                ? translate.validations(errors.confirmPassword.message as Parameters<typeof translate.validations>[0])
+                ? translate.validations(
+                    errors.confirmPassword.message as Parameters<
+                      typeof translate.validations
+                    >[0],
+                  )
                 : ''
             }
           />

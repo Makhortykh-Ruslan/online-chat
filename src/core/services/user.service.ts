@@ -12,6 +12,7 @@ import type {
   ResponseEmptyModel,
   ResponseUserDTOModel,
 } from '@/src/core/types';
+import { parseDataUrl } from '@/src/core/utils';
 import {
   getAuthData,
   getSystemSettingByUserIdRepository,
@@ -177,17 +178,6 @@ export const updatePasswordService = async (
   }
 };
 
-function parseDataUrl(
-  dataUrl: string,
-): { buffer: Buffer; contentType: string } | null {
-  const match = /^data:(image\/[a-z]+);base64,(.+)$/i.exec(dataUrl);
-  if (!match || match[1] == null || match[2] == null) return null;
-  const contentType = match[1];
-  const base64 = match[2];
-  const buffer = Buffer.from(base64, 'base64');
-  return { buffer, contentType };
-}
-
 export async function uploadAvatarService(
   dataUrl: string,
 ): Promise<ResponseModel<{ avatarUrl: string }>> {
@@ -295,16 +285,6 @@ export async function deleteAvatarService(): Promise<ResponseEmptyModel> {
       description: err instanceof Error ? err.message : 'Unknown error',
     };
   }
-}
-
-export async function setUserOnlineStatusAction(
-  isOnline: boolean,
-): Promise<void> {
-  const authUser = await getAuthData();
-
-  if (!authUser?.id) return;
-
-  await updateUserRepository({ id: authUser.id, is_online: isOnline });
 }
 
 export async function getUsersWithFiltersService(

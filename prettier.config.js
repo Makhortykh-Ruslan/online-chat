@@ -3,7 +3,6 @@ export default {
   trailingComma: 'all',
   tabWidth: 2,
   semi: true,
-  experimentalUseClient: true,
   printWidth: 80,
   endOfLine: 'auto',
   plugins: ['prettier-plugin-tailwindcss'],

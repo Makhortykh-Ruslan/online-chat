@@ -64,7 +64,7 @@ export default defineConfig([
       '@next/next/no-async-client-component': 'error',
       'react-hooks/rules-of-hooks': 'error',
       'max-params': ['error', 3],
-      'no-unused-vars': 'error',
+      'no-unused-vars': 'off',
       '@next/next/no-html-link-for-pages': 'error',
       '@next/next/no-img-element': 'error',
       '@next/next/no-head-element': 'error',

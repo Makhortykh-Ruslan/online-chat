@@ -2,7 +2,10 @@
 
 import type { MessageDTO } from '@/src/core/dto';
 import { EBDTableName } from '@/src/core/enums';
-import type { CreateMessageModel, MessageModel } from '@/src/core/models/message.model';
+import type {
+  CreateMessageModel,
+  MessageModel,
+} from '@/src/core/models/message.model';
 import { createClient } from '@/src/infrastructure/supabase/server.supabase';
 
 export async function insertMessage(data: CreateMessageModel) {

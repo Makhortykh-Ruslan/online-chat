@@ -1,6 +1,9 @@
 'use server';
 
-import type { ConversationDTO } from '@/src/core/dto/conversation.dto';
+import type {
+  ConversationDetailsDTO,
+  ConversationDTO,
+} from '@/src/core/dto/conversation.dto';
 import type { UserModel } from '@/src/core/models';
 import type { MessageModel } from '@/src/core/models/message.model';
 import {
@@ -138,17 +141,6 @@ export async function getConversationDTOById(
     lastMessage,
   };
 }
-
-export type ConversationDetailsDTO = {
-  conversationId: string;
-  type: 'direct' | 'group';
-  title: string | null;
-  avatarUrl: string | null;
-  participants: Array<{
-    userId: string;
-    user: UserModel;
-  }>;
-};
 
 export async function getConversationDetails(
   conversationId: string,
