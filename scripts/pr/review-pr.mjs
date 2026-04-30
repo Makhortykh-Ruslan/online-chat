@@ -6,6 +6,8 @@ import Anthropic from '@anthropic-ai/sdk';
 const { ANTHROPIC_API_KEY, GITHUB_TOKEN, PR_NUMBER, REPO, BASE_SHA, HEAD_SHA } =
   process.env;
 
+const MAX_DIFF_CHARS = 80_000;
+
 const diff = execSync(
   `git diff ${BASE_SHA} ${HEAD_SHA} -- '*.ts' '*.tsx' '*.js' '*.mjs' '*.css' \
   ':!*.config.*' \
@@ -27,36 +29,53 @@ if (!diff.trim()) {
   process.exit(0);
 }
 
-const reviewRules = readFileSync(
-  new URL('../.claude/pr/review-rules.md', import.meta.url),
-  'utf8',
-);
+let reviewRules;
+let promptTemplate;
+
+try {
+  reviewRules = readFileSync(
+    new URL('../../.claude/pr/review-rules.md', import.meta.url),
+    'utf8',
+  );
+} catch {
+  console.error(
+    'Failed to read review-rules.md: expected at .claude/pr/review-rules.md',
+  );
+  process.exit(1);
+}
+
+try {
+  promptTemplate = readFileSync(
+    new URL('./review-prompt.md', import.meta.url),
+    'utf8',
+  );
+} catch {
+  console.error(
+    'Failed to read review-prompt.md: expected at scripts/pr/review-prompt.md',
+  );
+  process.exit(1);
+}
+
+if (!promptTemplate.includes('{{RULES}}')) {
+  throw new Error('review-prompt.md is missing {{RULES}} placeholder');
+}
+
+if (!promptTemplate.includes('{{DIFF}}')) {
+  throw new Error('review-prompt.md is missing {{DIFF}} placeholder');
+}
+
+const truncatedDiff = diff.slice(0, MAX_DIFF_CHARS);
+
+const prompt = promptTemplate
+  .replaceAll('{{RULES}}', () => reviewRules)
+  .replaceAll('{{DIFF}}', () => truncatedDiff);
 
 const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 
 const message = await client.messages.create({
   model: 'claude-opus-4-7',
   max_tokens: 2048,
-  messages: [
-    {
-      role: 'user',
-      content: `You are a senior software engineer reviewing a pull request for a Next.js + Supabase + Tailwind CSS project.
-
-Follow these review rules strictly:
-
-<rules>
-${reviewRules}
-</rules>
-
-Format your response as GitHub-flavored Markdown.
-Start with a one-line summary, then list issues grouped by severity: 🔴 Critical, 🟡 Warning, 🟢 Suggestion.
-If nothing notable found, say so briefly. Do not flag issues that the rules say are handled automatically (Prettier, ESLint).
-
-<diff>
-${diff.slice(0, 80000)}
-</diff>`,
-    },
-  ],
+  messages: [{ role: 'user', content: prompt }],
 });
 
 const review = message.content[0].text;
