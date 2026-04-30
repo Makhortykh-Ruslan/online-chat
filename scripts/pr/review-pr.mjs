@@ -28,35 +28,25 @@ if (!diff.trim()) {
 }
 
 const reviewRules = readFileSync(
-  new URL('../.claude/pr/review-rules.md', import.meta.url),
+  new URL('../../.claude/pr/review-rules.md', import.meta.url),
   'utf8',
 );
+
+const promptTemplate = readFileSync(
+  new URL('./review-prompt.md', import.meta.url),
+  'utf8',
+);
+
+const prompt = promptTemplate
+  .replace('{{RULES}}', reviewRules)
+  .replace('{{DIFF}}', diff.slice(0, 80000));
 
 const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 
 const message = await client.messages.create({
   model: 'claude-opus-4-7',
   max_tokens: 2048,
-  messages: [
-    {
-      role: 'user',
-      content: `You are a senior software engineer reviewing a pull request for a Next.js + Supabase + Tailwind CSS project.
-
-Follow these review rules strictly:
-
-<rules>
-${reviewRules}
-</rules>
-
-Format your response as GitHub-flavored Markdown.
-Start with a one-line summary, then list issues grouped by severity: 🔴 Critical, 🟡 Warning, 🟢 Suggestion.
-If nothing notable found, say so briefly. Do not flag issues that the rules say are handled automatically (Prettier, ESLint).
-
-<diff>
-${diff.slice(0, 80000)}
-</diff>`,
-    },
-  ],
+  messages: [{ role: 'user', content: prompt }],
 });
 
 const review = message.content[0].text;

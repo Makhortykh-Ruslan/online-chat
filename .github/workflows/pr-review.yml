@@ -34,4 +34,4 @@ jobs:
           REPO: ${{ github.repository }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: node scripts/review-pr.mjs
+        run: node scripts/pr/review-pr.mjs

@@ -18,13 +18,13 @@ The goal was simple — pick three tools I wanted to get hands-on experience wit
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js (App Router) |
+| Layer          | Technology                                        |
+| -------------- | ------------------------------------------------- |
+| Framework      | Next.js (App Router)                              |
 | Backend & Auth | Supabase (PostgreSQL + Auth + Realtime + Storage) |
-| Styling | Tailwind CSS |
-| Forms | React Hook Form + Zod |
-| i18n | next-intl |
+| Styling        | Tailwind CSS                                      |
+| Forms          | React Hook Form + Zod                             |
+| i18n           | next-intl                                         |
 
 ## Getting Started
 
@@ -43,6 +43,18 @@ Create a `.env.local` file:
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_supabase_anon_key
 ```
+
+## AI Integration
+
+Pull requests are automatically reviewed by **Claude (claude-opus-4-7)** via a GitHub Actions workflow.
+
+On every opened or updated PR the workflow:
+
+1. Extracts the git diff (TypeScript, JavaScript, CSS — config files excluded)
+2. Sends it to the Claude API along with a set of project-specific review rules
+3. Posts the result as a comment on the PR in Ukrainian, grouped by severity: 🔴 Критично, 🟡 Попередження, 🟢 Пропозиція
+
+The review script lives in [`scripts/pr/review-pr.mjs`](scripts/pr/review-pr.mjs) and the prompt template in [`scripts/pr/review-prompt.md`](scripts/pr/review-prompt.md).
 
 ## Deploy
 
